@@ -1,10 +1,10 @@
 from hashlib import sha256
 import json
 import logging
-import requests
-import urlparse
+import urllib.parse as urlparse
 
 from monotonic import monotonic
+import requests
 
 from exportdirectory.version import __version__
 
@@ -95,8 +95,14 @@ class BaseAPIClient:
     def send(
             self, api_key, method, url, request=None, *args, **kwargs):
 
+        prepared_request = requests.Request(
+            method, url, *args, **kwargs
+        ).prepare()
+
         signed_request = self.sign_request(
-            requests.Request(method, url, *args, **kwargs).prepare()
+            api_key=api_key,
+            url=url,
+            prepared_request=prepared_request,
         )
 
         return requests.Session().send(signed_request)

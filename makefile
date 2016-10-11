@@ -8,10 +8,10 @@ test_requirements:
 	pip install -r requirements_test.txt
 
 flake8:
-	flake8 exportdirectory --exclude=migrations
+	flake8 . --exclude=migrations
 
 pytest:
-	pytest exportdirectory --cov=. $(pytest_args)
+	pytest . --cov=. $(pytest_args)
 
 test: flake8 pytest
 

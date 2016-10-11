@@ -1,5 +1,5 @@
 """
-Python API client for Export Directory
+Export Directory API client
 """
 import ast
 import pip.download
