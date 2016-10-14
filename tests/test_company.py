@@ -17,3 +17,7 @@ class CompanyAPIClientTest(TestCase):
         data = {'key': 'value'}
         self.client.update_profile(id=1, data=data)
         assert stub.request_history[0].json() == data
+
+    @stub_request('https://example.com/company/1/', 'get')
+    def test_retrieve_profile(self, stub):
+        self.client.retrieve_profile(id=1)
