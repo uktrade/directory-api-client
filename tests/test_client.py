@@ -1,25 +1,23 @@
 from unittest import TestCase
 
-from tests import stub_request
-
 from exportdirectory.client import DirectoryAPIClient
+from exportdirectory.company import CompanyAPIClient
+from exportdirectory.registration import RegistrationAPIClient
 
 
 class DirectoryAPIClientTest(TestCase):
 
     def setUp(self):
-        self.directory_client = DirectoryAPIClient(
-            base_url='https://example.com', api_key='test'
-        )
+        self.base_url = 'https://example.com'
+        self.api_key = 'test'
+        self.client = DirectoryAPIClient(self.base_url, self.api_key)
 
-    @stub_request('https://example.com/enrolment/', 'post')
-    def test_registration_send_form(self):
-        self.directory_client.registration.send_form(
-            form_data='form_data'
-        )
+    def test_registration(self):
+        assert isinstance(self.client.registration, RegistrationAPIClient)
+        assert self.client.registration.base_url == self.base_url
+        assert self.client.registration.api_key == self.api_key
 
-    @stub_request('https://example.com/enrolment/confirm/', 'post')
-    def test_confirm_email(self):
-        self.directory_client.registration.confirm_email(
-            confirmation_code='confirmation_code'
-        )
+    def test_company(self):
+        assert isinstance(self.client.company, CompanyAPIClient)
+        assert self.client.company.base_url == self.base_url
+        assert self.client.company.api_key == self.api_key

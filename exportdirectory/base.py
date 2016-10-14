@@ -23,6 +23,9 @@ class BaseAPIClient:
     def put(self, url, data):
         return self.request("PUT", url, "application/json", data=data)
 
+    def patch(self, url, data):
+        return self.request("PATCH", url, "application/json", data=data)
+
     def get(self, url, params=None):
         return self.request("GET", url, params=params)
 

@@ -14,7 +14,7 @@ class BaseAPIClientTest(TestCase):
         )
 
     @stub_request('https://example.com/test', 'post')
-    def test_request(self):
+    def test_request(self, stub):
         self.client.request("POST", 'test', data='data')
 
     def test_sign_request(self):
@@ -30,7 +30,15 @@ class BaseAPIClientTest(TestCase):
         )
 
     @stub_request('https://example.com', 'post')
-    def test_send(self):
+    def test_send(self, stub):
         self.client.send(
             api_key='test', method="POST", url='https://example.com'
         )
+
+    @stub_request('https://example.com/thing/', 'patch')
+    def test_patch(self, stub):
+        data = {'key': 'value'}
+        self.client.patch(url='thing/', data=data)
+        request = stub.request_history[0]
+        assert request.json() == data
+        assert request.headers['Content-type'] == 'application/json'
