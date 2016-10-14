@@ -21,25 +21,38 @@ class BaseAPIClient:
         self.api_key = api_key
 
     def put(self, url, data):
-        return self.request("PUT", url, "application/json", data=data)
+        return self.request(
+            "PUT", url, "application/json", data=json.dumps(data)
+        )
 
-    def patch(self, url, data):
-        return self.request("PATCH", url, "application/json", data=data)
+    def patch(self, url, data, files={}):
+        if files:
+            response = self.request(
+                "PATCH", url, "multipart/form-data", data=data, files=files
+            )
+        else:
+            response = self.request(
+                "PATCH", url, "application/json", data=json.dumps(data),
+            )
+        return response
 
     def get(self, url, params=None):
         return self.request("GET", url, params=params)
 
     def post(self, url, data):
-        return self.request("POST", url, "application/json", data=data)
+        return self.request(
+            "POST", url, "application/json", data=json.dumps(data)
+        )
 
     def delete(self, url, data=None):
         return self.request("DELETE", url)
 
-    def request(self, method, url, content_type=None, data=None, params=None):
+    def request(
+        self, method, url, content_type=None, data=None, params=None,
+        files=None
+    ):
 
         logger.debug("API request {} {}".format(method, url))
-
-        payload = json.dumps(data)
 
         headers = {
             "User-agent": "EXPORT-DIRECTORY-API-CLIENT/{}".format(__version__),
@@ -57,8 +70,9 @@ class BaseAPIClient:
                 method=method,
                 url=url,
                 headers=headers,
-                data=payload,
-                params=params
+                data=data,
+                params=params,
+                files=files,
             )
             if not response.ok:
                 logger.error(

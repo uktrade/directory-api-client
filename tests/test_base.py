@@ -1,3 +1,4 @@
+from io import StringIO
 from unittest import TestCase
 
 import requests
@@ -17,6 +18,38 @@ class BaseAPIClientTest(TestCase):
     def test_request(self, stub):
         self.client.request("POST", 'test', data='data')
 
+    @stub_request('https://example.com/test', 'post')
+    def test_post_encodes_json(self, stub):
+        data = {'key': 'value'}
+        self.client.post('test', data=data)
+        request = stub.request_history[0]
+        assert request.headers['Content-type'] == 'application/json'
+        assert request.text == '{"key": "value"}'
+
+    @stub_request('https://example.com/test', 'put')
+    def test_put_encodes_json(self, stub):
+        data = {'key': 'value'}
+        self.client.put('test', data=data)
+        request = stub.request_history[0]
+        assert request.headers['Content-type'] == 'application/json'
+        assert request.text == '{"key": "value"}'
+
+    @stub_request('https://example.com/test', 'patch')
+    def test_patch_encodes_json_without_file(self, stub):
+        data = {'key': 'value'}
+        self.client.patch('test', data=data)
+        request = stub.request_history[0]
+        assert request.headers['Content-type'] == 'application/json'
+        assert request.text == '{"key": "value"}'
+
+    @stub_request('https://example.com/thing/', 'patch')
+    def test_patch_encodes_form_with_file(self, stub):
+        data = {'key': 'value'}
+        files = {'logo': StringIO('hello')}
+        self.client.patch(url='thing/', data=data, files=files)
+        request = stub.request_history[0]
+        assert request.headers['Content-type'] == 'multipart/form-data'
+
     def test_sign_request(self):
         url = 'https://example.com'
         prepared_request = requests.Request(
@@ -34,11 +67,3 @@ class BaseAPIClientTest(TestCase):
         self.client.send(
             api_key='test', method="POST", url='https://example.com'
         )
-
-    @stub_request('https://example.com/thing/', 'patch')
-    def test_patch(self, stub):
-        data = {'key': 'value'}
-        self.client.patch(url='thing/', data=data)
-        request = stub.request_history[0]
-        assert request.json() == data
-        assert request.headers['Content-type'] == 'application/json'
