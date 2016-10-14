@@ -5,12 +5,12 @@ class RegistrationAPIClient(BaseAPIClient):
 
     def send_form(self, form_data):
         return self.post(
-            '/registration/',
+            '/enrolment/',
             data=form_data
         )
 
     def confirm_email(self, confirmation_code):
         return self.post(
-            '/registration/confirm',
+            '/enrolment/confirm/',
             data=confirmation_code
         )

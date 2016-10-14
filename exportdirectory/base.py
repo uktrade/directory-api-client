@@ -21,27 +21,28 @@ class BaseAPIClient:
         self.api_key = api_key
 
     def put(self, url, data):
-        return self.request("PUT", url, data=data)
+        return self.request("PUT", url, "application/json", data=data)
 
     def get(self, url, params=None):
         return self.request("GET", url, params=params)
 
     def post(self, url, data):
-        return self.request("POST", url, data=data)
+        return self.request("POST", url, "application/json", data=data)
 
     def delete(self, url, data=None):
-        return self.request("DELETE", url, data=data)
+        return self.request("DELETE", url)
 
-    def request(self, method, url, data=None, params=None):
+    def request(self, method, url, content_type=None, data=None, params=None):
 
         logger.debug("API request {} {}".format(method, url))
 
         payload = json.dumps(data)
 
         headers = {
-            "Content-type": "application/json",
             "User-agent": "EXPORT-DIRECTORY-API-CLIENT/{}".format(__version__),
         }
+        if content_type:
+            headers["Content-type"] = content_type
 
         url = urlparse.urljoin(self.base_url, url)
 
@@ -66,6 +67,8 @@ class BaseAPIClient:
                     )
                 )
                 response.raise_for_status()
+            else:
+                return response
         finally:
             elapsed_time = monotonic() - start_time
             logger.debug(
@@ -92,8 +95,7 @@ class BaseAPIClient:
 
         return prepared_request
 
-    def send(
-            self, api_key, method, url, request=None, *args, **kwargs):
+    def send(self, api_key, method, url, request=None, *args, **kwargs):
 
         prepared_request = requests.Request(
             method, url, *args, **kwargs
@@ -104,5 +106,4 @@ class BaseAPIClient:
             url=url,
             prepared_request=prepared_request,
         )
-
         return requests.Session().send(signed_request)

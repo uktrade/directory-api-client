@@ -2,8 +2,8 @@ from unittest import TestCase
 
 import requests
 
+from tests import stub_request
 from exportdirectory.base import BaseAPIClient
-from tests import mock_requests
 
 
 class BaseAPIClientTest(TestCase):
@@ -13,9 +13,9 @@ class BaseAPIClientTest(TestCase):
             base_url='https://example.com', api_key='test'
         )
 
+    @stub_request('https://example.com/test', 'post')
     def test_request(self):
-        with mock_requests():
-            self.client.request("POST", 'test', data='data')
+        self.client.request("POST", 'test', data='data')
 
     def test_sign_request(self):
         url = 'https://example.com'
@@ -29,8 +29,8 @@ class BaseAPIClientTest(TestCase):
             prepared_request=prepared_request,
         )
 
+    @stub_request('https://example.com', 'post')
     def test_send(self):
-        with mock_requests():
-            self.client.send(
-                api_key='test', method="POST", url='https://example.com'
-            )
+        self.client.send(
+            api_key='test', method="POST", url='https://example.com'
+        )

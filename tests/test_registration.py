@@ -1,7 +1,8 @@
 from unittest import TestCase
 
+from tests import stub_request
+
 from exportdirectory.registration import RegistrationAPIClient
-from tests import mock_requests
 
 
 class RegistrationAPIClientTest(TestCase):
@@ -11,14 +12,14 @@ class RegistrationAPIClientTest(TestCase):
             base_url='https://example.com', api_key='test'
         )
 
+    @stub_request('https://example.com/enrolment/', 'post')
     def test_send_form(self):
-        with mock_requests():
-            self.registration_client.send_form(
-                form_data='form_data'
-            )
+        self.registration_client.send_form(
+            form_data='form_data'
+        )
 
+    @stub_request('https://example.com/enrolment/confirm/', 'post')
     def test_confirm_email(self):
-        with mock_requests():
-            self.registration_client.confirm_email(
-                confirmation_code='confirmation_code'
-            )
+        self.registration_client.confirm_email(
+            confirmation_code='confirmation_code'
+        )
