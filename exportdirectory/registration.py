@@ -3,14 +3,19 @@ from exportdirectory.base import BaseAPIClient
 
 class RegistrationAPIClient(BaseAPIClient):
 
+    endpoints = {
+        'enrolment': '/enrolment/',
+        'confirm': '/enrolment/confirm/',
+    }
+
     def send_form(self, form_data):
         return self.post(
-            '/enrolment/',
+            self.endpoints['enrolment'],
             data=form_data
         )
 
     def confirm_email(self, confirmation_code):
         return self.post(
-            '/enrolment/confirm/',
+            self.endpoints['confirm'],
             data=confirmation_code
         )
