@@ -8,3 +8,6 @@ class CompanyAPIClient(BaseAPIClient):
             '/company/{id}/'.format(id=id),
             data=data
         )
+
+    def retrieve_profile(self, id):
+        return self.get('/company/{id}/'.format(id=id))
