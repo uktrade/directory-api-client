@@ -22,30 +22,43 @@ class BaseAPIClient:
 
     def put(self, url, data):
         return self.request(
-            "PUT", url, "application/json", data=json.dumps(data)
+            url=url,
+            method="PUT",
+            content_type="application/json",
+            data=json.dumps(data)
         )
 
-    def patch(self, url, data, files={}):
+    def patch(self, url, data, files=None):
         if files:
             response = self.request(
-                "PATCH", url, "multipart/form-data", data=data, files=files
+                url=url,
+                method="PATCH",
+                content_type="multipart/form-data",
+                data=data,
+                files=files,
             )
         else:
             response = self.request(
-                "PATCH", url, "application/json", data=json.dumps(data),
+                url=url,
+                method="PATCH",
+                content_type="application/json",
+                data=json.dumps(data),
             )
         return response
 
     def get(self, url, params=None):
-        return self.request("GET", url, params=params)
+        return self.request(url=url, method="GET", params=params)
 
     def post(self, url, data):
         return self.request(
-            "POST", url, "application/json", data=json.dumps(data)
+            url=url,
+            method="POST",
+            content_type="application/json",
+            data=json.dumps(data),
         )
 
     def delete(self, url, data=None):
-        return self.request("DELETE", url)
+        return self.request(url=url, method="DELETE")
 
     def request(
         self, method, url, content_type=None, data=None, params=None,
