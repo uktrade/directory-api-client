@@ -1,7 +1,7 @@
 from exportdirectory.base import BaseAPIClient
 
 
-class RegistrationAPIClient(BaseAPIClient):
+class EnrolmentAPIClient(BaseAPIClient):
 
     endpoints = {
         'enrolment': '/enrolment/',
