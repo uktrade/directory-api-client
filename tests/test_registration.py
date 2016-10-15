@@ -2,13 +2,13 @@ from unittest import TestCase
 
 from tests import stub_request
 
-from exportdirectory.registration import RegistrationAPIClient
+from exportdirectory.registration import EnrolmentAPIClient
 
 
-class RegistrationAPIClientTest(TestCase):
+class EnrolmentAPIClientTest(TestCase):
 
     def setUp(self):
-        self.registration_client = RegistrationAPIClient(
+        self.registration_client = EnrolmentAPIClient(
             base_url='https://example.com', api_key='test'
         )
 

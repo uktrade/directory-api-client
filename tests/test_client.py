@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from exportdirectory.client import DirectoryAPIClient
 from exportdirectory.company import CompanyAPIClient
-from exportdirectory.registration import RegistrationAPIClient
+from exportdirectory.registration import EnrolmentAPIClient
 from exportdirectory.user import UserAPIClient
 
 
@@ -14,7 +14,7 @@ class DirectoryAPIClientTest(TestCase):
         self.client = DirectoryAPIClient(self.base_url, self.api_key)
 
     def test_registration(self):
-        assert isinstance(self.client.registration, RegistrationAPIClient)
+        assert isinstance(self.client.registration, EnrolmentAPIClient)
         assert self.client.registration.base_url == self.base_url
         assert self.client.registration.api_key == self.api_key
 

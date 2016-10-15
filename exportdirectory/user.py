@@ -3,11 +3,14 @@ from exportdirectory.base import BaseAPIClient
 
 class UserAPIClient(BaseAPIClient):
 
+    endpoints = {
+        'user': '/user/{id}/'
+    }
+
     def update_profile(self, id, data):
-        return self.patch(
-            '/user/{id}/'.format(id=id),
-            data=data
-        )
+        url = self.endpoints['user'].format(id=id)
+        return self.patch(url, data=data)
 
     def retrieve_profile(self, id):
-        return self.get('/user/{id}/'.format(id=id))
+        url = '/user/{id}/'.format(id=id)
+        return self.get(url)
