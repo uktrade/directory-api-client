@@ -2,7 +2,7 @@ from io import StringIO
 import tempfile
 from unittest import TestCase
 
-from exportdirectory.company import CompanyAPIClient
+from directory_api_client.company import CompanyAPIClient
 from tests import stub_request
 
 

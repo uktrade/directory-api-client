@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from tests import stub_request
 
-from exportdirectory.registration import EnrolmentAPIClient
+from directory_api_client.registration import EnrolmentAPIClient
 
 
 class EnrolmentAPIClientTest(TestCase):

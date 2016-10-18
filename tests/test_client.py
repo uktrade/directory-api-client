@@ -1,9 +1,9 @@
 from unittest import TestCase
 
-from exportdirectory.client import DirectoryAPIClient
-from exportdirectory.company import CompanyAPIClient
-from exportdirectory.registration import EnrolmentAPIClient
-from exportdirectory.user import UserAPIClient
+from directory_api_client.client import DirectoryAPIClient
+from directory_api_client.company import CompanyAPIClient
+from directory_api_client.registration import EnrolmentAPIClient
+from directory_api_client.user import UserAPIClient
 
 
 class DirectoryAPIClientTest(TestCase):

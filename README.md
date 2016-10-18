@@ -10,15 +10,15 @@
 ## Installation
 
 ```shell
-pip install git+https://github.com/uktrade/directory-api-client.git
+pip install -e git+https://git@github.com/alphagov/directory-api-client.git@0.0.2#egg=directory-api-client
 ```
 
 ## Usage
 
 ```python
-from exportdirectory.client import DirectoryAPIClient
+from directory_api_client.client import DirectoryAPIClient
 
-export_directory_client = DirectoryAPIClient(
+directory_client = DirectoryAPIClient(
     base_url="https://api.directory.exportingisgreat.gov.uk",
     api_key=api_key
 )
@@ -27,7 +27,7 @@ export_directory_client = DirectoryAPIClient(
 ### Send registration form
 
 ```python
-export_directory_client.registration.send_form(
+directory_client.registration.send_form(
     form_data=form_data
 )
 ```
@@ -35,7 +35,7 @@ export_directory_client.registration.send_form(
 ### Confirm registration email
 
 ```python
-notifications_client.confirm_email(
+directory_client.registration.confirm_email(
     confirmation_code=confirmation_code,
 )
 ```

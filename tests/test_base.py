@@ -4,7 +4,7 @@ from unittest import TestCase
 import requests
 
 from tests import stub_request
-from exportdirectory.base import BaseAPIClient
+from directory_api_client.base import BaseAPIClient
 
 
 class BaseAPIClientTest(TestCase):
