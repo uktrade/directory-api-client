@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 def get_version():
     pattern = re.compile(r'__version__\s+=\s+(.*)')
 
-    with open('exportdirectory/version.py', 'rb') as src:
+    with open('directory_api_client/version.py', 'rb') as src:
         return str(ast.literal_eval(
             pattern.search(src.read().decode('utf-8')).group(1)
         ))
@@ -25,7 +25,7 @@ def get_requirements():
 
 
 setup(
-    name='exportdirectory',
+    name='directory_api_client',
     version=get_version(),
     url='https://github.com/uktrade/directory-api-client',
     license='MIT',

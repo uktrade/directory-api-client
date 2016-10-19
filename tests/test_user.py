@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from tests import stub_request
 
-from exportdirectory.user import UserAPIClient
+from directory_api_client.user import UserAPIClient
 
 
 class UserAPIClientTest(TestCase):

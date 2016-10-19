@@ -1,7 +1,7 @@
-from exportdirectory.base import BaseAPIClient
-from exportdirectory.company import CompanyAPIClient
-from exportdirectory.registration import EnrolmentAPIClient
-from exportdirectory.user import UserAPIClient
+from directory_api_client.base import BaseAPIClient
+from directory_api_client.company import CompanyAPIClient
+from directory_api_client.registration import EnrolmentAPIClient
+from directory_api_client.user import UserAPIClient
 
 
 class DirectoryAPIClient(BaseAPIClient):

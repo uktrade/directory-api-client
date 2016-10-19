@@ -1,4 +1,4 @@
-from exportdirectory.base import BaseAPIClient
+from directory_api_client.base import BaseAPIClient
 
 
 class UserAPIClient(BaseAPIClient):

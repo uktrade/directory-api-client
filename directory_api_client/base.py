@@ -6,7 +6,7 @@ import urllib.parse as urlparse
 from monotonic import monotonic
 import requests
 
-from exportdirectory.version import __version__
+from directory_api_client.version import __version__
 
 
 logger = logging.getLogger(__name__)
