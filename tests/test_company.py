@@ -47,3 +47,9 @@ class CompanyAPIClientTest(TestCase):
     @stub_request('https://example.com/company/1/', 'get')
     def test_retrieve_profile(self, stub):
         self.client.retrieve_profile(id=1)
+
+    @stub_request('https://example.com/validate-company-number/', 'get')
+    def test_validate_company_number(self, stub):
+        self.client.validate_company_number('01234567')
+        request = stub.request_history[0]
+        assert request.query == 'number=01234567'

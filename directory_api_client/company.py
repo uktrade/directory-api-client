@@ -5,6 +5,7 @@ class CompanyAPIClient(BaseAPIClient):
 
     endpoints = {
         'profile': '/company/{id}/',
+        'validate-company-number': '/validate-company-number/',
     }
 
     def update_profile(self, id, data):
@@ -21,3 +22,8 @@ class CompanyAPIClient(BaseAPIClient):
     def retrieve_profile(self, id):
         url = self.endpoints['profile'].format(id=id)
         return self.get(url)
+
+    def validate_company_number(self, number):
+        url = self.endpoints['validate-company-number']
+        params = {'number': number}
+        return self.get(url, params=params)
