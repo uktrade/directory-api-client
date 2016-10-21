@@ -78,7 +78,7 @@ class BaseAPIClient:
         start_time = monotonic()
 
         try:
-            response = self.send(
+            return self.send(
                 api_key=self.api_key,
                 method=method,
                 url=url,
@@ -87,18 +87,6 @@ class BaseAPIClient:
                 params=params,
                 files=files,
             )
-            if not response.ok:
-                logger.error(
-                    "API {} request on {} failed with {} '{}'".format(
-                        method,
-                        url,
-                        response.status_code,
-                        response.response
-                    )
-                )
-                response.raise_for_status()
-            else:
-                return response
         finally:
             elapsed_time = monotonic() - start_time
             logger.debug(
