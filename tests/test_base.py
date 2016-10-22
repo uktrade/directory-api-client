@@ -1,4 +1,5 @@
 from io import StringIO
+import http
 from unittest import TestCase
 
 import requests
@@ -60,10 +61,18 @@ class BaseAPIClientTest(TestCase):
             api_key='test',
             url=url,
             prepared_request=prepared_request,
-        )
+        ),
 
     @stub_request('https://example.com', 'post')
-    def test_send(self, stub):
-        self.client.send(
-            api_key='test', method="POST", url='https://example.com'
+    def test_send_response_ok(self, stub):
+        response = self.client.send(
+            api_key="test", method="POST", url="https://example.com",
         )
+        assert response.status_code == http.client.OK
+
+    @stub_request('https://example.com', 'post', http.client.BAD_REQUEST)
+    def test_send_response_not_ok(self, stub):
+        response = self.client.send(
+            api_key="test", method="POST", url="https://example.com",
+        )
+        assert response.status_code == http.client.BAD_REQUEST
