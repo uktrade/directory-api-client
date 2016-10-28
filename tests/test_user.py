@@ -15,10 +15,10 @@ class UserAPIClientTest(TestCase):
     @stub_request('https://example.com/user/1/', 'patch')
     def test_update_profile(self, stub):
         data = {'key': 'value'}
-        self.client.update_profile(id=1, data=data)
+        self.client.update_profile(sso_id=1, data=data)
         request = stub.request_history[0]
         assert request.json() == data
 
     @stub_request('https://example.com/user/1/', 'get')
     def test_retrieve_profile(self, stub):
-        self.client.retrieve_profile(id=1)
+        self.client.retrieve_profile(sso_id=1)

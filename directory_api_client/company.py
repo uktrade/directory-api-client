@@ -4,24 +4,24 @@ from directory_api_client.base import BaseAPIClient
 class CompanyAPIClient(BaseAPIClient):
 
     endpoints = {
-        'profile': '/company/details/{id}/',
+        'profile': '/user/{sso_id}/company/',
         'validate-company-number': '/validate-company-number/',
         'companies-house-profile': '/company/companies-house-profile/',
     }
 
-    def update_profile(self, id, data):
+    def update_profile(self, sso_user_id, data):
         files = {}
         if 'logo' in data:
             files['logo'] = data.pop('logo')
-        url = self.endpoints['profile'].format(id=id)
+        url = self.endpoints['profile'].format(sso_id=sso_user_id)
         return self.patch(
             url=url,
             data=data,
             files=files,
         )
 
-    def retrieve_profile(self, id):
-        url = self.endpoints['profile'].format(id=id)
+    def retrieve_profile(self, sso_user_id):
+        url = self.endpoints['profile'].format(sso_id=sso_user_id)
         return self.get(url)
 
     def retrieve_companies_house_profile(self, number):
