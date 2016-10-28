@@ -13,40 +13,40 @@ class CompanyAPIClientTest(TestCase):
             base_url='https://example.com', api_key='test'
         )
 
-    @stub_request('https://example.com/company/details/1/', 'patch')
+    @stub_request('https://example.com/user/1/company/', 'patch')
     def test_update_profile_handles_data(self, stub):
         data = {'key': 'value'}
-        self.client.update_profile(id=1, data=data)
+        self.client.update_profile(sso_user_id=1, data=data)
         request = stub.request_history[0]
         assert request.json() == data
 
-    @stub_request('https://example.com/company/details/1/', 'patch')
+    @stub_request('https://example.com/user/1/company/', 'patch')
     def test_update_profile_handles_files(self, stub):
         handle, logo_path = tempfile.mkstemp()
         data = {
             'logo': StringIO('hello'),
         }
-        self.client.update_profile(id=1, data=data)
+        self.client.update_profile(sso_user_id=1, data=data)
         request = stub.request_history[0]
         assert 'Content-Disposition: form-data;' in request.text
         assert 'filename="logo"\r\n\r\nhello\r\n' in request.text
 
-    @stub_request('https://example.com/company/details/1/', 'patch')
+    @stub_request('https://example.com/user/1/company/', 'patch')
     def test_update_profile_handles_files_and_data(self, stub):
         handle, logo_path = tempfile.mkstemp()
         data = {
             'logo': StringIO('hello'),
             'key': 'value',
         }
-        self.client.update_profile(id=1, data=data)
+        self.client.update_profile(sso_user_id=1, data=data)
         request = stub.request_history[0]
         assert 'Content-Disposition: form-data;' in request.text
         assert 'name="key"\r\n\r\nvalue\r\n' in request.text
         assert 'filename="logo"\r\n\r\nhello\r\n' in request.text
 
-    @stub_request('https://example.com/company/details/1/', 'get')
+    @stub_request('https://example.com/user/1/company/', 'get')
     def test_retrieve_profile(self, stub):
-        self.client.retrieve_profile(id=1)
+        self.client.retrieve_profile(sso_user_id=1)
 
     @stub_request('https://example.com/company/companies-house-profile/',
                   'get')
