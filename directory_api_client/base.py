@@ -95,8 +95,8 @@ class BaseAPIClient:
                 )
             )
 
-    def sign_request(self, api_key, url, prepared_request):
-        url = urlparse.urlsplit(url)
+    def sign_request(self, api_key, prepared_request):
+        url = urlparse.urlsplit(prepared_request.path_url)
         path = bytes(url.path, "utf-8")
 
         if url.query:
@@ -121,7 +121,6 @@ class BaseAPIClient:
 
         signed_request = self.sign_request(
             api_key=api_key,
-            url=url,
             prepared_request=prepared_request,
         )
         return requests.Session().send(signed_request)
