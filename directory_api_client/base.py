@@ -33,7 +33,6 @@ class BaseAPIClient:
             response = self.request(
                 url=url,
                 method="PATCH",
-                content_type="multipart/form-data",
                 data=data,
                 files=files,
             )
