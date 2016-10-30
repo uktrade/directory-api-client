@@ -49,7 +49,8 @@ class BaseAPIClientTest(TestCase):
         files = {'logo': StringIO('hello')}
         self.client.patch(url='thing/', data=data, files=files)
         request = stub.request_history[0]
-        assert request.headers['Content-type'] == 'multipart/form-data'
+        header = request.headers['Content-type']
+        assert header.startswith('multipart/form-data; boundary=')
 
     def test_sign_request(self):
         url = 'https://example.com'
