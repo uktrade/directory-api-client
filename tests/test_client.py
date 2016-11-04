@@ -1,5 +1,6 @@
 from unittest import TestCase
 
+from directory_api_client.buyer import BuyerAPIClient
 from directory_api_client.client import DirectoryAPIClient
 from directory_api_client.company import CompanyAPIClient
 from directory_api_client.registration import EnrolmentAPIClient
@@ -26,4 +27,9 @@ class DirectoryAPIClientTest(TestCase):
     def test_user(self):
         assert isinstance(self.client.user, UserAPIClient)
         assert self.client.user.base_url == self.base_url
+        assert self.client.user.api_key == self.api_key
+
+    def test_buyer(self):
+        assert isinstance(self.client.buyer, BuyerAPIClient)
+        assert self.client.buyer.base_url == self.base_url
         assert self.client.user.api_key == self.api_key
