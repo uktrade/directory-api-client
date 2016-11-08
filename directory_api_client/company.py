@@ -5,7 +5,7 @@ class CompanyAPIClient(BaseAPIClient):
 
     endpoints = {
         'profile': '/user/{sso_id}/company/',
-        'validate-company-number': '/validate-company-number/',
+        'validate-company-number': '/validate/company-number/',
         'companies-house-profile': '/company/companies-house-profile/',
     }
 

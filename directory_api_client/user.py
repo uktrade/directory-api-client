@@ -5,7 +5,9 @@ class UserAPIClient(BaseAPIClient):
 
     endpoints = {
         'user': '/user/{sso_id}/',
-        'validate-email-address': '/validate-email-address/',
+        'validate-email-address': '/validate/email-address/',
+        'validate-mobile-number': '/validate/phone-number/',
+
     }
 
     def update_profile(self, sso_id, data):
@@ -19,4 +21,9 @@ class UserAPIClient(BaseAPIClient):
     def validate_email_address(self, email):
         url = self.endpoints['validate-email-address']
         params = {'company_email': email}
+        return self.get(url, params=params)
+
+    def validate_mobile_number(self, mobile_number):
+        url = self.endpoints['validate-mobile-number']
+        params = {'mobile_number': mobile_number}
         return self.get(url, params=params)
