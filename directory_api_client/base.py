@@ -48,13 +48,22 @@ class BaseAPIClient:
     def get(self, url, params=None):
         return self.request(url=url, method="GET", params=params)
 
-    def post(self, url, data):
-        return self.request(
-            url=url,
-            method="POST",
-            content_type="application/json",
-            data=json.dumps(data),
-        )
+    def post(self, url, data, files=None):
+        if files:
+            response = self.request(
+                url=url,
+                method="POST",
+                data=data,
+                files=files,
+            )
+        else:
+            response = self.request(
+                url=url,
+                method="POST",
+                content_type="application/json",
+                data=json.dumps(data),
+            )
+        return response
 
     def delete(self, url, data=None):
         return self.request(url=url, method="DELETE")
