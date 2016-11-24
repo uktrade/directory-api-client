@@ -5,9 +5,9 @@ class CompanyAPIClient(BaseAPIClient):
 
     endpoints = {
         'profile': '/user/{sso_id}/company/',
+        'case-study-detail': '/user/{sso_id}/company/case-study/{id}/',
+        'case-study-list': '/user/{sso_id}/company/case-study/',
         'validate-company-number': '/validate/company-number/',
-        'case-study-detail': '/company/case-study/{id}/',
-        'case-study-list': '/company/case-study/',
     }
 
     def update_profile(self, sso_user_id, data):
@@ -30,14 +30,27 @@ class CompanyAPIClient(BaseAPIClient):
         params = {'number': number}
         return self.get(url, params=params)
 
-    def create_supplier_case_study(self, data):
-        url = self.endpoints['case-study-list']
-        return self.post(url, data=data)
+    def create_supplier_case_study(self, data, sso_user_id):
+        files = {}
+        for field in ['image_one', 'image_two', 'image_three', 'video_one']:
+            if data.get(field):
+                files[field] = data.pop(field)
+        url = self.endpoints['case-study-list'].format(sso_id=sso_user_id)
+        return self.post(url, data=data, files=files)
 
-    def update_supplier_case_study(self, data, case_study_id):
-        url = self.endpoints['case-study-detail'].format(id=case_study_id)
-        return self.patch(url, data=data)
+    def update_supplier_case_study(self, data, sso_user_id, case_study_id):
+        files = {}
+        for field in ['image_one', 'image_two', 'image_three', 'video_one']:
+            if data.get(field):
+                files[field] = data.pop(field)
+        url = self.endpoints['case-study-detail'].format(
+            sso_id=sso_user_id, id=case_study_id
+        )
+        return self.patch(url, data=data, files=files)
 
-    def delete_supplier_case_study(self, case_study_id):
-        url = self.endpoints['case-study-detail'].format(id=case_study_id)
+    def delete_supplier_case_study(self, sso_user_id, case_study_id):
+        url = self.endpoints['case-study-detail'].format(
+            id=case_study_id,
+            sso_id=sso_user_id,
+        )
         return self.delete(url)
