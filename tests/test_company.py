@@ -48,15 +48,26 @@ class CompanyAPIClientTest(TestCase):
     def test_retrieve_profile(self, stub):
         self.client.retrieve_profile(sso_user_id=1)
 
-    @stub_request('https://example.com/company/companies-house-profile/',
-                  'get')
-    def test_retrieve_companies_house_profile(self, stub):
-        self.client.retrieve_companies_house_profile('01234567')
-        request = stub.request_history[0]
-        assert request.query == 'number=01234567'
-
     @stub_request('https://example.com/validate/company-number/', 'get')
     def test_validate_company_number(self, stub):
         self.client.validate_company_number('01234567')
         request = stub.request_history[0]
         assert request.query == 'number=01234567'
+
+    @stub_request('https://example.com/company/case-study/', 'post')
+    def test_create_supplier_case_study(self, stub):
+        data = {'field': 'value'}
+        self.client.create_supplier_case_study(data)
+        request = stub.request_history[0]
+        assert request.json() == data
+
+    @stub_request('https://example.com/company/case-study/1/', 'patch')
+    def test_update_supplier_case_study(self, stub):
+        data = {'field': 'value'}
+        self.client.update_supplier_case_study(data, 1)
+        request = stub.request_history[0]
+        assert request.json() == data
+
+    @stub_request('https://example.com/company/case-study/1/', 'delete')
+    def test_delete_supplier_case_study(self, stub):
+        self.client.delete_supplier_case_study(1)
