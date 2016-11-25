@@ -45,6 +45,18 @@ class CompanyAPIClientTest(TestCase):
     def test_retrieve_profile(self, stub):
         self.client.retrieve_profile(sso_user_id=1)
 
+    @stub_request('https://example.com/company/public/?page=1', 'get')
+    def test_list_public_profile_default_page_number(self, stub):
+        self.client.list_public_profiles()
+
+    @stub_request('https://example.com/company/public/?page=4', 'get')
+    def test_list_public_profile_specified_page_number(self, stub):
+        self.client.list_public_profiles(page=4)
+
+    @stub_request('https://example.com/company/public/1/', 'get')
+    def test_retrieve_public_profile_by_companies_house_number(self, stub):
+        self.client.retrieve_public_profile_by_companies_house_number(number=1)
+
     @stub_request('https://example.com/validate/company-number/', 'get')
     def test_validate_company_number(self, stub):
         self.client.validate_company_number('01234567')
