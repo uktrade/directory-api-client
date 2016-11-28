@@ -1,3 +1,5 @@
+from urllib import parse
+
 from directory_api_client.base import BaseAPIClient
 
 
@@ -9,7 +11,7 @@ class CompanyAPIClient(BaseAPIClient):
         'case-study-list': '/user/{sso_id}/company/case-study/',
         'validate-company-number': '/validate/company-number/',
         'public-profile-detail': '/company/public/{number}/',
-        'public-profile-list': '/company/public/?page={page}',
+        'public-profile-list': '/company/public/',
     }
 
     def update_profile(self, sso_user_id, data):
@@ -31,8 +33,11 @@ class CompanyAPIClient(BaseAPIClient):
         url = self.endpoints['public-profile-detail'].format(number=number)
         return self.get(url)
 
-    def list_public_profiles(self, page=1):
-        url = self.endpoints['public-profile-list'].format(page=page)
+    def list_public_profiles(self, **kwargs):
+        url = '{path}?{querystring}'.format(
+            path=self.endpoints['public-profile-list'],
+            querystring=parse.urlencode(kwargs),
+        )
         return self.get(url)
 
     def validate_company_number(self, number):
