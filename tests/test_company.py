@@ -149,3 +149,9 @@ class CompanyAPIClientTest(TestCase):
     @stub_request('https://example.com/user/2/company/case-study/1/', 'delete')
     def test_delete_supplier_case_study(self, stub):
         self.client.delete_supplier_case_study(sso_user_id=2, case_study_id=1)
+
+    @stub_request('https://example.com/user/2/company/case-study/1/', 'get')
+    def retrieve_supplier_case_study(self, stub):
+        self.client.retrieve_supplier_case_study(
+            sso_user_id=2, case_study_id=1
+        )
