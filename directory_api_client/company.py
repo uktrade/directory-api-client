@@ -58,6 +58,12 @@ class CompanyAPIClient(BaseAPIClient):
         )
         return self.patch(url, data=data, files=files)
 
+    def retrieve_supplier_case_study(self, sso_user_id, case_study_id):
+        url = self.endpoints['case-study-detail'].format(
+            sso_id=sso_user_id, id=case_study_id
+        )
+        return self.get(url)
+
     def delete_supplier_case_study(self, sso_user_id, case_study_id):
         url = self.endpoints['case-study-detail'].format(
             id=case_study_id,
