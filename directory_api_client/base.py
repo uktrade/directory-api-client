@@ -76,7 +76,9 @@ class BaseAPIClient:
         logger.debug("API request {} {}".format(method, url))
 
         headers = {
-            "User-agent": "EXPORT-DIRECTORY-API-CLIENT/{}".format(__version__),
+            "User-agent": "EXPORT-DIRECTORY-API-CLIENT/{}".format(
+                __version__
+            ),
         }
         if content_type:
             headers["Content-type"] = content_type

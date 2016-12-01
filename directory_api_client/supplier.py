@@ -1,21 +1,21 @@
 from directory_api_client.base import BaseAPIClient
 
 
-class UserAPIClient(BaseAPIClient):
+class SupplierAPIClient(BaseAPIClient):
 
     endpoints = {
-        'user': '/user/{sso_id}/',
+        'supplier': '/supplier/{sso_id}/',
         'validate-email-address': '/validate/email-address/',
         'validate-mobile-number': '/validate/phone-number/',
 
     }
 
     def update_profile(self, sso_id, data):
-        url = self.endpoints['user'].format(sso_id=sso_id)
+        url = self.endpoints['supplier'].format(sso_id=sso_id)
         return self.patch(url, data=data)
 
     def retrieve_profile(self, sso_id):
-        url = '/user/{sso_id}/'.format(sso_id=sso_id)
+        url = '/supplier/{sso_id}/'.format(sso_id=sso_id)
         return self.get(url)
 
     def validate_email_address(self, email):

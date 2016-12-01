@@ -11,7 +11,7 @@ class DummyDirectoryAPIClient(DirectoryAPIClient):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         patch.object(self.registration, 'send', self.send).start()
-        patch.object(self.user, 'send', self.send).start()
+        patch.object(self.supplier, 'send', self.send).start()
         patch.object(self.company, 'send', self.send).start()
         patch.object(self.buyer, 'send', self.send).start()
 
