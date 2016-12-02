@@ -6,9 +6,9 @@ from directory_api_client.base import BaseAPIClient
 class CompanyAPIClient(BaseAPIClient):
 
     endpoints = {
-        'profile': '/user/{sso_id}/company/',
-        'case-study-detail': '/user/{sso_id}/company/case-study/{id}/',
-        'case-study-list': '/user/{sso_id}/company/case-study/',
+        'profile': '/supplier/{sso_id}/company/',
+        'case-study-detail': '/supplier/{sso_id}/company/case-study/{id}/',
+        'case-study-list': '/supplier/{sso_id}/company/case-study/',
         'validate-company-number': '/validate/company-number/',
         'public-profile-detail': '/company/public/{number}/',
         'public-profile-list': '/company/public/',

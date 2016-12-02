@@ -4,7 +4,7 @@ from directory_api_client.buyer import BuyerAPIClient
 from directory_api_client.client import DirectoryAPIClient
 from directory_api_client.company import CompanyAPIClient
 from directory_api_client.registration import EnrolmentAPIClient
-from directory_api_client.user import UserAPIClient
+from directory_api_client.supplier import SupplierAPIClient
 
 
 class DirectoryAPIClientTest(TestCase):
@@ -24,12 +24,12 @@ class DirectoryAPIClientTest(TestCase):
         assert self.client.company.base_url == self.base_url
         assert self.client.company.api_key == self.api_key
 
-    def test_user(self):
-        assert isinstance(self.client.user, UserAPIClient)
-        assert self.client.user.base_url == self.base_url
-        assert self.client.user.api_key == self.api_key
+    def test_supplier(self):
+        assert isinstance(self.client.supplier, SupplierAPIClient)
+        assert self.client.supplier.base_url == self.base_url
+        assert self.client.supplier.api_key == self.api_key
 
     def test_buyer(self):
         assert isinstance(self.client.buyer, BuyerAPIClient)
         assert self.client.buyer.base_url == self.base_url
-        assert self.client.user.api_key == self.api_key
+        assert self.client.supplier.api_key == self.api_key
