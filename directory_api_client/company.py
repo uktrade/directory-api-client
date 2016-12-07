@@ -12,6 +12,7 @@ class CompanyAPIClient(BaseAPIClient):
         'validate-company-number': '/validate/company-number/',
         'public-profile-detail': '/company/public/{number}/',
         'public-profile-list': '/company/public/',
+        'verify': '/supplier/{sso_id}/company/verify/',
     }
 
     def update_profile(self, sso_user_id, data):
@@ -75,3 +76,8 @@ class CompanyAPIClient(BaseAPIClient):
             sso_id=sso_user_id,
         )
         return self.delete(url)
+
+    def verify_with_code(self, sso_user_id, code):
+        url = self.endpoints['verify'].format(sso_id=sso_user_id)
+        data = {'code': code}
+        return self.post(url, data)

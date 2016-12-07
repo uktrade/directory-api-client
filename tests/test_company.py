@@ -167,7 +167,17 @@ class CompanyAPIClientTest(TestCase):
     @stub_request(
         'https://example.com/supplier/2/company/case-study/1/', 'get'
     )
-    def retrieve_supplier_case_study(self, stub):
+    def test_retrieve_supplier_case_study(self, stub):
         self.client.retrieve_supplier_case_study(
             sso_user_id=2, case_study_id=1
         )
+
+    @stub_request(
+        'https://example.com/supplier/2/company/verify/', 'post'
+    )
+    def test_verify_with_code(self, stub):
+        self.client.verify_with_code(
+            sso_user_id=2, code='222222'
+        )
+        request = stub.request_history[0]
+        assert request.json() == {'code': '222222'}
