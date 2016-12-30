@@ -7,8 +7,8 @@ class CompanyAPIClient(BaseAPIClient):
 
     endpoints = {
         'profile': '/supplier/{sso_id}/company/',
-        'case-study-detail': '/supplier/{sso_id}/company/case-study/{id}/',
-        'case-study-list': '/supplier/{sso_id}/company/case-study/',
+        'case-study-detail': '/company/case-study/{id}/',
+        'case-study-list': '/company/case-study/',
         'validate-company-number': '/validate/company-number/',
         'public-profile-detail': '/company/public/{number}/',
         'public-profile-list': '/company/public/',
@@ -51,33 +51,21 @@ class CompanyAPIClient(BaseAPIClient):
         for field in ['image_one', 'image_two', 'image_three', 'video_one']:
             if data.get(field):
                 files[field] = data.pop(field)
-        url = self.endpoints['case-study-list'].format(sso_id=sso_user_id)
-        return self.post(url, data=data, files=files)
+        url = self.endpoints['case-study-list']
+        return self.post(url, data=data, files=files, sso_id=sso_user_id)
 
     def update_supplier_case_study(self, data, sso_user_id, case_study_id):
         files = {}
         for field in ['image_one', 'image_two', 'image_three', 'video_one']:
             if data.get(field):
                 files[field] = data.pop(field)
-        url = self.endpoints['case-study-detail'].format(
-            sso_id=sso_user_id, id=case_study_id
-        )
-        return self.patch(url, data=data, files=files)
+        url = self.endpoints['case-study-detail'].format(id=case_study_id)
+        return self.patch(url, data=data, files=files, sso_id=sso_user_id)
 
-    def retrieve_supplier_case_study(self, sso_user_id, case_study_id):
-        url = self.endpoints['case-study-detail'].format(
-            sso_id=sso_user_id, id=case_study_id
-        )
-        return self.get(url)
+    def retrieve_supplier_case_study(self, case_study_id, sso_user_id=None):
+        url = self.endpoints['case-study-detail'].format(id=case_study_id)
+        return self.get(url, sso_id=sso_user_id)
 
     def delete_supplier_case_study(self, sso_user_id, case_study_id):
-        url = self.endpoints['case-study-detail'].format(
-            id=case_study_id,
-            sso_id=sso_user_id,
-        )
-        return self.delete(url)
-
-    def verify_with_code(self, sso_user_id, code):
-        url = self.endpoints['verify'].format(sso_id=sso_user_id)
-        data = {'code': code}
-        return self.post(url, data)
+        url = self.endpoints['case-study-detail'].format(id=case_study_id)
+        return self.delete(url, sso_id=sso_user_id)
