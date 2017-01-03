@@ -69,14 +69,15 @@ class CompanyAPIClientTest(TestCase):
         request = stub.request_history[0]
         assert request.query == 'number=01234567'
 
-    @stub_request('https://example.com/supplier/2/company/case-study/', 'post')
+    @stub_request('https://example.com/company/case-study/', 'post')
     def test_create_supplier_case_study(self, stub):
         data = {'field': 'value'}
         self.client.create_supplier_case_study(data=data, sso_user_id=2)
         request = stub.request_history[0]
         assert request.json() == data
+        assert request.headers['sso-id'] == '2'
 
-    @stub_request('https://example.com/supplier/2/company/case-study/', 'post')
+    @stub_request('https://example.com/company/case-study/', 'post')
     def test_create_supplier_case_study_handles_files(self, stub):
         data = {
             'image_one': StringIO('_image_one'),
@@ -87,13 +88,14 @@ class CompanyAPIClientTest(TestCase):
         self.client.create_supplier_case_study(data=data, sso_user_id=2)
 
         request = stub.request_history[0]
+        assert request.headers['sso-id'] == '2'
         assert 'Content-Disposition: form-data;' in request.text
         assert 'filename="image_one"\r\n\r\n_image_one\r\n' in request.text
         assert 'filename="image_two"\r\n\r\n_image_two\r\n' in request.text
         assert 'filename="image_three"\r\n\r\n_image_three\r\n' in request.text
         assert 'filename="video_one"\r\n\r\n_video_one\r\n' in request.text
 
-    @stub_request('https://example.com/supplier/2/company/case-study/', 'post')
+    @stub_request('https://example.com/company/case-study/', 'post')
     def test_create_supplier_case_study_handles_files_and_data(self, stub):
         data = {
             'image_one': StringIO('_image_one'),
@@ -103,13 +105,12 @@ class CompanyAPIClientTest(TestCase):
         self.client.create_supplier_case_study(sso_user_id=2, data=data)
 
         request = stub.request_history[0]
+        assert request.headers['sso-id'] == '2'
         assert 'Content-Disposition: form-data;' in request.text
         assert 'name="field"\r\n\r\nvalue\r\n' in request.text
         assert 'filename="image_one"\r\n\r\n_image_one\r\n' in request.text
 
-    @stub_request(
-        'https://example.com/supplier/2/company/case-study/1/', 'patch'
-    )
+    @stub_request('https://example.com/company/case-study/1/', 'patch')
     def test_update_supplier_case_study(self, stub):
         data = {'field': 'value'}
         self.client.update_supplier_case_study(
@@ -117,11 +118,10 @@ class CompanyAPIClientTest(TestCase):
         )
 
         request = stub.request_history[0]
+        assert request.headers['sso-id'] == '2'
         assert request.json() == data
 
-    @stub_request(
-        'https://example.com/supplier/2/company/case-study/1/', 'patch'
-    )
+    @stub_request('https://example.com/company/case-study/1/', 'patch')
     def test_update_supplier_case_study_hanles_files(self, stub):
         data = {
             'image_one': StringIO('_image_one'),
@@ -134,15 +134,14 @@ class CompanyAPIClientTest(TestCase):
         )
 
         request = stub.request_history[0]
+        assert request.headers['sso-id'] == '2'
         assert 'Content-Disposition: form-data;' in request.text
         assert 'filename="image_one"\r\n\r\n_image_one\r\n' in request.text
         assert 'filename="image_two"\r\n\r\n_image_two\r\n' in request.text
         assert 'filename="image_three"\r\n\r\n_image_three\r\n' in request.text
         assert 'filename="video_one"\r\n\r\n_video_one\r\n' in request.text
 
-    @stub_request(
-        'https://example.com/supplier/2/company/case-study/1/', 'patch'
-    )
+    @stub_request('https://example.com/company/case-study/1/', 'patch')
     def test_update_supplier_case_study_hanles_files_and_data(self, stub):
         data = {
             'image_one': StringIO('_image_one'),
@@ -154,30 +153,27 @@ class CompanyAPIClientTest(TestCase):
         )
 
         request = stub.request_history[0]
+        assert request.headers['sso-id'] == '2'
         assert 'Content-Disposition: form-data;' in request.text
         assert 'name="field"\r\n\r\nvalue\r\n' in request.text
         assert 'filename="image_one"\r\n\r\n_image_one\r\n' in request.text
 
-    @stub_request(
-        'https://example.com/supplier/2/company/case-study/1/', 'delete'
-    )
+    @stub_request('https://example.com/company/case-study/1/', 'delete')
     def test_delete_supplier_case_study(self, stub):
         self.client.delete_supplier_case_study(sso_user_id=2, case_study_id=1)
 
-    @stub_request(
-        'https://example.com/supplier/2/company/case-study/1/', 'get'
-    )
-    def test_retrieve_supplier_case_study(self, stub):
+    @stub_request('https://example.com/company/case-study/1/', 'get')
+    def retrieve_supplier_case_study(self, stub):
         self.client.retrieve_supplier_case_study(
             sso_user_id=2, case_study_id=1
         )
-
-    @stub_request(
-        'https://example.com/supplier/2/company/verify/', 'post'
-    )
-    def test_verify_with_code(self, stub):
-        self.client.verify_with_code(
-            sso_user_id=2, code='222222'
-        )
         request = stub.request_history[0]
-        assert request.json() == {'code': '222222'}
+
+        assert request.headers['sso-id'] == '2'
+
+    @stub_request('https://example.com/company/case-study/1/', 'get')
+    def retrieve_supplier_case_study_unidentified_user(self, stub):
+        self.client.retrieve_supplier_case_study(case_study_id=1)
+
+        request = stub.request_history[0]
+        assert 'sso-id' not in request.headers
