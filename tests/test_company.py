@@ -45,21 +45,21 @@ class CompanyAPIClientTest(TestCase):
     def test_retrieve_profile(self, stub):
         self.client.retrieve_profile(sso_user_id=1)
 
-    @stub_request('https://example.com/company/public/', 'get')
+    @stub_request('https://example.com/public/company/', 'get')
     def test_list_public_profile_no_params(self, stub):
         self.client.list_public_profiles()
 
-    @stub_request('https://example.com/company/public/?page=4', 'get')
+    @stub_request('https://example.com/public/company/?page=4', 'get')
     def test_list_public_profile_specified_page_number(self, stub):
         self.client.list_public_profiles(page=4)
 
     @stub_request(
-        'https://example.com/company/public/?page=4&sectors=THING', 'get'
+        'https://example.com/public/company/?page=4&sectors=THING', 'get'
     )
     def test_list_public_profile_multiple_kwargs(self, stub):
         self.client.list_public_profiles(page=4, sectors='THING')
 
-    @stub_request('https://example.com/company/public/1/', 'get')
+    @stub_request('https://example.com/public/company/1/', 'get')
     def test_retrieve_public_profile_by_companies_house_number(self, stub):
         self.client.retrieve_public_profile_by_companies_house_number(number=1)
 
@@ -70,21 +70,21 @@ class CompanyAPIClientTest(TestCase):
         assert request.query == 'number=01234567'
 
     @stub_request('https://example.com/supplier/2/company/case-study/', 'post')
-    def test_create_supplier_case_study(self, stub):
+    def test_create_case_study(self, stub):
         data = {'field': 'value'}
-        self.client.create_supplier_case_study(data=data, sso_user_id=2)
+        self.client.create_case_study(data=data, sso_user_id=2)
         request = stub.request_history[0]
         assert request.json() == data
 
     @stub_request('https://example.com/supplier/2/company/case-study/', 'post')
-    def test_create_supplier_case_study_handles_files(self, stub):
+    def test_create_case_study_handles_files(self, stub):
         data = {
             'image_one': StringIO('_image_one'),
             'image_two': StringIO('_image_two'),
             'image_three': StringIO('_image_three'),
             'video_one': StringIO('_video_one'),
         }
-        self.client.create_supplier_case_study(data=data, sso_user_id=2)
+        self.client.create_case_study(data=data, sso_user_id=2)
 
         request = stub.request_history[0]
         assert 'Content-Disposition: form-data;' in request.text
@@ -94,13 +94,13 @@ class CompanyAPIClientTest(TestCase):
         assert 'filename="video_one"\r\n\r\n_video_one\r\n' in request.text
 
     @stub_request('https://example.com/supplier/2/company/case-study/', 'post')
-    def test_create_supplier_case_study_handles_files_and_data(self, stub):
+    def test_create_case_study_handles_files_and_data(self, stub):
         data = {
             'image_one': StringIO('_image_one'),
             'image_two': None,
             'field': 'value',
         }
-        self.client.create_supplier_case_study(sso_user_id=2, data=data)
+        self.client.create_case_study(sso_user_id=2, data=data)
 
         request = stub.request_history[0]
         assert 'Content-Disposition: form-data;' in request.text
@@ -110,9 +110,9 @@ class CompanyAPIClientTest(TestCase):
     @stub_request(
         'https://example.com/supplier/2/company/case-study/1/', 'patch'
     )
-    def test_update_supplier_case_study(self, stub):
+    def test_update_case_study(self, stub):
         data = {'field': 'value'}
-        self.client.update_supplier_case_study(
+        self.client.update_case_study(
             data=data, sso_user_id=2, case_study_id=1
         )
 
@@ -122,14 +122,14 @@ class CompanyAPIClientTest(TestCase):
     @stub_request(
         'https://example.com/supplier/2/company/case-study/1/', 'patch'
     )
-    def test_update_supplier_case_study_hanles_files(self, stub):
+    def test_update_case_study_hanles_files(self, stub):
         data = {
             'image_one': StringIO('_image_one'),
             'image_two': StringIO('_image_two'),
             'image_three': StringIO('_image_three'),
             'video_one': StringIO('_video_one'),
         }
-        self.client.update_supplier_case_study(
+        self.client.update_case_study(
             data=data, sso_user_id=2, case_study_id=1
         )
 
@@ -143,13 +143,13 @@ class CompanyAPIClientTest(TestCase):
     @stub_request(
         'https://example.com/supplier/2/company/case-study/1/', 'patch'
     )
-    def test_update_supplier_case_study_hanles_files_and_data(self, stub):
+    def test_update_case_study_hanles_files_and_data(self, stub):
         data = {
             'image_one': StringIO('_image_one'),
             'image_two': None,
             'field': 'value',
         }
-        self.client.update_supplier_case_study(
+        self.client.update_case_study(
             data=data, sso_user_id=2, case_study_id=1
         )
 
@@ -161,16 +161,22 @@ class CompanyAPIClientTest(TestCase):
     @stub_request(
         'https://example.com/supplier/2/company/case-study/1/', 'delete'
     )
-    def test_delete_supplier_case_study(self, stub):
-        self.client.delete_supplier_case_study(sso_user_id=2, case_study_id=1)
+    def test_delete_case_study(self, stub):
+        self.client.delete_case_study(sso_user_id=2, case_study_id=1)
 
     @stub_request(
         'https://example.com/supplier/2/company/case-study/1/', 'get'
     )
-    def test_retrieve_supplier_case_study(self, stub):
-        self.client.retrieve_supplier_case_study(
+    def test_retrieve_private_case_study(self, stub):
+        self.client.retrieve_private_case_study(
             sso_user_id=2, case_study_id=1
         )
+
+    @stub_request(
+        'https://example.com/public/case-study/1/', 'get'
+    )
+    def test_retrieve_public_case_study(self, stub):
+        self.client.retrieve_public_case_study(case_study_id=1)
 
     @stub_request(
         'https://example.com/supplier/2/company/verify/', 'post'
