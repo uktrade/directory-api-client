@@ -10,9 +10,10 @@ class CompanyAPIClient(BaseAPIClient):
         'case-study-detail': '/supplier/{sso_id}/company/case-study/{id}/',
         'case-study-list': '/supplier/{sso_id}/company/case-study/',
         'validate-company-number': '/validate/company-number/',
-        'public-profile-detail': '/company/public/{number}/',
-        'public-profile-list': '/company/public/',
         'verify': '/supplier/{sso_id}/company/verify/',
+        'public-case-study-detail': '/public/case-study/{id}/',
+        'public-profile-detail': '/public/company/{number}/',
+        'public-profile-list': '/public/company/',
     }
 
     def update_profile(self, sso_user_id, data):
@@ -46,7 +47,7 @@ class CompanyAPIClient(BaseAPIClient):
         params = {'number': number}
         return self.get(url, params=params)
 
-    def create_supplier_case_study(self, data, sso_user_id):
+    def create_case_study(self, data, sso_user_id):
         files = {}
         for field in ['image_one', 'image_two', 'image_three', 'video_one']:
             if data.get(field):
@@ -54,7 +55,7 @@ class CompanyAPIClient(BaseAPIClient):
         url = self.endpoints['case-study-list'].format(sso_id=sso_user_id)
         return self.post(url, data=data, files=files)
 
-    def update_supplier_case_study(self, data, sso_user_id, case_study_id):
+    def update_case_study(self, data, sso_user_id, case_study_id):
         files = {}
         for field in ['image_one', 'image_two', 'image_three', 'video_one']:
             if data.get(field):
@@ -64,13 +65,19 @@ class CompanyAPIClient(BaseAPIClient):
         )
         return self.patch(url, data=data, files=files)
 
-    def retrieve_supplier_case_study(self, sso_user_id, case_study_id):
+    def retrieve_private_case_study(self, sso_user_id, case_study_id):
         url = self.endpoints['case-study-detail'].format(
             sso_id=sso_user_id, id=case_study_id
         )
         return self.get(url)
 
-    def delete_supplier_case_study(self, sso_user_id, case_study_id):
+    def retrieve_public_case_study(self, case_study_id):
+        url = self.endpoints['public-case-study-detail'].format(
+            id=case_study_id
+        )
+        return self.get(url)
+
+    def delete_case_study(self, sso_user_id, case_study_id):
         url = self.endpoints['case-study-detail'].format(
             id=case_study_id,
             sso_id=sso_user_id,
