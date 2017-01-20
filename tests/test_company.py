@@ -42,8 +42,8 @@ class CompanyAPIClientTest(TestCase):
         assert 'filename="logo"\r\n\r\nhello\r\n' in request.text
 
     @stub_request('https://example.com/supplier/1/company/', 'get')
-    def test_retrieve_profile(self, stub):
-        self.client.retrieve_profile(sso_user_id=1)
+    def test_retrieve_private_profile(self, stub):
+        self.client.retrieve_private_profile(sso_user_id=1)
 
     @stub_request('https://example.com/public/company/', 'get')
     def test_list_public_profile_no_params(self, stub):
@@ -60,8 +60,15 @@ class CompanyAPIClientTest(TestCase):
         self.client.list_public_profiles(page=4, sectors='THING')
 
     @stub_request('https://example.com/public/company/1/', 'get')
-    def test_retrieve_public_profile_by_companies_house_number(self, stub):
-        self.client.retrieve_public_profile_by_companies_house_number(number=1)
+    def test_retrieve_public_profile(self, stub):
+        self.client.retrieve_public_profile(number=1)
+
+    @stub_request('https://example.com/public/company/1/contact/', 'post')
+    def test_send_email(self, stub):
+        data = {'body': 'Hello there!'}
+        self.client.send_email(number=1, data=data)
+        request = stub.request_history[0]
+        assert request.json() == data
 
     @stub_request('https://example.com/validate/company-number/', 'get')
     def test_validate_company_number(self, stub):
@@ -172,15 +179,11 @@ class CompanyAPIClientTest(TestCase):
             sso_user_id=2, case_study_id=1
         )
 
-    @stub_request(
-        'https://example.com/public/case-study/1/', 'get'
-    )
+    @stub_request('https://example.com/public/case-study/1/', 'get')
     def test_retrieve_public_case_study(self, stub):
         self.client.retrieve_public_case_study(case_study_id=1)
 
-    @stub_request(
-        'https://example.com/supplier/2/company/verify/', 'post'
-    )
+    @stub_request('https://example.com/supplier/2/company/verify/', 'post')
     def test_verify_with_code(self, stub):
         self.client.verify_with_code(
             sso_user_id=2, code='222222'
