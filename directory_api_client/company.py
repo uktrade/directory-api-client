@@ -14,6 +14,7 @@ class CompanyAPIClient(BaseAPIClient):
         'public-case-study-detail': '/public/case-study/{id}/',
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
+        'contact-company': '/public/company/{number}/contact/',
     }
 
     def update_profile(self, sso_user_id, data):
@@ -27,11 +28,11 @@ class CompanyAPIClient(BaseAPIClient):
             files=files,
         )
 
-    def retrieve_profile(self, sso_user_id):
+    def retrieve_private_profile(self, sso_user_id):
         url = self.endpoints['profile'].format(sso_id=sso_user_id)
         return self.get(url)
 
-    def retrieve_public_profile_by_companies_house_number(self, number):
+    def retrieve_public_profile(self, number):
         url = self.endpoints['public-profile-detail'].format(number=number)
         return self.get(url)
 
@@ -87,4 +88,8 @@ class CompanyAPIClient(BaseAPIClient):
     def verify_with_code(self, sso_user_id, code):
         url = self.endpoints['verify'].format(sso_id=sso_user_id)
         data = {'code': code}
+        return self.post(url, data)
+
+    def send_email(self, number, data):
+        url = self.endpoints['contact-company'].format(number=number)
         return self.post(url, data)
