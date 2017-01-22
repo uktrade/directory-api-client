@@ -14,7 +14,7 @@ class CompanyAPIClient(BaseAPIClient):
         'public-case-study-detail': '/public/case-study/{id}/',
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
-        'contact-company': '/public/company/{number}/contact/',
+        'contact-company': '/contact/company/',
     }
 
     def update_profile(self, sso_user_id, data):
@@ -90,6 +90,5 @@ class CompanyAPIClient(BaseAPIClient):
         data = {'code': code}
         return self.post(url, data)
 
-    def send_email(self, number, data):
-        url = self.endpoints['contact-company'].format(number=number)
-        return self.post(url, data)
+    def send_email(self, data):
+        return self.post(self.endpoints['contact-company'], data)
