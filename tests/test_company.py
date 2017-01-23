@@ -63,7 +63,7 @@ class CompanyAPIClientTest(TestCase):
     def test_retrieve_public_profile(self, stub):
         self.client.retrieve_public_profile(number=1)
 
-    @stub_request('https://example.com/contact/company/', 'post')
+    @stub_request('https://example.com/contact/supplier/', 'post')
     def test_send_email(self, stub):
         data = {'body': 'Hello there!'}
         self.client.send_email(data=data)
