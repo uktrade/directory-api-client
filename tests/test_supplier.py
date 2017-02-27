@@ -22,3 +22,7 @@ class SupplierAPIClientTest(TestCase):
     @stub_request('https://example.com/supplier/1/', 'get')
     def test_retrieve_profile(self, stub):
         self.client.retrieve_profile(sso_id=1)
+
+    @stub_request('https://example.com/supplier/1/unsubscribe/', 'post')
+    def test_unsubscribe(self, stub):
+        self.client.unsubscribe(sso_id=1)
