@@ -27,6 +27,13 @@ class BaseAPIClientTest(TestCase):
         assert request.headers['Content-type'] == 'application/json'
         assert request.text == '{"key": "value"}'
 
+    @stub_request('https://example.com/test', 'post')
+    def test_post_no_payload(self, stub):
+        self.client.post('test')
+        request = stub.request_history[0]
+        assert request.headers['Content-type'] == 'application/json'
+        assert request.text == '{}'
+
     @stub_request('https://example.com/test', 'put')
     def test_put_encodes_json(self, stub):
         data = {'key': 'value'}

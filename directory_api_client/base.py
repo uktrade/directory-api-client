@@ -48,7 +48,7 @@ class BaseAPIClient:
     def get(self, url, params=None):
         return self.request(url=url, method="GET", params=params)
 
-    def post(self, url, data, files=None):
+    def post(self, url, data={}, files=None):
         if files:
             response = self.request(
                 url=url,
