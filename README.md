@@ -1,5 +1,5 @@
 # directory-api-client
-[Export Directory API client](https://www.directory.exportingisgreat.gov.uk/)
+Export Directory internal API client.
 
 ## Build status
 
@@ -10,7 +10,7 @@
 ## Installation
 
 ```shell
-pip install -e git+https://git@github.com/alphagov/directory-api-client.git@0.0.2#egg=directory-api-client
+pip install -e git+https://git@github.com/uktrade/directory-api-client.git@0.0.2#egg=directory-api-client
 ```
 
 ## Usage
