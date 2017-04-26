@@ -15,6 +15,7 @@ class CompanyAPIClient(BaseAPIClient):
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
         'contact-supplier': '/contact/supplier/',
+        'search': '/company/search/',
     }
 
     def update_profile(self, sso_user_id, data):
@@ -92,3 +93,7 @@ class CompanyAPIClient(BaseAPIClient):
 
     def send_email(self, data):
         return self.post(self.endpoints['contact-supplier'], data)
+
+    def search(self, term):
+        params = {'term': term}
+        return self.get(self.endpoints['search'], params=params)
