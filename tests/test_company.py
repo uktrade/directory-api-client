@@ -190,3 +190,10 @@ class CompanyAPIClientTest(TestCase):
         )
         request = stub.request_history[0]
         assert request.json() == {'code': '222222'}
+
+    @stub_request('https://example.com/company/search/', 'get')
+    def test_search(self, stub):
+        self.client.search(term='thing')
+
+        request = stub.request_history[0]
+        assert request.query == 'term=thing'
