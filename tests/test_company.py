@@ -193,7 +193,10 @@ class CompanyAPIClientTest(TestCase):
 
     @stub_request('https://example.com/company/search/', 'get')
     def test_search(self, stub):
-        self.client.search(term='thing')
+        self.client.search(term='thing', page=1, size=10)
 
         request = stub.request_history[0]
-        assert request.query == 'term=thing'
+
+        assert 'size=10' in request.query
+        assert 'page=1' in request.query
+        assert 'term=thing' in request.query
