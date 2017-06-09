@@ -15,6 +15,7 @@ class DummyDirectoryAPIClient(DirectoryAPIClient):
         patch.object(self.company, 'send', self.send).start()
         patch.object(self.buyer, 'send', self.send).start()
         patch.object(self.notifications, 'send', self.send).start()
+        patch.object(self.exportopportunity, 'send', self.send).start()
 
     @patch('requests.Session.send')
     def send(self, mock_send, *args, **kwargs):
