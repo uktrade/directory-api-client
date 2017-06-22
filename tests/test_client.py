@@ -3,7 +3,7 @@ from unittest import TestCase
 from directory_api_client.buyer import BuyerAPIClient
 from directory_api_client.client import DirectoryAPIClient
 from directory_api_client.company import CompanyAPIClient
-from directory_api_client.registration import EnrolmentAPIClient
+from directory_api_client.enrolment import EnrolmentAPIClient
 from directory_api_client.supplier import SupplierAPIClient
 
 
@@ -14,11 +14,11 @@ class DirectoryAPIClientTest(TestCase):
         self.key = 'test'
         self.client = DirectoryAPIClient(self.base_url, self.key)
 
-    def test_registration(self):
-        assert isinstance(self.client.registration, EnrolmentAPIClient)
-        assert self.client.registration.base_url == self.base_url
+    def test_enrolment(self):
+        assert isinstance(self.client.enrolment, EnrolmentAPIClient)
+        assert self.client.enrolment.base_url == self.base_url
         assert (
-            self.client.registration.request_signer.signer.secret == self.key
+            self.client.enrolment.request_signer.signer.secret == self.key
         )
 
     def test_company(self):

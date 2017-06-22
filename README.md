@@ -31,7 +31,7 @@ directory_client = DirectoryAPIClient(
 ### Send registration form
 
 ```python
-directory_client.registration.send_form(
+directory_client.enrolment.send_form(
     form_data=form_data
 )
 ```

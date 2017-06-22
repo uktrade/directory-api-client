@@ -8,7 +8,7 @@ from directory_api_client.buyer import BuyerAPIClient
 class BuyerAPIClientTest(TestCase):
 
     def setUp(self):
-        self.registration_client = BuyerAPIClient(
+        self.enrolment_client = BuyerAPIClient(
             base_url='https://example.com', api_key='test'
         )
 
@@ -16,7 +16,7 @@ class BuyerAPIClientTest(TestCase):
     def test_send_form(self, stub):
         form_data = {'field': 'value'}
 
-        self.registration_client.send_form(form_data)
+        self.enrolment_client.send_form(form_data)
 
         request = stub.request_history[0]
         assert request.json() == form_data
