@@ -20,21 +20,23 @@ class BaseAPIClient:
         self.base_url = base_url
         self.request_signer = RequestSigner(secret=api_key)
 
-    def put(self, url, data):
+    def put(self, url, data, sso_session_id=None):
         return self.request(
             url=url,
             method="PUT",
             content_type="application/json",
-            data=json.dumps(data)
+            data=json.dumps(data),
+            sso_session_id=sso_session_id,
         )
 
-    def patch(self, url, data, files=None):
+    def patch(self, url, data, files=None, sso_session_id=None):
         if files:
             response = self.request(
                 url=url,
                 method="PATCH",
                 data=data,
                 files=files,
+                sso_session_id=sso_session_id,
             )
         else:
             response = self.request(
@@ -42,19 +44,26 @@ class BaseAPIClient:
                 method="PATCH",
                 content_type="application/json",
                 data=json.dumps(data),
+                sso_session_id=sso_session_id,
             )
         return response
 
-    def get(self, url, params=None):
-        return self.request(url=url, method="GET", params=params)
+    def get(self, url, params=None, sso_session_id=None):
+        return self.request(
+            url=url,
+            method="GET",
+            params=params,
+            sso_session_id=sso_session_id,
+        )
 
-    def post(self, url, data={}, files=None):
+    def post(self, url, data={}, files=None, sso_session_id=None):
         if files:
             response = self.request(
                 url=url,
                 method="POST",
                 data=data,
                 files=files,
+                sso_session_id=sso_session_id,
             )
         else:
             response = self.request(
@@ -62,15 +71,20 @@ class BaseAPIClient:
                 method="POST",
                 content_type="application/json",
                 data=json.dumps(data),
+                sso_session_id=sso_session_id,
             )
         return response
 
-    def delete(self, url, data=None):
-        return self.request(url=url, method="DELETE")
+    def delete(self, url, data=None, sso_session_id=None):
+        return self.request(
+            url=url,
+            method="DELETE",
+            sso_session_id=sso_session_id,
+        )
 
     def request(
         self, method, url, content_type=None, data=None, params=None,
-        files=None
+        files=None, sso_session_id=None
     ):
 
         logger.debug("API request {} {}".format(method, url))
@@ -82,6 +96,10 @@ class BaseAPIClient:
         }
         if content_type:
             headers["Content-type"] = content_type
+        if sso_session_id:
+            headers['Authorization'] = (
+                'SSO_SESSION_ID {}'.format(sso_session_id)
+            )
 
         url = urlparse.urljoin(self.base_url, url)
 
