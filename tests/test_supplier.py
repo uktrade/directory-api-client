@@ -12,17 +12,22 @@ class SupplierAPIClientTest(TestCase):
             base_url='https://example.com', api_key='test'
         )
 
-    @stub_request('https://example.com/supplier/1/', 'patch')
+    @stub_request('https://example.com/supplier/', 'patch')
     def test_update_profile(self, stub):
         data = {'key': 'value'}
-        self.client.update_profile(sso_id=1, data=data)
+        self.client.update_profile(sso_session_id=1, data=data)
+
         request = stub.request_history[0]
         assert request.json() == data
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
-    @stub_request('https://example.com/supplier/1/', 'get')
+    @stub_request('https://example.com/supplier/', 'get')
     def test_retrieve_profile(self, stub):
-        self.client.retrieve_profile(sso_id=1)
+        self.client.retrieve_profile(sso_session_id=1)
 
-    @stub_request('https://example.com/supplier/1/unsubscribe/', 'post')
+    @stub_request('https://example.com/supplier/unsubscribe/', 'post')
     def test_unsubscribe(self, stub):
-        self.client.unsubscribe(sso_id=1)
+        self.client.unsubscribe(sso_session_id=1)
+
+        request = stub.request_history[0]
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
