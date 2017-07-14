@@ -92,6 +92,6 @@ class CompanyAPIClient(BaseAPIClient):
     def send_email(self, data):
         return self.post(self.endpoints['contact-supplier'], data)
 
-    def search(self, term, page, size):
-        params = {'term': term, 'page': page, 'size': size}
+    def search(self, term, page, size, sector=None):
+        params = {'term': term, 'page': page, 'size': size, 'sector': sector}
         return self.get(self.endpoints['search'], params=params)
