@@ -213,11 +213,14 @@ class CompanyAPIClientTest(TestCase):
 
     @stub_request('https://example.com/company/search/', 'get')
     def test_search(self, stub):
-        self.client.search(term='thing', page=1, size=10, sector='AEROSPACE')
+        self.client.search(
+            term='thing', page=1, size=10, sectors=['AIRPORTS', 'AEROSPACE']
+        )
 
         request = stub.request_history[0]
 
         assert 'size=10' in request.url
         assert 'page=1' in request.url
         assert 'term=thing' in request.url
-        assert 'sector=AEROSPACE' in request.url
+        assert 'sectors=AIRPORTS' in request.url
+        assert 'sectors=AEROSPACE' in request.url
