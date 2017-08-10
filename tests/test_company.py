@@ -212,7 +212,7 @@ class CompanyAPIClientTest(TestCase):
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
     @stub_request(
-        'https://example.com/supplier/company/verify/companies-house/', 'post'
+        'https://example.com/supplier/company/verify-companies-house/', 'post'
     )
     def test_verify_with_companies_house(self, stub):
         self.client.verify_with_companies_house(

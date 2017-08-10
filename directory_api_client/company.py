@@ -11,7 +11,7 @@ class CompanyAPIClient(BaseAPIClient):
         'case-study-list': '/supplier/company/case-study/',
         'validate-company-number': '/validate/company-number/',
         'verify': '/supplier/company/verify/',
-        'verify-companies-house': '/supplier/company/verify/companies-house/',
+        'verify-companies-house': '/supplier/company/verify-companies-house/',
         'public-case-study-detail': '/public/case-study/{id}/',
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
