@@ -211,6 +211,18 @@ class CompanyAPIClientTest(TestCase):
         assert request.json() == {'code': '222222'}
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
+    @stub_request(
+        'https://example.com/supplier/company/verify-companies-house/', 'post'
+    )
+    def test_verify_with_companies_house(self, stub):
+        self.client.verify_with_companies_house(
+            sso_session_id=2, access_token='222222'
+        )
+
+        request = stub.request_history[0]
+        assert request.json() == {'access_token': '222222'}
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
     @stub_request('https://example.com/company/search/', 'get')
     def test_search(self, stub):
         self.client.search(

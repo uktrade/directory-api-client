@@ -11,6 +11,7 @@ class CompanyAPIClient(BaseAPIClient):
         'case-study-list': '/supplier/company/case-study/',
         'validate-company-number': '/validate/company-number/',
         'verify': '/supplier/company/verify/',
+        'verify-companies-house': '/supplier/company/verify-companies-house/',
         'public-case-study-detail': '/public/case-study/{id}/',
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
@@ -88,6 +89,11 @@ class CompanyAPIClient(BaseAPIClient):
         return self.post(
             self.endpoints['verify'], data, sso_session_id=sso_session_id
         )
+
+    def verify_with_companies_house(self, sso_session_id, access_token):
+        data = {'access_token': access_token}
+        url = self.endpoints['verify-companies-house']
+        return self.post(url, data, sso_session_id=sso_session_id)
 
     def send_email(self, data):
         return self.post(self.endpoints['contact-supplier'], data)
