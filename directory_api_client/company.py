@@ -17,6 +17,15 @@ class CompanyAPIClient(BaseAPIClient):
         'public-profile-list': '/public/company/',
         'contact-supplier': '/contact/supplier/',
         'search': '/company/search/',
+        'transfer-invite': '/supplier/company/transfer-ownership-invite/',
+        'transfer-invite-detail': (
+            '/supplier/company/transfer-ownership-invite/{invite_key}/'
+        ),
+        'collaboration-invite': '/supplier/company/collaboration-invite/',
+        'collaboration-invite-detail': (
+            '/supplier/company/collaboration-invite/{invite_key}/'
+        ),
+        'remove-collaborators': '/supplier/company/remove-collaborators/',
     }
 
     def update_profile(self, sso_session_id, data):
@@ -101,3 +110,44 @@ class CompanyAPIClient(BaseAPIClient):
     def search(self, term, page, size, sectors=None):
         params = {'term': term, 'page': page, 'size': size, 'sectors': sectors}
         return self.get(self.endpoints['search'], params=params)
+
+    def create_transfer_invite(self, sso_session_id, new_owner_email):
+        url = self.endpoints['transfer-invite']
+        data = {'new_owner_email': new_owner_email}
+        return self.post(url, data, sso_session_id=sso_session_id)
+
+    def retrieve_transfer_invite(self, sso_session_id, invite_key):
+        url = self.endpoints['transfer-invite-detail'].format(
+            invite_key=invite_key
+        )
+        return self.get(url, sso_session_id=sso_session_id)
+
+    def accept_transfer_invite(self, sso_session_id, invite_key):
+        url = self.endpoints['transfer-invite-detail'].format(
+            invite_key=invite_key
+        )
+        data = {'accepted': True}
+        return self.patch(url, data=data, sso_session_id=sso_session_id)
+
+    def create_collaboration_invite(self, sso_session_id, collaborator_email):
+        url = self.endpoints['collaboration-invite']
+        data = {'collaborator_email': collaborator_email}
+        return self.post(url, data, sso_session_id=sso_session_id)
+
+    def retrieve_collaboration_invite(self, sso_session_id, invite_key):
+        url = self.endpoints['collaboration-invite-detail'].format(
+            invite_key=invite_key
+        )
+        return self.get(url, sso_session_id=sso_session_id)
+
+    def accept_collaboration_invite(self, sso_session_id, invite_key):
+        url = self.endpoints['collaboration-invite-detail'].format(
+            invite_key=invite_key
+        )
+        data = {'accepted': True}
+        return self.patch(url, data=data, sso_session_id=sso_session_id)
+
+    def remove_collaborators(self, sso_session_id, supplier_ids):
+        url = self.endpoints['remove-collaborators']
+        data = {'supplier_ids': supplier_ids}
+        return self.post(url, data=data, sso_session_id=sso_session_id)

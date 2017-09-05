@@ -236,3 +236,92 @@ class CompanyAPIClientTest(TestCase):
         assert 'term=thing' in request.url
         assert 'sectors=AIRPORTS' in request.url
         assert 'sectors=AEROSPACE' in request.url
+
+    @stub_request(
+        'https://example.com/supplier/company/transfer-ownership-invite/',
+        'post'
+    )
+    def test_create_transfer_invite(self, stub):
+        self.client.create_transfer_invite(
+            sso_session_id=2, new_owner_email='test@example.com'
+        )
+
+        request = stub.request_history[0]
+        assert request.json() == {'new_owner_email': 'test@example.com'}
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+    @stub_request(
+        'https://example.com/supplier/company/transfer-ownership-invite/123/',
+        'get'
+    )
+    def test_retrieve_transfer_invite(self, stub):
+        self.client.retrieve_transfer_invite(
+            sso_session_id=2, invite_key='123'
+        )
+
+        request = stub.request_history[0]
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+    @stub_request(
+        'https://example.com/supplier/company/transfer-ownership-invite/123/',
+        'patch'
+    )
+    def test_accept_transfer_invite(self, stub):
+        self.client.accept_transfer_invite(
+            sso_session_id=2, invite_key='123'
+        )
+
+        request = stub.request_history[0]
+        assert request.json() == {'accepted': True}
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+    @stub_request(
+        'https://example.com/supplier/company/collaboration-invite/',
+        'post'
+    )
+    def test_create_collaboration_invite(self, stub):
+        self.client.create_collaboration_invite(
+            sso_session_id=2, collaborator_email='test@example.com'
+        )
+
+        request = stub.request_history[0]
+        assert request.json() == {'collaborator_email': 'test@example.com'}
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+    @stub_request(
+        'https://example.com/supplier/company/collaboration-invite/123/',
+        'get'
+    )
+    def test_retrieve_collaboration_invite(self, stub):
+        self.client.retrieve_collaboration_invite(
+            sso_session_id=2, invite_key='123'
+        )
+
+        request = stub.request_history[0]
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+    @stub_request(
+        'https://example.com/supplier/company/collaboration-invite/123/',
+        'patch'
+    )
+    def test_accept_collaboration_invite(self, stub):
+        self.client.accept_collaboration_invite(
+            sso_session_id=2, invite_key='123'
+        )
+
+        request = stub.request_history[0]
+        assert request.json() == {'accepted': True}
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+    @stub_request(
+        'https://example.com/supplier/company/remove-collaborators/',
+        'post'
+    )
+    def test_remove_collaborators(self, stub):
+        self.client.remove_collaborators(
+            sso_session_id=2, supplier_ids=[1, 2, 3]
+        )
+
+        request = stub.request_history[0]
+        assert request.json() == {'supplier_ids': [1, 2, 3]}
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
