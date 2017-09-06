@@ -26,6 +26,7 @@ class CompanyAPIClient(BaseAPIClient):
             '/supplier/company/collaboration-invite/{invite_key}/'
         ),
         'remove-collaborators': '/supplier/company/remove-collaborators/',
+        'collaborators': '/supplier/company/collaborators/',
     }
 
     def update_profile(self, sso_session_id, data):
@@ -147,7 +148,11 @@ class CompanyAPIClient(BaseAPIClient):
         data = {'accepted': True}
         return self.patch(url, data=data, sso_session_id=sso_session_id)
 
-    def remove_collaborators(self, sso_session_id, supplier_ids):
+    def remove_collaborators(self, sso_session_id, sso_ids):
         url = self.endpoints['remove-collaborators']
-        data = {'supplier_ids': supplier_ids}
+        data = {'sso_ids': sso_ids}
         return self.post(url, data=data, sso_session_id=sso_session_id)
+
+    def retrieve_collaborators(self, sso_session_id):
+        url = self.endpoints['collaborators']
+        return self.get(url, sso_session_id=sso_session_id)
