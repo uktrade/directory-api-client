@@ -319,9 +319,16 @@ class CompanyAPIClientTest(TestCase):
     )
     def test_remove_collaborators(self, stub):
         self.client.remove_collaborators(
-            sso_session_id=2, supplier_ids=[1, 2, 3]
+            sso_session_id=2, sso_ids=[1, 2, 3]
         )
 
         request = stub.request_history[0]
-        assert request.json() == {'supplier_ids': [1, 2, 3]}
+        assert request.json() == {'sso_ids': [1, 2, 3]}
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+    @stub_request('https://example.com/supplier/company/collaborators/', 'get')
+    def test_retrieve_collaborators(self, stub):
+        self.client.retrieve_collaborators(sso_session_id=2)
+
+        request = stub.request_history[0]
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
