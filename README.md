@@ -1,13 +1,13 @@
 # directory-api-client
-Export Directory internal API client.
 
-## Build status
+[![code-climate-image]][code-climate]
+[![circle-ci-image]][circle-ci]
+[![codecov-image]][codecov]
+[![gemnasium-image]][gemnasium]
 
-[![CircleCI](https://circleci.com/gh/uktrade/directory-api-client/tree/master.svg?style=svg)](https://circleci.com/gh/uktrade/directory-api-client/tree/master)
+**Export Directory internal API client.**
 
-## Coverage
-
-[![codecov](https://codecov.io/gh/uktrade/directory-api-client/branch/master/graph/badge.svg)](https://codecov.io/gh/uktrade/directory-api-client)
+---
 
 ## Requirements
 
@@ -49,3 +49,16 @@ directory_client.registration.confirm_email(
     $ git clone https://github.com/uktrade/directory-api-client
     $ cd directory-ui
     $ make
+
+
+[code-climate-image]: https://codeclimate.com/github/uktrade/directory-api-client/badges/issue_count.svg
+[code-climate]: https://codeclimate.com/github/uktrade/directory-api-client
+
+[circle-ci-image]: https://circleci.com/gh/uktrade/directory-api-client/tree/master.svg?style=svg
+[circle-ci]: https://circleci.com/gh/uktrade/directory-api-client/tree/master
+
+[codecov-image]: https://codecov.io/gh/uktrade/directory-api-client/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/uktrade/directory-api-client
+
+[gemnasium-image]: https://gemnasium.com/badges/github.com/uktrade/directory-api-client.svg
+[gemnasium]: https://gemnasium.com/github.com/uktrade/directory-api-client
