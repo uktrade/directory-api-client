@@ -18,20 +18,20 @@ class DirectoryAPIClientTest(TestCase):
         assert isinstance(self.client.enrolment, EnrolmentAPIClient)
         assert self.client.enrolment.base_url == self.base_url
         assert (
-            self.client.enrolment.request_signer.signer.secret == self.key
+            self.client.enrolment.request_signer.secret == self.key
         )
 
     def test_company(self):
         assert isinstance(self.client.company, CompanyAPIClient)
         assert self.client.company.base_url == self.base_url
-        assert self.client.company.request_signer.signer.secret == self.key
+        assert self.client.company.request_signer.secret == self.key
 
     def test_supplier(self):
         assert isinstance(self.client.supplier, SupplierAPIClient)
         assert self.client.supplier.base_url == self.base_url
-        assert self.client.supplier.request_signer.signer.secret == self.key
+        assert self.client.supplier.request_signer.secret == self.key
 
     def test_buyer(self):
         assert isinstance(self.client.buyer, BuyerAPIClient)
         assert self.client.buyer.base_url == self.base_url
-        assert self.client.buyer.request_signer.signer.secret == self.key
+        assert self.client.buyer.request_signer.secret == self.key

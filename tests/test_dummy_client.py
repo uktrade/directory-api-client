@@ -23,37 +23,37 @@ class DirectoryAPIExternalClientTest(TestCase):
     def test_buyer(self):
         assert isinstance(self.client.buyer, BuyerAPIClient)
         assert self.client.buyer.base_url == self.base_url
-        assert self.client.buyer.request_signer.signer.secret == self.api_key
+        assert self.client.buyer.request_signer.secret == self.api_key
 
     def test_company(self):
         company = self.client.company
         assert isinstance(company, CompanyAPIClient)
         assert company.base_url == self.base_url
-        assert company.request_signer.signer.secret == self.api_key
+        assert company.request_signer.secret == self.api_key
 
     def test_enrolment(self):
         enrolment = self.client.enrolment
         assert isinstance(enrolment, EnrolmentAPIClient)
         assert enrolment.base_url == self.base_url
-        assert enrolment.request_signer.signer.secret == self.api_key
+        assert enrolment.request_signer.secret == self.api_key
 
     def test_exportopportunity(self):
         exportopportunity = self.client.exportopportunity
         assert isinstance(exportopportunity, ExportOpportunityAPIClient)
         assert exportopportunity.base_url == self.base_url
-        assert exportopportunity.request_signer.signer.secret == self.api_key
+        assert exportopportunity.request_signer.secret == self.api_key
 
     def test_notifications(self):
         notifications = self.client.notifications
         assert isinstance(notifications, NotificationsAPIClient)
         assert notifications.base_url == self.base_url
-        assert notifications.request_signer.signer.secret == self.api_key
+        assert notifications.request_signer.secret == self.api_key
 
     def test_supplier(self):
         supplier = self.client.supplier
         assert isinstance(supplier, SupplierAPIClient)
         assert supplier.base_url == self.base_url
-        assert supplier.request_signer.signer.secret == self.api_key
+        assert supplier.request_signer.secret == self.api_key
 
     def test_buyer_send_mocked(self):
         response = self.client.buyer.send(method='get', url='http://1.com')
