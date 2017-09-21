@@ -16,7 +16,8 @@ class CompanyAPIClient(BaseAPIClient):
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
         'contact-supplier': '/contact/supplier/',
-        'search': '/company/search/',
+        'search-companies': '/company/search/',
+        'search-case-studies': '/case-study/search/',
         'transfer-invite': '/supplier/company/transfer-ownership-invite/',
         'transfer-invite-detail': (
             '/supplier/company/transfer-ownership-invite/{invite_key}/'
@@ -108,9 +109,13 @@ class CompanyAPIClient(BaseAPIClient):
     def send_email(self, data):
         return self.post(self.endpoints['contact-supplier'], data)
 
-    def search(self, term, page, size, sectors=None):
+    def search_company(self, term, page, size, sectors=None):
         params = {'term': term, 'page': page, 'size': size, 'sectors': sectors}
-        return self.get(self.endpoints['search'], params=params)
+        return self.get(self.endpoints['search-companies'], params=params)
+
+    def search_case_study(self, term, page, size, sectors=None):
+        params = {'term': term, 'page': page, 'size': size, 'sectors': sectors}
+        return self.get(self.endpoints['search-case-studies'], params=params)
 
     def create_transfer_invite(self, sso_session_id, new_owner_email):
         url = self.endpoints['transfer-invite']

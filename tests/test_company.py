@@ -224,8 +224,22 @@ class CompanyAPIClientTest(TestCase):
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
     @stub_request('https://example.com/company/search/', 'get')
-    def test_search(self, stub):
-        self.client.search(
+    def test_search_company(self, stub):
+        self.client.search_company(
+            term='thing', page=1, size=10, sectors=['AIRPORTS', 'AEROSPACE']
+        )
+
+        request = stub.request_history[0]
+
+        assert 'size=10' in request.url
+        assert 'page=1' in request.url
+        assert 'term=thing' in request.url
+        assert 'sectors=AIRPORTS' in request.url
+        assert 'sectors=AEROSPACE' in request.url
+
+    @stub_request('https://example.com/case-study/search/', 'get')
+    def test_search_case_study(self, stub):
+        self.client.search_case_study(
             term='thing', page=1, size=10, sectors=['AIRPORTS', 'AEROSPACE']
         )
 
