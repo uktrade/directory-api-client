@@ -21,4 +21,18 @@ CODECOV := \
 test: flake8 pytest
 	$(CODECOV)
 
+integration_tests:
+	cd $(mktemp -d) && \
+	git clone https://github.com/uktrade/directory-tests && \
+	cd directory-tests && \
+	make docker_integration_tests
+
+compile_requirements:
+	python3 -m piptools compile requirements.in
+
+compile_test_requirements:
+	python3 -m piptools compile requirements_test.in
+
+compile_all_requirements: compile_requirements compile_test_requirements
+
 .PHONY: build clean test_requirements flake8 pytest test
