@@ -5,7 +5,7 @@ class SupplierAPIClient(BaseAPIClient):
 
     endpoints = {
         'supplier': '/supplier/',
-        'unsubscribe': '/supplier/unsubscribe/'
+        'unsubscribe': '/supplier/unsubscribe/',
     }
 
     def update_profile(self, sso_session_id, data):

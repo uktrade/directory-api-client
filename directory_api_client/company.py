@@ -16,7 +16,18 @@ class CompanyAPIClient(BaseAPIClient):
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
         'contact-supplier': '/contact/supplier/',
-        'search': '/company/search/',
+        'search-companies': '/company/search/',
+        'search-case-studies': '/case-study/search/',
+        'transfer-invite': '/supplier/company/transfer-ownership-invite/',
+        'transfer-invite-detail': (
+            '/supplier/company/transfer-ownership-invite/{invite_key}/'
+        ),
+        'collaboration-invite': '/supplier/company/collaboration-invite/',
+        'collaboration-invite-detail': (
+            '/supplier/company/collaboration-invite/{invite_key}/'
+        ),
+        'remove-collaborators': '/supplier/company/remove-collaborators/',
+        'collaborators': '/supplier/company/collaborators/',
     }
 
     def update_profile(self, sso_session_id, data):
@@ -98,6 +109,55 @@ class CompanyAPIClient(BaseAPIClient):
     def send_email(self, data):
         return self.post(self.endpoints['contact-supplier'], data)
 
-    def search(self, term, page, size, sectors=None):
+    def search_company(self, term, page, size, sectors=None):
         params = {'term': term, 'page': page, 'size': size, 'sectors': sectors}
-        return self.get(self.endpoints['search'], params=params)
+        return self.get(self.endpoints['search-companies'], params=params)
+
+    def search_case_study(self, term, page, size, sectors=None):
+        params = {'term': term, 'page': page, 'size': size, 'sectors': sectors}
+        return self.get(self.endpoints['search-case-studies'], params=params)
+
+    def create_transfer_invite(self, sso_session_id, new_owner_email):
+        url = self.endpoints['transfer-invite']
+        data = {'new_owner_email': new_owner_email}
+        return self.post(url, data, sso_session_id=sso_session_id)
+
+    def retrieve_transfer_invite(self, sso_session_id, invite_key):
+        url = self.endpoints['transfer-invite-detail'].format(
+            invite_key=invite_key
+        )
+        return self.get(url, sso_session_id=sso_session_id)
+
+    def accept_transfer_invite(self, sso_session_id, invite_key):
+        url = self.endpoints['transfer-invite-detail'].format(
+            invite_key=invite_key
+        )
+        data = {'accepted': True}
+        return self.patch(url, data=data, sso_session_id=sso_session_id)
+
+    def create_collaboration_invite(self, sso_session_id, collaborator_email):
+        url = self.endpoints['collaboration-invite']
+        data = {'collaborator_email': collaborator_email}
+        return self.post(url, data, sso_session_id=sso_session_id)
+
+    def retrieve_collaboration_invite(self, sso_session_id, invite_key):
+        url = self.endpoints['collaboration-invite-detail'].format(
+            invite_key=invite_key
+        )
+        return self.get(url, sso_session_id=sso_session_id)
+
+    def accept_collaboration_invite(self, sso_session_id, invite_key):
+        url = self.endpoints['collaboration-invite-detail'].format(
+            invite_key=invite_key
+        )
+        data = {'accepted': True}
+        return self.patch(url, data=data, sso_session_id=sso_session_id)
+
+    def remove_collaborators(self, sso_session_id, sso_ids):
+        url = self.endpoints['remove-collaborators']
+        data = {'sso_ids': sso_ids}
+        return self.post(url, data=data, sso_session_id=sso_session_id)
+
+    def retrieve_collaborators(self, sso_session_id):
+        url = self.endpoints['collaborators']
+        return self.get(url, sso_session_id=sso_session_id)
