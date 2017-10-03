@@ -109,13 +109,11 @@ class CompanyAPIClient(BaseAPIClient):
     def send_email(self, data):
         return self.post(self.endpoints['contact-supplier'], data)
 
-    def search_company(self, term, page, size, sectors=None):
-        params = {'term': term, 'page': page, 'size': size, 'sectors': sectors}
-        return self.get(self.endpoints['search-companies'], params=params)
+    def search_company(self, **kwargs):
+        return self.get(self.endpoints['search-companies'], params=kwargs)
 
-    def search_case_study(self, term, page, size, sectors=None):
-        params = {'term': term, 'page': page, 'size': size, 'sectors': sectors}
-        return self.get(self.endpoints['search-case-studies'], params=params)
+    def search_case_study(self, **kwargs):
+        return self.get(self.endpoints['search-case-studies'], params=kwargs)
 
     def create_transfer_invite(self, sso_session_id, new_owner_email):
         url = self.endpoints['transfer-invite']
