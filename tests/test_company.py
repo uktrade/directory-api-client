@@ -226,7 +226,11 @@ class CompanyAPIClientTest(TestCase):
     @stub_request('https://example.com/company/search/', 'get')
     def test_search_company(self, stub):
         self.client.search_company(
-            term='thing', page=1, size=10, sectors=['AIRPORTS', 'AEROSPACE']
+            term='thing',
+            page=1,
+            size=10,
+            sectors=['AIRPORTS', 'AEROSPACE'],
+            campaign_tag='food-is-great',
         )
 
         request = stub.request_history[0]
@@ -236,11 +240,16 @@ class CompanyAPIClientTest(TestCase):
         assert 'term=thing' in request.url
         assert 'sectors=AIRPORTS' in request.url
         assert 'sectors=AEROSPACE' in request.url
+        assert 'campaign_tag=food-is-great' in request.url
 
     @stub_request('https://example.com/case-study/search/', 'get')
     def test_search_case_study(self, stub):
         self.client.search_case_study(
-            term='thing', page=1, size=10, sectors=['AIRPORTS', 'AEROSPACE']
+            term='thing',
+            page=1,
+            size=10,
+            sectors=['AIRPORTS', 'AEROSPACE'],
+            campaign_tag='food-is-great',
         )
 
         request = stub.request_history[0]
@@ -250,6 +259,7 @@ class CompanyAPIClientTest(TestCase):
         assert 'term=thing' in request.url
         assert 'sectors=AIRPORTS' in request.url
         assert 'sectors=AEROSPACE' in request.url
+        assert 'campaign_tag=food-is-great' in request.url
 
     @stub_request(
         'https://example.com/supplier/company/transfer-ownership-invite/',
