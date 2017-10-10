@@ -12,10 +12,18 @@ class ExportOpportunityAPIClientTestCase(TestCase):
             base_url='https://e.com', api_key='test'
         )
 
-    @stub_request('https://e.com/export-opportunity/', 'post')
-    def test_anonymous_unsubscribe(self, stub):
+    @stub_request('https://e.com/export-opportunity/food/', 'post')
+    def test_create_opportunity_food(self, stub):
         form_data = {'field': 'value'}
-        self.client.create_opportunity(form_data)
+        self.client.create_opportunity_food(form_data)
+
+        request = stub.request_history[0]
+        assert request.json() == form_data
+
+    @stub_request('https://e.com/export-opportunity/legal/', 'post')
+    def test_create_opportunity_legal(self, stub):
+        form_data = {'field': 'value'}
+        self.client.create_opportunity_legal(form_data)
 
         request = stub.request_history[0]
         assert request.json() == form_data
