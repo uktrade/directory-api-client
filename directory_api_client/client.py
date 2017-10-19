@@ -5,6 +5,7 @@ from directory_api_client.enrolment import EnrolmentAPIClient
 from directory_api_client.supplier import SupplierAPIClient
 from directory_api_client.notifications import NotificationsAPIClient
 from directory_api_client.exportopportunity import ExportOpportunityAPIClient
+from directory_api_client.exportreadiness import ExportReadinessAPIClient
 
 
 class DirectoryAPIClient(BaseAPIClient):
@@ -18,3 +19,4 @@ class DirectoryAPIClient(BaseAPIClient):
         self.buyer = BuyerAPIClient(base_url, api_key)
         self.notifications = NotificationsAPIClient(base_url, api_key)
         self.exportopportunity = ExportOpportunityAPIClient(base_url, api_key)
+        self.exportreadiness = ExportReadinessAPIClient(base_url, api_key)
