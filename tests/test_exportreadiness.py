@@ -37,11 +37,11 @@ class ExportReadinessAPIClientTestCase(TestCase):
 
     @stub_request('https://e.com/export-readiness/article-read/', 'post')
     def test_create_article_read(self, stub):
-        form_data = {'field': 'value'}
-        self.client.create_article_read(form_data, sso_session_id=1)
+        article_uuid = '123'
+        self.client.create_article_read(article_uuid, sso_session_id=1)
 
         request = stub.request_history[0]
-        assert request.json() == form_data
+        assert request.json() == {'article_uuid': article_uuid}
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
     @stub_request('https://e.com/export-readiness/task-completed/', 'get')
@@ -53,9 +53,9 @@ class ExportReadinessAPIClientTestCase(TestCase):
 
     @stub_request('https://e.com/export-readiness/task-completed/', 'post')
     def test_create_task_completed(self, stub):
-        form_data = {'field': 'value'}
-        self.client.create_task_completed(form_data, sso_session_id=1)
+        task_uuid = '123'
+        self.client.create_task_completed(task_uuid, sso_session_id=1)
 
         request = stub.request_history[0]
-        assert request.json() == form_data
+        assert request.json() == {'task_uuid': task_uuid}
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'

@@ -28,10 +28,10 @@ class ExportReadinessAPIClient(BaseAPIClient):
             sso_session_id=sso_session_id
         )
 
-    def create_article_read(self, form_data, sso_session_id):
+    def create_article_read(self, article_uuid, sso_session_id):
         return self.post(
             self.endpoints['create-retrieve-article-read'],
-            data=form_data,
+            data={'article_uuid': article_uuid},
             sso_session_id=sso_session_id
         )
 
@@ -41,9 +41,9 @@ class ExportReadinessAPIClient(BaseAPIClient):
             sso_session_id=sso_session_id
         )
 
-    def create_task_completed(self, form_data, sso_session_id):
+    def create_task_completed(self, task_uuid, sso_session_id):
         return self.post(
             self.endpoints['create-retrieve-task-completed'],
-            data=form_data,
+            data={'task_uuid': task_uuid},
             sso_session_id=sso_session_id
         )
