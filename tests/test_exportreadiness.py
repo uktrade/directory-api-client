@@ -13,7 +13,7 @@ class ExportReadinessAPIClientTestCase(TestCase):
         )
 
     @stub_request('https://e.com/export-readiness/triage/', 'get')
-    def test_retrieve_triage_resukt(self, stub):
+    def test_retrieve_triage_result(self, stub):
         self.client.retrieve_triage_result(sso_session_id=1)
 
         request = stub.request_history[0]
@@ -23,6 +23,38 @@ class ExportReadinessAPIClientTestCase(TestCase):
     def test_create_triage_result(self, stub):
         form_data = {'field': 'value'}
         self.client.create_triage_result(form_data, sso_session_id=1)
+
+        request = stub.request_history[0]
+        assert request.json() == form_data
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
+    @stub_request('https://e.com/export-readiness/article-read/', 'get')
+    def test_retrieve_article_read(self, stub):
+        self.client.retrieve_article_read(sso_session_id=1)
+
+        request = stub.request_history[0]
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
+    @stub_request('https://e.com/export-readiness/article-read/', 'post')
+    def test_create_article_read(self, stub):
+        form_data = {'field': 'value'}
+        self.client.create_article_read(form_data, sso_session_id=1)
+
+        request = stub.request_history[0]
+        assert request.json() == form_data
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
+    @stub_request('https://e.com/export-readiness/task-completed/', 'get')
+    def test_retrieve_task_completed(self, stub):
+        self.client.retrieve_task_completed(sso_session_id=1)
+
+        request = stub.request_history[0]
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
+    @stub_request('https://e.com/export-readiness/task-completed/', 'post')
+    def test_create_task_completed(self, stub):
+        form_data = {'field': 'value'}
+        self.client.create_task_completed(form_data, sso_session_id=1)
 
         request = stub.request_history[0]
         assert request.json() == form_data
