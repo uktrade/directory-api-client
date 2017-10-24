@@ -28,6 +28,15 @@ class ExportReadinessAPIClientTestCase(TestCase):
         assert request.json() == form_data
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
+    @stub_request('https://e.com/export-readiness/triage/', 'patch')
+    def test_update_triage_result(self, stub):
+        form_data = {'field': 'value'}
+        self.client.update_triage_result(form_data, sso_session_id=1)
+
+        request = stub.request_history[0]
+        assert request.json() == form_data
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
     @stub_request('https://e.com/export-readiness/article-read/', 'get')
     def test_retrieve_article_read(self, stub):
         self.client.retrieve_article_read(sso_session_id=1)
