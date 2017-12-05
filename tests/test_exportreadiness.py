@@ -53,6 +53,14 @@ class ExportReadinessAPIClientTestCase(TestCase):
         assert request.json() == {'article_uuid': article_uuid}
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
+    @stub_request('https://e.com/export-readiness/article-read/', 'post')
+    def test_bulk_create_article_read(self, stub):
+        self.client.bulk_create_article_read(['1', '2'], sso_session_id=1)
+
+        request = stub.request_history[0]
+        assert request.json() == [{'article_uuid': '1'}, {'article_uuid': '2'}]
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
     @stub_request('https://e.com/export-readiness/task-completed/', 'get')
     def test_retrieve_task_completed(self, stub):
         self.client.retrieve_task_completed(sso_session_id=1)

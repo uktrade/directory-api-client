@@ -42,6 +42,13 @@ class ExportReadinessAPIClient(BaseAPIClient):
             sso_session_id=sso_session_id
         )
 
+    def bulk_create_article_read(self, article_uuids, sso_session_id):
+        return self.post(
+            self.endpoints['create-retrieve-article-read'],
+            data=[{'article_uuid': uuid} for uuid in article_uuids],
+            sso_session_id=sso_session_id
+        )
+
     def retrieve_task_completed(self, sso_session_id):
         return self.get(
             self.endpoints['create-retrieve-task-completed'],
