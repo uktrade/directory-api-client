@@ -6,6 +6,8 @@ from directory_api_client.company import CompanyAPIClient
 from directory_api_client.enrolment import EnrolmentAPIClient
 from directory_api_client.supplier import SupplierAPIClient
 
+from tests import stub_request
+
 
 class DirectoryAPIClientTest(TestCase):
 
@@ -35,3 +37,10 @@ class DirectoryAPIClientTest(TestCase):
         assert isinstance(self.client.buyer, BuyerAPIClient)
         assert self.client.buyer.base_url == self.base_url
         assert self.client.buyer.request_signer.secret == self.key
+
+    @stub_request('https://example.com/ping/', 'get')
+    def test_ping(self, stub):
+        self.client.ping()
+
+        request = stub.request_history[0]
+        assert request

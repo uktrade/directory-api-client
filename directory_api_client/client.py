@@ -10,6 +10,10 @@ from directory_api_client.exportreadiness import ExportReadinessAPIClient
 
 class DirectoryAPIClient(BaseAPIClient):
 
+    endpoints = {
+        'ping': 'ping/',
+    }
+
     def __init__(self, base_url=None, api_key=None):
         super(DirectoryAPIClient, self).__init__(base_url, api_key)
 
@@ -20,3 +24,6 @@ class DirectoryAPIClient(BaseAPIClient):
         self.notifications = NotificationsAPIClient(base_url, api_key)
         self.exportopportunity = ExportOpportunityAPIClient(base_url, api_key)
         self.exportreadiness = ExportReadinessAPIClient(base_url, api_key)
+
+    def ping(self):
+        return self.get(url=self.endpoints['ping'])
