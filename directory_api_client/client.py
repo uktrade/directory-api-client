@@ -11,7 +11,7 @@ from directory_api_client.exportreadiness import ExportReadinessAPIClient
 class DirectoryAPIClient(BaseAPIClient):
 
     endpoints = {
-        'ping': 'ping/',
+        'ping': 'healthcheck/ping/',
     }
 
     def __init__(self, base_url=None, api_key=None):

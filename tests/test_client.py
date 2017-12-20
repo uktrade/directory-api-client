@@ -38,7 +38,7 @@ class DirectoryAPIClientTest(TestCase):
         assert self.client.buyer.base_url == self.base_url
         assert self.client.buyer.request_signer.secret == self.key
 
-    @stub_request('https://example.com/ping/', 'get')
+    @stub_request('https://example.com/healthcheck/ping/', 'get')
     def test_ping(self, stub):
         self.client.ping()
 
