@@ -31,3 +31,10 @@ class SupplierAPIClientTest(TestCase):
 
         request = stub.request_history[0]
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
+    @stub_request('https://example.com/supplier/csv-dump/', 'get')
+    def test_get_csv_dump(self, stub):
+        token = 'debug'
+        self.client.get_csv_dump(token)
+        request = stub.request_history[0]
+        assert request.qs == {'token': ['debug']}

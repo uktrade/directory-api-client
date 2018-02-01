@@ -6,6 +6,7 @@ class SupplierAPIClient(BaseAPIClient):
     endpoints = {
         'supplier': '/supplier/',
         'unsubscribe': '/supplier/unsubscribe/',
+        'csv-dump': 'supplier/csv-dump/'
     }
 
     def update_profile(self, sso_session_id, data):
@@ -19,3 +20,7 @@ class SupplierAPIClient(BaseAPIClient):
     def unsubscribe(self, sso_session_id):
         url = self.endpoints['unsubscribe']
         return self.post(url, sso_session_id=sso_session_id)
+
+    def get_csv_dump(self, token):
+        url = self.endpoints['csv-dump']
+        return self.get(url,  params={'token': token})
