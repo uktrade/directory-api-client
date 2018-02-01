@@ -20,3 +20,10 @@ class BuyerAPIClientTest(TestCase):
 
         request = stub.request_history[0]
         assert request.json() == form_data
+
+    @stub_request('https://example.com/buyer/csv-dump/', 'get')
+    def test_get_csv_dump(self, stub):
+        token = 'debug'
+        self.enrolment_client.get_csv_dump(token)
+        request = stub.request_history[0]
+        assert request.qs == {'token': ['debug']}
