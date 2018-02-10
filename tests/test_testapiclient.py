@@ -103,7 +103,7 @@ class DirectoryTestAPIClientTest(TestCase):
         )
 
     @given(ch_id=text(max_size=8))
-    @hypothesis_settings(max_examples=95, deadline=700)
+    @hypothesis_settings(max_examples=95, deadline=1000)
     def test_get_company_by_ch_id_with_hypothesis(self, ch_id):
         response = self.client.get_company_by_ch_id(ch_id=ch_id)
         if ch_id:
@@ -112,7 +112,7 @@ class DirectoryTestAPIClientTest(TestCase):
             assert response is None
 
     @given(ch_id=text(max_size=8))
-    @hypothesis_settings(max_examples=95, deadline=700)
+    @hypothesis_settings(max_examples=95, deadline=1000)
     def test_delete_company_by_ch_id_with_hypothesis(self, ch_id):
         response = self.client.delete_company_by_ch_id(ch_id=ch_id)
         if ch_id:
