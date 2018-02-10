@@ -5,11 +5,13 @@
 #    pip-compile --output-file requirements_test.txt requirements_test.in
 #
 -e git+https://github.com/uktrade/directory-signature-auth.git@v2.0.0#egg=sigauth
+attrs==17.4.0             # via hypothesis
 codecov==2.0.9
-coverage==4.4.1           # via codecov, pytest-cov
+coverage==4.4.1           # via codecov, hypothesis, pytest-cov
 django==1.11.5
 djangorestframework==3.4.7
 flake8==3.0.4
+hypothesis==3.44.26
 mccabe==0.5.3             # via flake8
 mohawk==0.3.4
 monotonic==1.2
