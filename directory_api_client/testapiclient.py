@@ -8,8 +8,5 @@ class DirectoryTestAPIClient(BaseAPIClient):
     }
 
     def get_company_by_ch_id(self, ch_id: str):
-        result = None
-        if ch_id:
-            url = self.endpoints['company_by_ch_id'].format(ch_id=ch_id)
-            result = self.get(url=url)
-        return result
+        url = self.endpoints['company_by_ch_id'].format(ch_id=ch_id)
+        return self.get(url=url)
