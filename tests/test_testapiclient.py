@@ -40,12 +40,12 @@ class DirectoryTestAPIClientTest(TestCase):
         assert response is None
 
     def test_should_return_none_on_empty_ch_id(self):
-        response = self.client.get_company_by_ch_id(ch_id="")
+        response = self.client.get_company_by_ch_id(ch_id='')
         assert response is None
 
     @mock.patch('directory_api_client.base.BaseAPIClient.request')
     def test_should_not_make_any_request_on_empty_ch_id(self, mocked_request):
-        self.client.get_company_by_ch_id(ch_id="")
+        self.client.get_company_by_ch_id(ch_id='')
         assert mocked_request.call_count == 0
 
     @mock.patch('directory_api_client.base.BaseAPIClient.request')
@@ -76,13 +76,13 @@ class DirectoryTestAPIClientTest(TestCase):
         assert response is None
 
     def test_delete_company_should_return_none_on_empty_ch_id(self):
-        response = self.client.delete_company_by_ch_id(ch_id="")
+        response = self.client.delete_company_by_ch_id(ch_id='')
         assert response is None
 
     @mock.patch('directory_api_client.base.BaseAPIClient.request')
     def test_delete_company_should_not_make_any_request_on_empty_ch_id(
             self, mocked_request):
-        self.client.delete_company_by_ch_id(ch_id="")
+        self.client.delete_company_by_ch_id(ch_id='')
         assert mocked_request.call_count == 0
 
     @mock.patch('directory_api_client.base.BaseAPIClient.request')
