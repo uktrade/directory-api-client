@@ -31,23 +31,19 @@ class DirectoryTestAPIClientTest(TestCase):
         request = stub.request_history[0]
         assert request.url == response.url
 
-    def test_should_return_none_on_missing_ch_id(self):
+    def test_get_company_should_return_404_on_missing_ch_id(self):
         response = self.client.get_company_by_ch_id(ch_id=None)
-        assert response is None
+        assert response.status_code == 404
 
-    def test_should_return_none_on_empty_ch_id(self):
-        response = self.client.get_company_by_ch_id(ch_id="")
-        assert response is None
-
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
-    def test_should_not_make_any_request_on_empty_ch_id(self, mocked_request):
-        self.client.get_company_by_ch_id(ch_id="")
-        assert mocked_request.call_count == 0
+    def test_get_company_should_return_404_on_empty_ch_id(self):
+        response = self.client.get_company_by_ch_id(ch_id='')
+        assert response.status_code == 404
 
     @mock.patch('directory_api_client.base.BaseAPIClient.request')
-    def test_should_not_make_any_request_on_no_ch_id(self, mocked_request):
-        self.client.get_company_by_ch_id(ch_id=None)
-        assert mocked_request.call_count == 0
+    def test_get_company_should_make_request_on_empty_ch_id(
+            self, mocked_request):
+        self.client.get_company_by_ch_id(ch_id='')
+        assert mocked_request.call_count == 1
 
     @mock.patch('directory_api_client.base.BaseAPIClient.request')
     def test_get_company(self, mocked_request):
