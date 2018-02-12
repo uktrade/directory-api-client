@@ -35,23 +35,24 @@ class DirectoryTestAPIClientTest(TestCase):
         request = stub.request_history[0]
         assert request.url == response.url
 
-    def test_should_return_none_on_missing_ch_id(self):
+    def test_get_company_should_return_404_on_missing_ch_id(self):
         response = self.client.get_company_by_ch_id(ch_id=None)
-        assert response is None
+        assert response.status_code == 404
 
-    def test_should_return_none_on_empty_ch_id(self):
+    def test_get_company_should_return_404_on_empty_ch_id(self):
         response = self.client.get_company_by_ch_id(ch_id='')
-        assert response is None
+        assert response.status_code == 404
 
     @mock.patch('directory_api_client.base.BaseAPIClient.request')
-    def test_should_not_make_any_request_on_empty_ch_id(self, mocked_request):
+    def test_get_company_should_make_request_on_empty_ch_id(
+            self, mocked_request):
         self.client.get_company_by_ch_id(ch_id='')
-        assert mocked_request.call_count == 0
+        assert mocked_request.call_count == 1
 
     @mock.patch('directory_api_client.base.BaseAPIClient.request')
-    def test_should_not_make_any_request_on_no_ch_id(self, mocked_request):
+    def test_get_company_should_make_request_on_no_ch_id(self, mocked_request):
         self.client.get_company_by_ch_id(ch_id=None)
-        assert mocked_request.call_count == 0
+        assert mocked_request.call_count == 1
 
     @mock.patch('directory_api_client.base.BaseAPIClient.request')
     def test_get_company(self, mocked_request):
@@ -106,16 +107,10 @@ class DirectoryTestAPIClientTest(TestCase):
     @hypothesis_settings(max_examples=95, deadline=1000)
     def test_get_company_by_ch_id_with_hypothesis(self, ch_id):
         response = self.client.get_company_by_ch_id(ch_id=ch_id)
-        if ch_id:
-            assert response.status_code == 404
-        else:
-            assert response is None
+        assert response.status_code == 404
 
     @given(ch_id=text(max_size=8))
     @hypothesis_settings(max_examples=95, deadline=1000)
     def test_delete_company_by_ch_id_with_hypothesis(self, ch_id):
         response = self.client.delete_company_by_ch_id(ch_id=ch_id)
-        if ch_id:
-            assert response.status_code == 404
-        else:
-            assert response is None
+        assert response.status_code == 404
