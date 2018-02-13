@@ -1,9 +1,5 @@
 from unittest import mock, TestCase
 
-from hypothesis import given
-from hypothesis import settings as hypothesis_settings
-from hypothesis.strategies import text
-
 from tests import stub_request
 
 from directory_api_client.testapiclient import DirectoryTestAPIClient
@@ -102,15 +98,3 @@ class DirectoryTestAPIClientTest(TestCase):
             method='DELETE', sso_session_id=None,
             url='testapi/company/{}/'.format(ch_id)
         )
-
-    @given(ch_id=text(max_size=8))
-    @hypothesis_settings(max_examples=95, deadline=None)
-    def test_get_company_by_ch_id_with_hypothesis(self, ch_id):
-        response = self.client.get_company_by_ch_id(ch_id=ch_id)
-        assert response.status_code == 404
-
-    @given(ch_id=text(max_size=8))
-    @hypothesis_settings(max_examples=95, deadline=None)
-    def test_delete_company_by_ch_id_with_hypothesis(self, ch_id):
-        response = self.client.delete_company_by_ch_id(ch_id=ch_id)
-        assert response.status_code == 404
