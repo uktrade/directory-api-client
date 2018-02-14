@@ -8,6 +8,7 @@ from directory_api_client.testapiclient import DirectoryTestAPIClient
 class DirectoryTestAPIClientTest(TestCase):
 
     url_get_company = 'http://test.uk/testapi/company/'
+    url_get_published_companies = 'http://test.uk/testapi/companies/published/'
 
     def setUp(self):
         self.base_url = 'http://test.uk'
@@ -101,4 +102,51 @@ class DirectoryTestAPIClientTest(TestCase):
         assert mocked_request.call_args == mock.call(
             method='DELETE', sso_session_id=None,
             url='testapi/company/{}/'.format(ch_id)
+        )
+
+    @stub_request(url_get_published_companies, 'get')
+    def test_get_published_companies_without_optional_parameters(self, stub):
+        response = self.client.get_published_companies()
+        request = stub.request_history[0]
+        assert request.url == response.url
+
+    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    def test_get_published_companies_check_request(self, mocked_request):
+        self.client.get_published_companies()
+        assert mocked_request.call_count == 1
+        assert mocked_request.call_args == mock.call(
+            method='GET', params={}, sso_session_id=None,
+            url='testapi/companies/published/'
+        )
+
+    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    def test_get_published_companies_with_both_filters(
+            self, mocked_request):
+        limit = 10
+        minimal_number_of_sectors = 5
+        self.client.get_published_companies(
+            limit=limit, minimal_number_of_sectors=minimal_number_of_sectors)
+        expected_params = {
+            'limit': limit,
+            'minimal_number_of_sectors': minimal_number_of_sectors
+        }
+        assert mocked_request.call_count == 1
+        assert mocked_request.call_args == mock.call(
+            method='GET', params=expected_params, sso_session_id=None,
+            url='testapi/companies/published/'
+        )
+
+    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    def test_get_published_companies_with_one_filter(
+            self, mocked_request):
+        minimal_number_of_sectors = 5
+        self.client.get_published_companies(
+            minimal_number_of_sectors=minimal_number_of_sectors)
+        expected_params = {
+            'minimal_number_of_sectors': minimal_number_of_sectors
+        }
+        assert mocked_request.call_count == 1
+        assert mocked_request.call_args == mock.call(
+            method='GET', params=expected_params, sso_session_id=None,
+            url='testapi/companies/published/'
         )
