@@ -7,10 +7,10 @@ from directory_api_client.testapiclient import DirectoryTestAPIClient
 
 class DirectoryTestAPIClientTest(TestCase):
 
-    url = 'https://example.com/testapi/company/'
+    url_get_company = 'http://test.uk/testapi/company/'
 
     def setUp(self):
-        self.base_url = 'https://example.com'
+        self.base_url = 'http://test.uk'
         self.key = 'test'
         self.client = DirectoryTestAPIClient(self.base_url, self.key)
 
@@ -24,18 +24,20 @@ class DirectoryTestAPIClientTest(TestCase):
         for endpoint in self.client.endpoints.values():
             assert not endpoint.startswith('/')
 
-    @stub_request(url + '12345678/', 'get')
+    @stub_request(url_get_company + '12345678/', 'get')
     def test_get_company_by_ch_id(self, stub):
         ch_id = '12345678'
         response = self.client.get_company_by_ch_id(ch_id=ch_id)
         request = stub.request_history[0]
         assert request.url == response.url
 
-    def test_get_company_should_return_404_on_missing_ch_id(self):
+    @stub_request(url_get_company + 'None/', 'get', 404)
+    def test_get_company_should_return_404_on_missing_ch_id(self, stub):
         response = self.client.get_company_by_ch_id(ch_id=None)
         assert response.status_code == 404
 
-    def test_get_company_should_return_404_on_empty_ch_id(self):
+    @stub_request(url_get_company, 'get', 404)
+    def test_get_company_should_return_404_on_empty_ch_id(self, stub):
         response = self.client.get_company_by_ch_id(ch_id='')
         assert response.status_code == 404
 
@@ -61,18 +63,20 @@ class DirectoryTestAPIClientTest(TestCase):
             url='testapi/company/{}/'.format(ch_id), sso_session_id=None
         )
 
-    @stub_request(url + 'ch_ID_00/', 'delete')
+    @stub_request(url_get_company + 'ch_ID_00/', 'delete')
     def test_delete_company_by_ch_id(self, stub):
         ch_id = 'ch_ID_00'
         response = self.client.delete_company_by_ch_id(ch_id=ch_id)
         request = stub.request_history[0]
         assert request.url == response.url
 
-    def test_delete_company_should_return_404_on_missing_ch_id(self):
+    @stub_request(url_get_company + 'None/', 'delete', 404)
+    def test_delete_company_should_return_404_on_missing_ch_id(self, stub):
         response = self.client.delete_company_by_ch_id(ch_id=None)
         assert response.status_code == 404
 
-    def test_delete_company_should_return_404_on_empty_ch_id(self):
+    @stub_request(url_get_company, 'delete', 404)
+    def test_delete_company_should_return_404_on_empty_ch_id(self, stub):
         response = self.client.delete_company_by_ch_id(ch_id='')
         assert response.status_code == 404
 
