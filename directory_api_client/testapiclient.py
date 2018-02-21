@@ -23,9 +23,8 @@ class DirectoryTestAPIClient(BaseAPIClient):
             self, *, limit=None, minimal_number_of_sectors=None):
         url = self.endpoints['published_companies']
         params = {}
-        if limit is not None:
-            params.update({'limit': limit})
-        if minimal_number_of_sectors is not None:
-            params.update(
-                {'minimal_number_of_sectors': minimal_number_of_sectors})
+        if limit:
+            params['limit'] = limit
+        if minimal_number_of_sectors:
+            params['minimal_number_of_sectors'] = minimal_number_of_sectors
         return self.get(url=url, params=params)
