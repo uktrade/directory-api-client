@@ -1,2 +1,2 @@
 [run]
-omit = .venv/*,setup.py
+omit = .venv/*,setup.py,*/version.py

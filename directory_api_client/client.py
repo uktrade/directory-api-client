@@ -1,4 +1,5 @@
-from directory_api_client.base import BaseAPIClient
+from directory_client_core.base import BaseAPIClient
+
 from directory_api_client.buyer import BuyerAPIClient
 from directory_api_client.company import CompanyAPIClient
 from directory_api_client.enrolment import EnrolmentAPIClient

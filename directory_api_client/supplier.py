@@ -1,4 +1,5 @@
-from directory_api_client.base import BaseAPIClient
+from directory_client_core.authentication import SessionSSOAuthenticator
+from directory_client_core.base import BaseAPIClient
 
 
 class SupplierAPIClient(BaseAPIClient):
@@ -8,18 +9,22 @@ class SupplierAPIClient(BaseAPIClient):
         'unsubscribe': '/supplier/unsubscribe/',
         'csv-dump': 'supplier/csv-dump/'
     }
+    authenticator = SessionSSOAuthenticator
 
     def update_profile(self, sso_session_id, data):
-        url = self.endpoints['supplier']
-        return self.patch(url, data=data, sso_session_id=sso_session_id)
+        return self.patch(
+            self.endpoints['supplier'],
+            data=data,
+            authenticator=self.authenticator(sso_session_id)
+        )
 
     def retrieve_profile(self, sso_session_id):
         url = self.endpoints['supplier']
-        return self.get(url, sso_session_id=sso_session_id)
+        return self.get(url, authenticator=self.authenticator(sso_session_id))
 
     def unsubscribe(self, sso_session_id):
         url = self.endpoints['unsubscribe']
-        return self.post(url, sso_session_id=sso_session_id)
+        return self.post(url, authenticator=self.authenticator(sso_session_id))
 
     def get_csv_dump(self, token):
         url = self.endpoints['csv-dump']
