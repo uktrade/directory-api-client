@@ -42,26 +42,28 @@ class DirectoryTestAPIClientTest(TestCase):
         response = self.client.get_company_by_ch_id(ch_id='')
         assert response.status_code == 404
 
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    @mock.patch('directory_client_core.base.BaseAPIClient.request')
     def test_get_company_should_make_request_on_empty_ch_id(
             self, mocked_request):
         self.client.get_company_by_ch_id(ch_id='')
         assert mocked_request.call_count == 1
 
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    @mock.patch('directory_client_core.base.BaseAPIClient.request')
     def test_get_company_should_make_request_on_no_ch_id(self, mocked_request):
         self.client.get_company_by_ch_id(ch_id=None)
         assert mocked_request.call_count == 1
 
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    @mock.patch('directory_client_core.base.BaseAPIClient.request')
     def test_get_company(self, mocked_request):
         ch_id = '12345678'
         self.client.get_company_by_ch_id(ch_id=ch_id)
 
         assert mocked_request.call_count == 1
         assert mocked_request.call_args == mock.call(
-            method='GET', params=None,
-            url='testapi/company/{}/'.format(ch_id), sso_session_id=None
+            method='GET',
+            params=None,
+            url='testapi/company/{}/'.format(ch_id),
+            authenticator=mock.ANY,
         )
 
     @stub_request(url_get_company + 'ch_ID_00/', 'delete')
@@ -81,27 +83,28 @@ class DirectoryTestAPIClientTest(TestCase):
         response = self.client.delete_company_by_ch_id(ch_id='')
         assert response.status_code == 404
 
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    @mock.patch('directory_client_core.base.BaseAPIClient.request')
     def test_delete_company_should_make_request_on_empty_ch_id(
             self, mocked_request):
         self.client.delete_company_by_ch_id(ch_id='')
         assert mocked_request.call_count == 1
 
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    @mock.patch('directory_client_core.base.BaseAPIClient.request')
     def test_delete_company_should_make_request_on_no_ch_id(
             self, mocked_request):
         self.client.delete_company_by_ch_id(ch_id=None)
         assert mocked_request.call_count == 1
 
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    @mock.patch('directory_client_core.base.BaseAPIClient.request')
     def test_delete_company(self, mocked_request):
         ch_id = '12345678'
         self.client.delete_company_by_ch_id(ch_id=ch_id)
 
         assert mocked_request.call_count == 1
         assert mocked_request.call_args == mock.call(
-            method='DELETE', sso_session_id=None,
-            url='testapi/company/{}/'.format(ch_id)
+            method='DELETE',
+            url='testapi/company/{}/'.format(ch_id),
+            authenticator=mock.ANY,
         )
 
     @stub_request(url_get_published_companies, 'get')
@@ -110,16 +113,18 @@ class DirectoryTestAPIClientTest(TestCase):
         request = stub.request_history[0]
         assert request.url == response.url
 
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    @mock.patch('directory_client_core.base.BaseAPIClient.request')
     def test_get_published_companies_check_request(self, mocked_request):
         self.client.get_published_companies()
         assert mocked_request.call_count == 1
         assert mocked_request.call_args == mock.call(
-            method='GET', params={}, sso_session_id=None,
-            url='testapi/companies/published/'
+            method='GET',
+            params={},
+            url='testapi/companies/published/',
+            authenticator=mock.ANY
         )
 
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    @mock.patch('directory_client_core.base.BaseAPIClient.request')
     def test_get_published_companies_with_both_filters(
             self, mocked_request):
         limit = 10
@@ -132,11 +137,13 @@ class DirectoryTestAPIClientTest(TestCase):
         }
         assert mocked_request.call_count == 1
         assert mocked_request.call_args == mock.call(
-            method='GET', params=expected_params, sso_session_id=None,
-            url='testapi/companies/published/'
+            method='GET',
+            params=expected_params,
+            url='testapi/companies/published/',
+            authenticator=mock.ANY,
         )
 
-    @mock.patch('directory_api_client.base.BaseAPIClient.request')
+    @mock.patch('directory_client_core.base.BaseAPIClient.request')
     def test_get_published_companies_with_one_filter(
             self, mocked_request):
         minimal_number_of_sectors = 5
@@ -147,6 +154,8 @@ class DirectoryTestAPIClientTest(TestCase):
         }
         assert mocked_request.call_count == 1
         assert mocked_request.call_args == mock.call(
-            method='GET', params=expected_params, sso_session_id=None,
-            url='testapi/companies/published/'
+            method='GET',
+            params=expected_params,
+            url='testapi/companies/published/',
+            authenticator=mock.ANY,
         )
