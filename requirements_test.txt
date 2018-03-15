@@ -8,7 +8,7 @@ certifi==2018.1.18        # via requests
 chardet==3.0.4            # via requests
 codecov==2.0.9
 coverage==4.5.1           # via codecov, pytest-cov
-directory-client-core==0.2.0
+directory-client-core==0.2.1
 django==1.11.5
 djangorestframework==3.4.7  # via sigauth
 flake8==3.0.4
