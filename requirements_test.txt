@@ -1,4 +1,4 @@
--r requirements.in
+-r requirements.txt
 
 pytest==3.0.2
 pytest-cov==2.3.1
