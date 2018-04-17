@@ -54,7 +54,7 @@ class CompanyAPIClient(BaseAPIClient):
     def list_public_profiles(self, **kwargs):
         url = '{path}?{querystring}'.format(
             path=self.endpoints['public-profile-list'],
-            querystring=parse.urlencode(kwargs),
+            querystring=parse.urlencode(kwargs, doseq=True),
         )
         return self.get(url)
 
