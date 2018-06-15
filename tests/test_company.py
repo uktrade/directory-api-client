@@ -218,6 +218,18 @@ class CompanyAPIClientTest(TestCase):
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
     @stub_request(
+        'https://example.com/supplier/company/verify/govuk-verify/', 'post'
+    )
+    def test_verify_with_govuk_verify(self, stub):
+        self.client.verify_with_govuk_verify(
+            sso_session_id=2, address='Jim Example. 123 Fake Street'
+        )
+
+        request = stub.request_history[0]
+        assert request.json() == {'address': 'Jim Example. 123 Fake Street'}
+        assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+    @stub_request(
         'https://example.com/supplier/company/verify/companies-house/', 'post'
     )
     def test_verify_with_companies_house(self, stub):

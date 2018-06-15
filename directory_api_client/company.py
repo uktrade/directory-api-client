@@ -13,6 +13,7 @@ class CompanyAPIClient(BaseAPIClient):
         'validate-company-number': '/validate/company-number/',
         'verify': '/supplier/company/verify/',
         'verify-companies-house': '/supplier/company/verify/companies-house/',
+        'verify-govuk-verify': '/supplier/company/verify/govuk-verify/',
         'public-case-study-detail': '/public/case-study/{id}/',
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
@@ -115,6 +116,15 @@ class CompanyAPIClient(BaseAPIClient):
     def verify_with_companies_house(self, sso_session_id, access_token):
         data = {'access_token': access_token}
         url = self.endpoints['verify-companies-house']
+        return self.post(
+            url,
+            data=data,
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def verify_with_govuk_verify(self, sso_session_id, address):
+        data = {'address': address}
+        url = self.endpoints['verify-govuk-verify']
         return self.post(
             url,
             data=data,
