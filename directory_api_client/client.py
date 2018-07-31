@@ -15,16 +15,15 @@ class DirectoryAPIClient(BaseAPIClient):
         'ping': 'healthcheck/ping/',
     }
 
-    def __init__(self, base_url=None, api_key=None):
-        super(DirectoryAPIClient, self).__init__(base_url, api_key)
-
-        self.enrolment = EnrolmentAPIClient(base_url, api_key)
-        self.company = CompanyAPIClient(base_url, api_key)
-        self.supplier = SupplierAPIClient(base_url, api_key)
-        self.buyer = BuyerAPIClient(base_url, api_key)
-        self.notifications = NotificationsAPIClient(base_url, api_key)
-        self.exportopportunity = ExportOpportunityAPIClient(base_url, api_key)
-        self.exportreadiness = ExportReadinessAPIClient(base_url, api_key)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.enrolment = EnrolmentAPIClient(*args, **kwargs)
+        self.company = CompanyAPIClient(*args, **kwargs)
+        self.supplier = SupplierAPIClient(*args, **kwargs)
+        self.buyer = BuyerAPIClient(*args, **kwargs)
+        self.notifications = NotificationsAPIClient(*args, **kwargs)
+        self.exportopportunity = ExportOpportunityAPIClient(*args, **kwargs)
+        self.exportreadiness = ExportReadinessAPIClient(*args, **kwargs)
 
     def ping(self):
         return self.get(url=self.endpoints['ping'])

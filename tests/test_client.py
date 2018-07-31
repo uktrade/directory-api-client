@@ -44,3 +44,8 @@ class DirectoryAPIClientTest(TestCase):
 
         request = stub.request_history[0]
         assert request
+
+    def test_timeout(self):
+        client = DirectoryAPIClient(self.base_url, self.key, timeout=5)
+
+        assert client.timeout == 5
