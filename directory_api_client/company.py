@@ -1,10 +1,12 @@
 from urllib import parse
 
 from directory_client_core.authentication import SessionSSOAuthenticator
-from directory_client_core.base import BaseAPIClient
+from directory_client_core.base import AbstractAPIClient
+
+from directory_api_client.version import __version__
 
 
-class CompanyAPIClient(BaseAPIClient):
+class CompanyAPIClient(AbstractAPIClient):
 
     endpoints = {
         'profile': '/supplier/company/',
@@ -31,6 +33,7 @@ class CompanyAPIClient(BaseAPIClient):
         'collaborators': '/supplier/company/collaborators/',
     }
     authenticator = SessionSSOAuthenticator
+    version = __version__
 
     def update_profile(self, sso_session_id, data):
         files = {}

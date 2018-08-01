@@ -1,12 +1,15 @@
-from directory_client_core.base import BaseAPIClient
+from directory_client_core.base import AbstractAPIClient
+
+from directory_api_client.version import __version__
 
 
-class DirectoryTestAPIClient(BaseAPIClient):
+class DirectoryTestAPIClient(AbstractAPIClient):
 
     endpoints = {
         'company_by_ch_id': 'testapi/company/{ch_id}/',
         'published_companies': 'testapi/companies/published/'
     }
+    version = __version__
 
     def get_url(self, ch_id):
         return self.endpoints['company_by_ch_id'].format(ch_id=ch_id)

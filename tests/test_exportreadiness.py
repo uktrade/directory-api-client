@@ -9,7 +9,10 @@ class ExportReadinessAPIClientTestCase(TestCase):
 
     def setUp(self):
         self.client = ExportReadinessAPIClient(
-            base_url='https://e.com', api_key='test'
+            base_url='https://e.com',
+            api_key='test',
+            sender_id='test',
+            timeout=5,
         )
 
     @stub_request('https://e.com/export-readiness/triage/', 'get')

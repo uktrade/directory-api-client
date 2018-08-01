@@ -28,7 +28,7 @@ setup(
     install_requires=[
         'django>=1.9,<2.0a1',
         'requests>=2.18.4,<3.0.0',
-        'directory_client_core>=0.2.1,<1.0.0',
+        'directory_client_core<5.0.0',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
