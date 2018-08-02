@@ -9,7 +9,10 @@ class NotificationsAPIClientTestCase(TestCase):
 
     def setUp(self):
         self.client = NotificationsAPIClient(
-            base_url='https://e.com', api_key='test'
+            base_url='https://e.com',
+            api_key='test',
+            sender_id='test',
+            timeout=5,
         )
 
     @stub_request('https://e.com/notifications/anonymous-unsubscribe/', 'post')

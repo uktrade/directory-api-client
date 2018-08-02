@@ -10,45 +10,36 @@
 
 ---
 
-## Requirements
 
 ## Installation
 
-```shell
-pip install -e git+https://git@github.com/uktrade/directory-api-client.git@0.0.2#egg=directory-api-client
+```sh
+    $ pip install directory-api-client
 ```
 
-## Usage
+The api client expects the following settings:
 
-```python
-from directory_api_client.client import DirectoryAPIClient
+| Setting                              | Notes                                                       |
+| ------------------------------------ | ----------------------------------------------------------- |
+| DIRECTORY_API_CLIENT_BASE_URL        |                                                             |
+| DIRECTORY_API_CLIENT_API_KEY         | Unique to client. Retrieved during the on-boarding process. |
+| DIRECTORY_API_CLIENT_SENDER_ID       | Unique to client. Retrieved during the on-boarding process. |
+| DIRECTORY_API_CLIENT_DEFAULT_TIMEOUT |                                                             |
 
-directory_client = DirectoryAPIClient(
-    base_url="https://api.directory.exportingisgreat.gov.uk",
-    api_key=api_key
-)
-```
+Once that is done the API client can be used:
 
-### Send registration form
-
-```python
-directory_client.enrolment.send_form(
-    form_data=form_data
-)
-```
-
-### Confirm registration email
-
-```python
-directory_client.registration.confirm_email(
-    confirmation_code=confirmation_code,
-)
+```py
+from directory_api_client.client import api_client
 ```
 
 ## Development
 
-    $ git clone https://github.com/uktrade/directory-api-client
-    $ cd directory-api-client
+```shell
+$ git clone https://github.com/uktrade/directory-api-client
+$ cd directory-api-client
+$ [create virtual environment and activate]
+$ pip install -r requirements_test.txt
+```
 
 ## Publish to PyPI
 
@@ -59,11 +50,10 @@ The package should be published to PyPI on merge to master. If you need to do it
 | DIRECTORY_PYPI_USERNAME     |
 | DIRECTORY_PYPI_PASSWORD     |
 
-
 Then run the following command:
-
+```sh
     make publish
-
+```
 
 [code-climate-image]: https://codeclimate.com/github/uktrade/directory-api-client/badges/issue_count.svg
 [code-climate]: https://codeclimate.com/github/uktrade/directory-api-client

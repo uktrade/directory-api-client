@@ -1,12 +1,15 @@
-from directory_client_core.base import BaseAPIClient
+from directory_client_core.base import AbstractAPIClient
+
+from directory_api_client.version import __version__
 
 
-class BuyerAPIClient(BaseAPIClient):
+class BuyerAPIClient(AbstractAPIClient):
 
     endpoints = {
         'save': 'buyer/',
         'csv-dump': 'buyer/csv-dump/'
     }
+    version = __version__
 
     def send_form(self, form_data):
         return self.post(

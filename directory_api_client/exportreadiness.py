@@ -1,8 +1,10 @@
 from directory_client_core.authentication import SessionSSOAuthenticator
-from directory_client_core.base import BaseAPIClient
+from directory_client_core.base import AbstractAPIClient
+
+from directory_api_client.version import __version__
 
 
-class ExportReadinessAPIClient(BaseAPIClient):
+class ExportReadinessAPIClient(AbstractAPIClient):
 
     endpoints = {
         'triage-result': 'export-readiness/triage/',
@@ -10,6 +12,7 @@ class ExportReadinessAPIClient(BaseAPIClient):
         'create-retrieve-task-completed': 'export-readiness/task-completed/'
     }
     authenticator = SessionSSOAuthenticator
+    version = __version__
 
     def retrieve_triage_result(self, sso_session_id):
         return self.get(

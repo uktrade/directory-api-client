@@ -17,7 +17,10 @@ class DirectoryAPIExternalClientTest(TestCase):
         self.base_url = 'https://buyer.com'
         self.api_key = 'test'
         self.client = DummyDirectoryAPIClient(
-            self.base_url, self.api_key
+            base_url=self.base_url,
+            api_key=self.api_key,
+            sender_id='test',
+            timeout=5,
         )
 
     def test_buyer(self):

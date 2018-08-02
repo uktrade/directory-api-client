@@ -1,13 +1,16 @@
-from directory_client_core.base import BaseAPIClient
+from directory_client_core.base import AbstractAPIClient
+
+from directory_api_client.version import __version__
 
 
-class ExportOpportunityAPIClient(BaseAPIClient):
+class ExportOpportunityAPIClient(AbstractAPIClient):
 
     endpoints = {
         'create-opportunity-food': '/export-opportunity/food/',
         'create-opportunity-legal': '/export-opportunity/legal/',
 
     }
+    version = __version__
 
     def create_opportunity_food(self, form_data):
         return self.post(

@@ -5,6 +5,7 @@ from directory_api_client.client import DirectoryAPIClient
 from directory_api_client.company import CompanyAPIClient
 from directory_api_client.enrolment import EnrolmentAPIClient
 from directory_api_client.supplier import SupplierAPIClient
+from directory_api_client.version import __version__
 
 from tests import stub_request
 
@@ -14,7 +15,12 @@ class DirectoryAPIClientTest(TestCase):
     def setUp(self):
         self.base_url = 'https://example.com'
         self.key = 'test'
-        self.client = DirectoryAPIClient(self.base_url, self.key)
+        self.client = DirectoryAPIClient(
+            base_url='https://example.com',
+            api_key='test',
+            sender_id='test',
+            timeout=5,
+        )
 
     def test_enrolment(self):
         assert isinstance(self.client.enrolment, EnrolmentAPIClient)
@@ -46,6 +52,10 @@ class DirectoryAPIClientTest(TestCase):
         assert request
 
     def test_timeout(self):
-        client = DirectoryAPIClient(self.base_url, self.key, timeout=5)
+        assert self.client.timeout == 5
 
-        assert client.timeout == 5
+    def test_sender_id(self):
+        assert self.client.request_signer.sender_id == 'test'
+
+    def test_version(self):
+        assert DirectoryAPIClient.version == __version__
