@@ -24,11 +24,12 @@ setup(
     description='Python client for Directory API.',
     packages=find_packages(exclude=["tests.*", "tests"]),
     long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     include_package_data=True,
     install_requires=[
         'django>=1.9,<2.0a1',
         'requests>=2.18.4,<3.0.0',
-        'directory_client_core>=4.0.2,<5.0.0',
+        'directory_client_core>=4.3.0,<5.0.0',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

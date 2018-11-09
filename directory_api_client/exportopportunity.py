@@ -1,9 +1,8 @@
-from directory_client_core.base import AbstractAPIClient
-
+from directory_api_client.base import CachedAbstractAPIClient
 from directory_api_client.version import __version__
 
 
-class ExportOpportunityAPIClient(AbstractAPIClient):
+class ExportOpportunityAPIClient(CachedAbstractAPIClient):
 
     endpoints = {
         'create-opportunity-food': '/export-opportunity/food/',

@@ -18,12 +18,15 @@
 
 The api client expects the following settings:
 
-| Setting                              | Notes                                                       |
-| ------------------------------------ | ----------------------------------------------------------- |
-| DIRECTORY_API_CLIENT_BASE_URL        |                                                             |
-| DIRECTORY_API_CLIENT_API_KEY         | Unique to client. Retrieved during the on-boarding process. |
-| DIRECTORY_API_CLIENT_SENDER_ID       | Unique to client. Retrieved during the on-boarding process. |
-| DIRECTORY_API_CLIENT_DEFAULT_TIMEOUT |                                                             |
+| Setting                                    | Notes                                                       |
+| ------------------------------------------ | ----------------------------------------------------------- |
+| DIRECTORY_API_CLIENT_BASE_URL              |                                                             |
+| DIRECTORY_API_CLIENT_API_KEY               | Unique to client. Retrieved during the on-boarding process. |
+| DIRECTORY_API_CLIENT_SENDER_ID             | Unique to client. Retrieved during the on-boarding process. |
+| DIRECTORY_API_CLIENT_DEFAULT_TIMEOUT       |                                                             |
+| DIRECTORY_CLIENT_CORE_CACHE_EXPIRE_SECONDS | [see directory-client-core](https://github.com/uktrade/directory-client-core#caching)
+
+And the caching expects the following key in CACHES setting: `api_fallback`
 
 Once that is done the API client can be used:
 
