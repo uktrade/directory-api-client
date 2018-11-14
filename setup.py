@@ -31,6 +31,18 @@ setup(
         'requests>=2.18.4,<3.0.0',
         'directory_client_core>=4.3.0,<5.0.0',
     ],
+    extras_require={
+        'test': [
+            'pytest==3.0.2',
+            'pytest-cov==2.3.1',
+            'flake8==3.0.4',
+            'requests_mock==1.1.0',
+            'codecov==2.0.9',
+            'twine>=1.11.0,<2.0.0',
+            'wheel>=0.31.0,<1.0.0',
+            'setuptools>=38.6.0,<39.0.0',
+        ]
+    },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',

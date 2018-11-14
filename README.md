@@ -40,7 +40,7 @@ from directory_api_client.client import api_client
 $ git clone https://github.com/uktrade/directory-api-client
 $ cd directory-api-client
 $ [create virtual environment and activate]
-$ pip install -r requirements_test.txt
+$ make test_requirements
 ```
 
 ## Publish to PyPI
