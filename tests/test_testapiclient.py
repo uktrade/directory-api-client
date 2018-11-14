@@ -69,6 +69,7 @@ class DirectoryTestAPIClientTest(TestCase):
             params=None,
             url='testapi/company/{}/'.format(ch_id),
             authenticator=mock.ANY,
+            cache_control=None,
         )
 
     @stub_request(url_get_company + 'ch_ID_00/', 'delete')
@@ -126,7 +127,8 @@ class DirectoryTestAPIClientTest(TestCase):
             method='GET',
             params={},
             url='testapi/companies/published/',
-            authenticator=mock.ANY
+            authenticator=mock.ANY,
+            cache_control=None,
         )
 
     @mock.patch('directory_client_core.base.AbstractAPIClient.request')
@@ -146,6 +148,7 @@ class DirectoryTestAPIClientTest(TestCase):
             params=expected_params,
             url='testapi/companies/published/',
             authenticator=mock.ANY,
+            cache_control=None,
         )
 
     @mock.patch('directory_client_core.base.AbstractAPIClient.request')
@@ -163,4 +166,5 @@ class DirectoryTestAPIClientTest(TestCase):
             params=expected_params,
             url='testapi/companies/published/',
             authenticator=mock.ANY,
+            cache_control=None,
         )

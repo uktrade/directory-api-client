@@ -1,7 +1,6 @@
 from django.conf import settings
 
-from directory_client_core.base import AbstractAPIClient
-
+from directory_api_client.base import CachedAbstractAPIClient
 from directory_api_client.buyer import BuyerAPIClient
 from directory_api_client.company import CompanyAPIClient
 from directory_api_client.enrolment import EnrolmentAPIClient
@@ -12,7 +11,7 @@ from directory_api_client.exportreadiness import ExportReadinessAPIClient
 from directory_api_client.version import __version__
 
 
-class DirectoryAPIClient(AbstractAPIClient):
+class DirectoryAPIClient(CachedAbstractAPIClient):
 
     endpoints = {
         'ping': 'healthcheck/ping/',
