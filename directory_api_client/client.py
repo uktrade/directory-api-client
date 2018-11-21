@@ -8,6 +8,8 @@ from directory_api_client.supplier import SupplierAPIClient
 from directory_api_client.notifications import NotificationsAPIClient
 from directory_api_client.exportopportunity import ExportOpportunityAPIClient
 from directory_api_client.exportreadiness import ExportReadinessAPIClient
+from directory_api_client.exporting import ExportingAPIClient
+
 from directory_api_client.version import __version__
 
 
@@ -27,6 +29,7 @@ class DirectoryAPIClient(CachedAbstractAPIClient):
         self.notifications = NotificationsAPIClient(*args, **kwargs)
         self.exportopportunity = ExportOpportunityAPIClient(*args, **kwargs)
         self.exportreadiness = ExportReadinessAPIClient(*args, **kwargs)
+        self.exporting = ExportingAPIClient(*args, **kwargs)
 
     def ping(self):
         return self.get(url=self.endpoints['ping'])
