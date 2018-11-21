@@ -5,6 +5,8 @@ from directory_api_client.client import DirectoryAPIClient
 from directory_api_client.company import CompanyAPIClient
 from directory_api_client.enrolment import EnrolmentAPIClient
 from directory_api_client.supplier import SupplierAPIClient
+from directory_api_client.exporting import ExportingAPIClient
+
 from directory_api_client.version import __version__
 
 from tests import stub_request
@@ -20,6 +22,13 @@ class DirectoryAPIClientTest(TestCase):
             api_key='test',
             sender_id='test',
             timeout=5,
+        )
+
+    def test_exporting(self):
+        assert isinstance(self.client.exporting, ExportingAPIClient)
+        assert self.client.exporting.base_url == self.base_url
+        assert (
+            self.client.exporting.request_signer.secret == self.key
         )
 
     def test_enrolment(self):
