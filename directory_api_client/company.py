@@ -31,6 +31,7 @@ class CompanyAPIClient(CachedAbstractAPIClient):
         ),
         'remove-collaborators': '/supplier/company/remove-collaborators/',
         'collaborators': '/supplier/company/collaborators/',
+        'request-collaboration': 'supplier/company/collaborator-request/',
     }
     authenticator = SessionSSOAuthenticator
     version = __version__
@@ -189,3 +190,12 @@ class CompanyAPIClient(CachedAbstractAPIClient):
     def retrieve_collaborators(self, sso_session_id):
         url = self.endpoints['collaborators']
         return self.get(url, authenticator=self.authenticator(sso_session_id))
+
+    def request_collaboration(self, company_number, collaborator_email):
+        return self.post(
+            self.endpoints['request-collaboration'],
+            data={
+                'company_number': company_number,
+                'collaborator_email': collaborator_email
+            },
+        )
