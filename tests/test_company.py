@@ -365,3 +365,17 @@ class CompanyAPIClientTest(TestCase):
 
         request = stub.request_history[0]
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+    @stub_request(
+        'https://example.com/supplier/company/collaborator-request/', 'post'
+    )
+    def test_request_collaboration(self, stub):
+        self.client.request_collaboration(
+            company_number='1234567', collaborator_email='test@example.com'
+        )
+
+        request = stub.request_history[0]
+        assert request.json() == {
+            'company_number': '1234567',
+            'collaborator_email': 'test@example.com',
+        }
