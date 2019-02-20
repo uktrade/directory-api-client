@@ -1,10 +1,13 @@
 from directory_client_core.authentication import SessionSSOAuthenticator
+from directory_client_core.base import AbstractAPIClient
+from directory_client_core.helpers import fallback
 
-from directory_api_client.base import CachedAbstractAPIClient
+from django.core.cache import caches
+
 from directory_api_client.version import __version__
 
 
-class SupplierAPIClient(CachedAbstractAPIClient):
+class SupplierAPIClient(AbstractAPIClient):
 
     endpoints = {
         'supplier': '/supplier/',
@@ -21,6 +24,7 @@ class SupplierAPIClient(CachedAbstractAPIClient):
             authenticator=self.authenticator(sso_session_id)
         )
 
+    @fallback(cache=caches['api_fallback'])
     def retrieve_profile(self, sso_session_id):
         url = self.endpoints['supplier']
         return self.get(url, authenticator=self.authenticator(sso_session_id))

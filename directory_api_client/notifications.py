@@ -1,8 +1,9 @@
-from directory_api_client.base import CachedAbstractAPIClient
+from directory_client_core.base import AbstractAPIClient
+
 from directory_api_client.version import __version__
 
 
-class NotificationsAPIClient(CachedAbstractAPIClient):
+class NotificationsAPIClient(AbstractAPIClient):
 
     endpoints = {
         'anonymous-unsubscribe': '/notifications/anonymous-unsubscribe/',
