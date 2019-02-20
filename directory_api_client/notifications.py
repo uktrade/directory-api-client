@@ -1,13 +1,11 @@
-from directory_api_client.base import CachedAbstractAPIClient
-from directory_api_client.version import __version__
+from directory_api_client.base import AbstractAPIClient
 
 
-class NotificationsAPIClient(CachedAbstractAPIClient):
+class NotificationsAPIClient(AbstractAPIClient):
 
     endpoints = {
         'anonymous-unsubscribe': '/notifications/anonymous-unsubscribe/',
     }
-    version = __version__
 
     def anonymous_unsubscribe(self, signed_email_address):
         url = self.endpoints['anonymous-unsubscribe']

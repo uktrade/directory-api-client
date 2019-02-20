@@ -1,10 +1,8 @@
 from directory_client_core.authentication import SessionSSOAuthenticator
-
-from directory_api_client.base import CachedAbstractAPIClient
-from directory_api_client.version import __version__
+from directory_api_client.base import AbstractAPIClient
 
 
-class SupplierAPIClient(CachedAbstractAPIClient):
+class SupplierAPIClient(AbstractAPIClient):
 
     endpoints = {
         'supplier': '/supplier/',
@@ -12,7 +10,6 @@ class SupplierAPIClient(CachedAbstractAPIClient):
         'csv-dump': 'supplier/csv-dump/'
     }
     authenticator = SessionSSOAuthenticator
-    version = __version__
 
     def update_profile(self, sso_session_id, data):
         return self.patch(
@@ -22,8 +19,11 @@ class SupplierAPIClient(CachedAbstractAPIClient):
         )
 
     def retrieve_profile(self, sso_session_id):
-        url = self.endpoints['supplier']
-        return self.get(url, authenticator=self.authenticator(sso_session_id))
+        return self.get(
+            url=self.endpoints['supplier'],
+            authenticator=self.authenticator(sso_session_id),
+            use_fallback_cache=True,
+        )
 
     def unsubscribe(self, sso_session_id):
         url = self.endpoints['unsubscribe']

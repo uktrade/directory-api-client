@@ -2,11 +2,10 @@ from urllib import parse
 
 from directory_client_core.authentication import SessionSSOAuthenticator
 
-from directory_api_client.base import CachedAbstractAPIClient
-from directory_api_client.version import __version__
+from directory_api_client.base import AbstractAPIClient
 
 
-class CompanyAPIClient(CachedAbstractAPIClient):
+class CompanyAPIClient(AbstractAPIClient):
 
     endpoints = {
         'profile': '/supplier/company/',
@@ -18,7 +17,6 @@ class CompanyAPIClient(CachedAbstractAPIClient):
         'public-case-study-detail': '/public/case-study/{id}/',
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
-        'contact-supplier': '/contact/supplier/',
         'search-companies': '/company/search/',
         'search-case-studies': '/case-study/search/',
         'transfer-invite': '/supplier/company/transfer-ownership-invite/',
@@ -34,7 +32,6 @@ class CompanyAPIClient(CachedAbstractAPIClient):
         'request-collaboration': 'supplier/company/collaborator-request/',
     }
     authenticator = SessionSSOAuthenticator
-    version = __version__
 
     def update_profile(self, sso_session_id, data):
         files = {}
@@ -48,19 +45,24 @@ class CompanyAPIClient(CachedAbstractAPIClient):
         )
 
     def retrieve_private_profile(self, sso_session_id):
-        url = self.endpoints['profile']
-        return self.get(url, authenticator=self.authenticator(sso_session_id))
+        return self.get(
+            url=self.endpoints['profile'],
+            authenticator=self.authenticator(sso_session_id),
+            use_fallback_cache=True,
+        )
 
     def retrieve_public_profile(self, number):
-        url = self.endpoints['public-profile-detail'].format(number=number)
-        return self.get(url)
+        return self.get(
+            url=self.endpoints['public-profile-detail'].format(number=number),
+            use_fallback_cache=True,
+        )
 
     def list_public_profiles(self, **kwargs):
         url = '{path}?{querystring}'.format(
             path=self.endpoints['public-profile-list'],
             querystring=parse.urlencode(kwargs, doseq=True),
         )
-        return self.get(url)
+        return self.get(url=url, use_fallback_cache=True)
 
     def validate_company_number(self, number):
         url = self.endpoints['validate-company-number']
@@ -94,14 +96,17 @@ class CompanyAPIClient(CachedAbstractAPIClient):
         )
 
     def retrieve_private_case_study(self, sso_session_id, case_study_id):
-        url = self.endpoints['case-study-detail'].format(id=case_study_id)
-        return self.get(url, authenticator=self.authenticator(sso_session_id))
+        return self.get(
+            url=self.endpoints['case-study-detail'].format(id=case_study_id),
+            authenticator=self.authenticator(sso_session_id),
+            use_fallback_cache=True,
+        )
 
     def retrieve_public_case_study(self, case_study_id):
         url = self.endpoints['public-case-study-detail'].format(
             id=case_study_id
         )
-        return self.get(url)
+        return self.get(url=url, use_fallback_cache=True)
 
     def delete_case_study(self, sso_session_id, case_study_id):
         url = self.endpoints['case-study-detail'].format(id=case_study_id)
@@ -125,14 +130,19 @@ class CompanyAPIClient(CachedAbstractAPIClient):
             authenticator=self.authenticator(sso_session_id),
         )
 
-    def send_email(self, data):
-        return self.post(self.endpoints['contact-supplier'], data)
-
     def search_company(self, **kwargs):
-        return self.get(self.endpoints['search-companies'], params=kwargs)
+        return self.get(
+            url=self.endpoints['search-companies'],
+            params=kwargs,
+            use_fallback_cache=True,
+        )
 
     def search_case_study(self, **kwargs):
-        return self.get(self.endpoints['search-case-studies'], params=kwargs)
+        return self.get(
+            url=self.endpoints['search-case-studies'],
+            params=kwargs,
+            use_fallback_cache=True,
+        )
 
     def create_transfer_invite(self, sso_session_id, new_owner_email):
         return self.post(

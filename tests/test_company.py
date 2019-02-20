@@ -81,13 +81,6 @@ class CompanyAPIClientTest(TestCase):
     def test_retrieve_public_profile(self, stub):
         self.client.retrieve_public_profile(number=1)
 
-    @stub_request('https://example.com/contact/supplier/', 'post')
-    def test_send_email(self, stub):
-        data = {'body': 'Hello there!'}
-        self.client.send_email(data=data)
-        request = stub.request_history[0]
-        assert request.json() == data
-
     @stub_request('https://example.com/validate/company-number/', 'get')
     def test_validate_company_number(self, stub):
         self.client.validate_company_number('01234567')
