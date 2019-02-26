@@ -29,7 +29,7 @@ class CompanyAPIClient(AbstractAPIClient):
         ),
         'remove-collaborators': '/supplier/company/remove-collaborators/',
         'collaborators': '/supplier/company/collaborators/',
-        'request-collaboration': 'supplier/company/collaborator-request/',
+        'request-collaboration': '/supplier/company/collaborator-request/',
     }
     authenticator = SessionSSOAuthenticator
 
