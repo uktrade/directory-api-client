@@ -8,7 +8,8 @@ class EnrolmentAPIClient(AbstractAPIClient):
     endpoints = {
         'enrolment': '/enrolment/',
         'trusted-code': '/trusted-code/{code}/',
-        'claim-preverified-company': '/enrolment/claim-preverified/',
+        'preverified': '/enrolment/preverified-company/{key}/',
+        'preverified-claim': '/enrolment/preverified-company/{key}/claim/',
 
     }
 
@@ -22,9 +23,13 @@ class EnrolmentAPIClient(AbstractAPIClient):
         url = self.endpoints['trusted-code'].format(code=code)
         return self.get(url)
 
-    def claim_prepeveried_company(self, sso_session_id, data):
+    def retrieve_prepeveried_company(self, key):
+        url = self.endpoints['preverified'].format(key=key)
+        return self.get(url)
+
+    def claim_prepeveried_company(self, sso_session_id, key, data):
         return self.post(
-            self.endpoints['claim-preverified-company'],
+            url=self.endpoints['preverified-claim'].format(key=key),
             data=data,
             authenticator=SessionSSOAuthenticator(sso_session_id),
         )
