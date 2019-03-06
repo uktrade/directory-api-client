@@ -12,4 +12,3 @@ class ExportingAPIClient(AbstractAPIClient):
             url=self.endpoints['lookup-by-postcode'].format(postcode=postcode),
             use_fallback_cache=True,
         )
-
