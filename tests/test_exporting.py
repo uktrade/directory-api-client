@@ -22,5 +22,3 @@ class ExportingAPIClientTest(TestCase):
         self.client.lookup_regional_offices_by_postcode(
             postcode='ABC 123'
         )
-
-
