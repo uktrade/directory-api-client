@@ -16,18 +16,11 @@ class ExportingAPIClientTest(TestCase):
         )
 
     @stub_request(
-        'https://example.com/exporting/lookup-by-postcode/ABC%20123/', 'get'
+        'https://example.com/exporting/offices/ABC%20123/', 'get'
     )
-    def test_lookup_regional_office_by_postcode(self, stub):
-        self.client.lookup_regional_office_by_postcode(
+    def test_lookup_regional_offices_by_postcode(self, stub):
+        self.client.lookup_regional_offices_by_postcode(
             postcode='ABC 123'
         )
 
-    @stub_request(
-        'https://example.com/exporting/lookup-by-postcode-get-all/ABC%20123/',
-        'get'
-    )
-    def test_lookup_regional_office_by_postcode_get_all(self, stub):
-        self.client.lookup_regional_office_by_postcode_get_all(
-            postcode='ABC 123'
-        )
+
