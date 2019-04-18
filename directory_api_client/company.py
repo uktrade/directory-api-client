@@ -18,6 +18,9 @@ class CompanyAPIClient(AbstractAPIClient):
         'public-profile-detail': '/public/company/{number}/',
         'public-profile-list': '/public/company/',
         'search-companies': '/company/search/',
+        'search-investment-support-directories': (
+            '/investment-support-directory/search/'
+        ),
         'search-case-studies': '/case-study/search/',
         'transfer-invite': '/supplier/company/transfer-ownership-invite/',
         'transfer-invite-detail': (
@@ -133,6 +136,13 @@ class CompanyAPIClient(AbstractAPIClient):
     def search_company(self, **kwargs):
         return self.get(
             url=self.endpoints['search-companies'],
+            params=kwargs,
+            use_fallback_cache=True,
+        )
+
+    def search_investment_search_directory(self, **kwargs):
+        return self.get(
+            url=self.endpoints['search-investment-support-directories'],
             params=kwargs,
             use_fallback_cache=True,
         )
