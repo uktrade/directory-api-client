@@ -4,6 +4,7 @@
 [![circle-ci-image]][circle-ci]
 [![codecov-image]][codecov]
 [![pypi-image]][pypi]
+[![semver-image]][semver]
 
 **Export Directory internal API client.**
 
@@ -12,9 +13,8 @@
 
 ## Installation
 
-```sh
     $ pip install directory-api-client
-```
+
 
 The api client expects the following settings:
 
@@ -24,7 +24,13 @@ The api client expects the following settings:
 | DIRECTORY_API_CLIENT_API_KEY               | Unique to client. Retrieved during the on-boarding process. |
 | DIRECTORY_API_CLIENT_SENDER_ID             | Unique to client. Retrieved during the on-boarding process. |
 | DIRECTORY_API_CLIENT_DEFAULT_TIMEOUT       |                                                             |
-| DIRECTORY_CLIENT_CORE_CACHE_EXPIRE_SECONDS | [see directory-client-core](https://github.com/uktrade/directory-client-core#caching)
+
+The following [directory client core settings](https://github.com/uktrade/directory-client-core) also apply to directory cms client:
+
+| Setting                                            | Notes                                                 |
+| ---------------------------------------------------| ------------------------------------------------------|
+| DIRECTORY_CLIENT_CORE_CACHE_EXPIRE_SECONDS         | Duration to store the retrieved content in the cache. |    |
+| DIRECTORY_CLIENT_CORE_CACHE_LOG_THROTTLING_SECONDS | Duration to throttle log events for a given url for.  |
 
 And the caching expects the following key in CACHES setting: `api_fallback`
 
@@ -53,9 +59,9 @@ The package should be published to PyPI on merge to master. If you need to do it
 | DIRECTORY_PYPI_PASSWORD     |
 
 Then run the following command:
-```sh
-    make publish
-```
+
+    $ make publish
+
 
 [code-climate-image]: https://codeclimate.com/github/uktrade/directory-api-client/badges/issue_count.svg
 [code-climate]: https://codeclimate.com/github/uktrade/directory-api-client
@@ -68,3 +74,6 @@ Then run the following command:
 
 [pypi-image]: https://badge.fury.io/py/directory-api-client.svg
 [pypi]: https://badge.fury.io/py/directory-api-client
+
+[semver-image]: https://img.shields.io/badge/Versioning%20strategy-SemVer-5FBB1C.svg
+[semver]: https://semver.org
