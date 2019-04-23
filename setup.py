@@ -29,7 +29,7 @@ setup(
     install_requires=[
         'django>=1.11.20,<2.0a1',
         'requests>=2.18.4,<3.0.0',
-        'directory_client_core>=4.3.0,<5.0.0',
+        'directory_client_core>=5.0.0,<6.0.0',
     ],
     extras_require={
         'test': [
@@ -52,7 +52,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Software Development :: Libraries :: Python Modules',
