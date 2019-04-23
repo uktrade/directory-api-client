@@ -244,6 +244,29 @@ class CompanyAPIClientTest(TestCase):
         assert 'sectors=AEROSPACE' in request.url
         assert 'campaign_tag=food-is-great' in request.url
 
+    @stub_request(
+        'https://example.com/investment-support-directory/search/', 'get'
+    )
+    def test_search_investment_support_directory(self, stub):
+        self.client.search_investment_search_directory(
+            term='thing',
+            page=1,
+            size=10,
+            expertise_industries=['REG', 'IT'],
+            expertise_languages=['ENGLISH', 'GERMAN', 'SPANISH'],
+        )
+
+        request = stub.request_history[0]
+
+        assert 'size=10' in request.url
+        assert 'page=1' in request.url
+        assert 'term=thing' in request.url
+        assert 'expertise_industries=REG' in request.url
+        assert 'expertise_industries=IT' in request.url
+        assert 'expertise_languages=ENGLISH' in request.url
+        assert 'expertise_languages=GERMAN' in request.url
+        assert 'expertise_languages=SPANISH' in request.url
+
     @stub_request('https://example.com/case-study/search/', 'get')
     def test_search_case_study(self, stub):
         self.client.search_case_study(
