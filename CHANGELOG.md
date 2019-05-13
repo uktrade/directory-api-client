@@ -5,4 +5,4 @@
 ### Implemented enhancements
 
 ### Fixed bugs:
-- Version 14.0 remove redundant code call to retrieve public profile list
+- Version 14.0 remove redundant call to retrieve public profile list
