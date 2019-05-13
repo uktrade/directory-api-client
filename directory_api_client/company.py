@@ -16,7 +16,6 @@ class CompanyAPIClient(AbstractAPIClient):
         'verify-companies-house': '/supplier/company/verify/companies-house/',
         'public-case-study-detail': '/public/case-study/{id}/',
         'public-profile-detail': '/public/company/{number}/',
-        'public-profile-list': '/public/company/',
         'search-companies': '/company/search/',
         'search-investment-support-directories': (
             '/investment-support-directory/search/'
@@ -59,13 +58,6 @@ class CompanyAPIClient(AbstractAPIClient):
             url=self.endpoints['public-profile-detail'].format(number=number),
             use_fallback_cache=True,
         )
-
-    def list_public_profiles(self, **kwargs):
-        url = '{path}?{querystring}'.format(
-            path=self.endpoints['public-profile-list'],
-            querystring=parse.urlencode(kwargs, doseq=True),
-        )
-        return self.get(url=url, use_fallback_cache=True)
 
     def validate_company_number(self, number):
         url = self.endpoints['validate-company-number']

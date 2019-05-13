@@ -57,26 +57,6 @@ class CompanyAPIClientTest(TestCase):
         request = stub.request_history[0]
         assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
-    @stub_request('https://example.com/public/company/', 'get')
-    def test_list_public_profile_no_params(self, stub):
-        self.client.list_public_profiles()
-
-    @stub_request('https://example.com/public/company/?page=4', 'get')
-    def test_list_public_profile_specified_page_number(self, stub):
-        self.client.list_public_profiles(page=4)
-
-    @stub_request(
-        'https://example.com/public/company/?page=4&sectors=THING', 'get'
-    )
-    def test_list_public_profile_multiple_kwargs(self, stub):
-        self.client.list_public_profiles(page=4, sectors='THING')
-
-    @stub_request(
-        'https://example.com/public/company/?page=4&sectors=1&sectors=2', 'get'
-    )
-    def test_list_public_profile_multiple_sectors(self, stub):
-        self.client.list_public_profiles(page=4, sectors=['1', '2'])
-
     @stub_request('https://example.com/public/company/1/', 'get')
     def test_retrieve_public_profile(self, stub):
         self.client.retrieve_public_profile(number=1)
