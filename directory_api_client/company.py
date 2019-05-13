@@ -1,5 +1,3 @@
-from urllib import parse
-
 from directory_client_core.authentication import SessionSSOAuthenticator
 
 from directory_api_client.base import AbstractAPIClient
