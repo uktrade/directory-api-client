@@ -1,4 +1,3 @@
-
 from django.conf import settings
 
 from directory_api_client.base import AbstractAPIClient

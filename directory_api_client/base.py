@@ -1,14 +1,14 @@
+import pkg_resources
+
 import directory_client_core.base
 from directory_client_core.helpers import fallback
 
 from django.core.cache import caches
 
-from directory_api_client.version import __version__
-
 
 class AbstractAPIClient(directory_client_core.base.AbstractAPIClient):
 
-    version = __version__
+    version = pkg_resources.get_distribution(__package__).version
 
     @fallback(cache=caches['api_fallback'])
     def fallback_cache_get(self, *args, **kwargs):

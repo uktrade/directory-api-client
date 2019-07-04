@@ -1,23 +1,9 @@
-"""
-Export Directory API client
-"""
-import ast
-import re
 from setuptools import setup, find_packages
-
-
-def get_version():
-    pattern = re.compile(r'__version__\s+=\s+(.*)')
-
-    with open('directory_api_client/version.py', 'rb') as src:
-        return str(ast.literal_eval(
-            pattern.search(src.read().decode('utf-8')).group(1)
-        ))
 
 
 setup(
     name='directory_api_client',
-    version=get_version(),
+    version='14.0.0',
     url='https://github.com/uktrade/directory-api-client',
     license='MIT',
     author='Department for International Trade',
@@ -27,7 +13,7 @@ setup(
     long_description_content_type='text/markdown',
     include_package_data=True,
     install_requires=[
-        'django>=1.11.20,<2.0a1',
+        'django>=1.11.22,<2.0a1',
         'requests>=2.18.4,<3.0.0',
         'directory_client_core>=5.0.0,<6.0.0',
     ],

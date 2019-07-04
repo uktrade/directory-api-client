@@ -7,8 +7,6 @@ from directory_api_client.enrolment import EnrolmentAPIClient
 from directory_api_client.supplier import SupplierAPIClient
 from directory_api_client.exporting import ExportingAPIClient
 
-from directory_api_client.version import __version__
-
 from tests import stub_request
 
 
@@ -65,6 +63,3 @@ class DirectoryAPIClientTest(TestCase):
 
     def test_sender_id(self):
         assert self.client.request_signer.sender_id == 'test'
-
-    def test_version(self):
-        assert DirectoryAPIClient.version == __version__
