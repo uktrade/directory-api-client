@@ -1,5 +1,16 @@
 # Changelog
 
+
+## [14.0.1](https://pypi.org/project/directory-api-client/14.0.1/) (2019-07-04)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/88/files)
+
+### Implemented enhancements
+- No ticket - Can now import the instantiated client as `from directory_api_client import api_client`
+- No ticket - Remove `version.py`
+
+### Bugs fixed
+- No ticket - Upgrade vulnerable django version to django 1.11.22
+
 ## [14.0.0](https://pypi.org/project/directory-api-client/14.0.0/) (2019-04-23)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/87/files)
 
