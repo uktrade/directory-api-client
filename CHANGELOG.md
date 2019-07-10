@@ -1,7 +1,7 @@
 # Changelog
 
 ## [15.0.0](https://pypi.org/project/directory-api-client/15.0.0/) (2019-07-04)
-[Full Changelog](https://github.com/uktrade/directory-api-client/pull/89/files)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/90/files)
 
 ### Implemented enhancements
 - Use fallback cache on more endpoints that support it
