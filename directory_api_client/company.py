@@ -51,7 +51,6 @@ class CompanyAPIClient(AbstractAPIClient):
         return self.get(
             url=self.endpoints['profile'],
             authenticator=self.authenticator(sso_session_id),
-            use_fallback_cache=True,
         )
 
     def retrieve_public_profile(self, number):
@@ -133,7 +132,7 @@ class CompanyAPIClient(AbstractAPIClient):
             authenticator=self.authenticator(sso_session_id),
         )
 
-    def search_company(self, **kwargs):
+    def search_find_a_supplier(self, **kwargs):
         return self.get(
             url=self.endpoints['search-companies'],
             params=kwargs,
@@ -143,13 +142,6 @@ class CompanyAPIClient(AbstractAPIClient):
     def search_investment_search_directory(self, **kwargs):
         return self.get(
             url=self.endpoints['search-investment-support-directories'],
-            params=kwargs,
-            use_fallback_cache=True,
-        )
-
-    def search_case_study(self, **kwargs):
-        return self.get(
-            url=self.endpoints['search-case-studies'],
             params=kwargs,
             use_fallback_cache=True,
         )
@@ -165,7 +157,11 @@ class CompanyAPIClient(AbstractAPIClient):
         url = self.endpoints['transfer-invite-detail'].format(
             invite_key=invite_key
         )
-        return self.get(url, authenticator=self.authenticator(sso_session_id))
+        return self.get(
+            url,
+            authenticator=self.authenticator(sso_session_id),
+            use_fallback_cache=True,
+        )
 
     def accept_transfer_invite(self, sso_session_id, invite_key):
         url = self.endpoints['transfer-invite-detail'].format(
@@ -187,7 +183,11 @@ class CompanyAPIClient(AbstractAPIClient):
         url = self.endpoints['collaboration-invite-detail'].format(
             invite_key=invite_key
         )
-        return self.get(url, authenticator=self.authenticator(sso_session_id))
+        return self.get(
+            url,
+            authenticator=self.authenticator(sso_session_id),
+            use_fallback_cache=True,
+        )
 
     def accept_collaboration_invite(self, sso_session_id, invite_key):
         url = self.endpoints['collaboration-invite-detail'].format(

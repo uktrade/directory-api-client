@@ -16,4 +16,8 @@ class BuyerAPIClient(AbstractAPIClient):
 
     def get_csv_dump(self, token):
         url = self.endpoints['csv-dump']
-        return self.get(url, params={'token': token})
+        return self.get(
+            url,
+            params={'token': token},
+            use_fallback_cache=True,
+        )
