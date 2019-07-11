@@ -1,5 +1,17 @@
 # Changelog
 
+## [15.0.0](https://pypi.org/project/directory-api-client/15.0.0/) (2019-07-04)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/90/files)
+
+### Implemented enhancements
+- Use fallback cache on more endpoints that support it
+
+### Bugs fixed
+- Removed fallback cache usage for endpoints can leak user details
+
+### Breaking changes
+- Removed `company.search_case_study`
+- Renamed `company.search_company` to `company.search_find_a_supplier`
 
 ## [14.0.1](https://pypi.org/project/directory-api-client/14.0.1/) (2019-07-04)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/88/files)

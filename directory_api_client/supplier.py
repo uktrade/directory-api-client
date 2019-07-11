@@ -22,7 +22,6 @@ class SupplierAPIClient(AbstractAPIClient):
         return self.get(
             url=self.endpoints['supplier'],
             authenticator=self.authenticator(sso_session_id),
-            use_fallback_cache=True,
         )
 
     def unsubscribe(self, sso_session_id):
@@ -31,4 +30,8 @@ class SupplierAPIClient(AbstractAPIClient):
 
     def get_csv_dump(self, token):
         url = self.endpoints['csv-dump']
-        return self.get(url,  params={'token': token})
+        return self.get(
+            url,
+            params={'token': token},
+            use_fallback_cache=True,
+        )
