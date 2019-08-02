@@ -5,7 +5,7 @@
 
 ### Implemented enhancements
 - Support Django 1.11.22 through 2.x
-
+- GTRANSFORM-69 Automating redirects on great.gov
 ## [15.0.0](https://pypi.org/project/directory-api-client/15.0.0/) (2019-07-04)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/90/files)
 
