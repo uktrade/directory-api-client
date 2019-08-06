@@ -8,7 +8,7 @@ test_requirements:
 	pip install -e .[test]
 
 flake8:
-	flake8 . --exclude=.venv
+	flake8 . --exclude=ENV
 
 pytest:
 	pytest . --cov=. $(pytest_args)

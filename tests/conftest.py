@@ -8,6 +8,10 @@ def pytest_configure():
         DIRECTORY_API_CLIENT_DEFAULT_TIMEOUT=5,
         DIRECTORY_CLIENT_CORE_CACHE_EXPIRE_SECONDS=10,
         CACHES={
+            'redirect': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+                'LOCATION': 'unique-snowflake',
+            },
             'api_fallback': {
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
                 'LOCATION': 'unique-snowflake',
