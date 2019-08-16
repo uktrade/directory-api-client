@@ -1,43 +1,55 @@
-from unittest import TestCase
-
-from tests import stub_request
+import pytest
 
 from directory_api_client.supplier import SupplierAPIClient
 
 
-class SupplierAPIClientTest(TestCase):
+@pytest.fixture
+def client():
+    return SupplierAPIClient(
+        base_url='https://example.com',
+        api_key='test',
+        sender_id='test',
+        timeout=5,
+    )
 
-    def setUp(self):
-        self.client = SupplierAPIClient(
-            base_url='https://example.com',
-            api_key='test',
-            sender_id='test',
-            timeout=5,
-        )
 
-    @stub_request('https://example.com/supplier/', 'patch')
-    def test_update_profile(self, stub):
-        data = {'key': 'value'}
-        self.client.update_profile(sso_session_id=1, data=data)
+def test_update_profile(client, requests_mock):
+    url = 'https://example.com/supplier/'
+    requests_mock.patch(url)
 
-        request = stub.request_history[0]
-        assert request.json() == data
-        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+    data = {'key': 'value'}
+    client.update_profile(sso_session_id=1, data=data)
 
-    @stub_request('https://example.com/supplier/', 'get')
-    def test_retrieve_profile(self, stub):
-        self.client.retrieve_profile(sso_session_id=1)
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == data
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
-    @stub_request('https://example.com/supplier/unsubscribe/', 'post')
-    def test_unsubscribe(self, stub):
-        self.client.unsubscribe(sso_session_id=1)
 
-        request = stub.request_history[0]
-        assert request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+def test_retrieve_profile(client, requests_mock):
+    url = 'https://example.com/supplier/'
+    requests_mock.get(url)
 
-    @stub_request('https://example.com/supplier/csv-dump/', 'get')
-    def test_get_csv_dump(self, stub):
-        token = 'debug'
-        self.client.get_csv_dump(token)
-        request = stub.request_history[0]
-        assert request.qs == {'token': ['debug']}
+    client.retrieve_profile(sso_session_id=1)
+
+    assert requests_mock.last_request.url == url
+
+
+def test_unsubscribe(client, requests_mock):
+    url = 'https://example.com/supplier/unsubscribe/'
+    requests_mock.post(url)
+
+    client.unsubscribe(sso_session_id=1)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
+
+def test_get_csv_dump(client, requests_mock):
+    url = 'https://example.com/supplier/csv-dump/'
+    requests_mock.get(url)
+
+    token = 'debug'
+    client.get_csv_dump(token)
+
+    assert requests_mock.last_request.url.startswith(url)
+    assert requests_mock.last_request.qs == {'token': ['debug']}

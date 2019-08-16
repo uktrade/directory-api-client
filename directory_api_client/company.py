@@ -1,5 +1,3 @@
-from urllib import parse
-
 from directory_client_core.authentication import SessionSSOAuthenticator
 
 from directory_api_client.base import AbstractAPIClient
@@ -14,9 +12,9 @@ class CompanyAPIClient(AbstractAPIClient):
         'validate-company-number': '/validate/company-number/',
         'verify': '/supplier/company/verify/',
         'verify-companies-house': '/supplier/company/verify/companies-house/',
+        'verify-identity-request': 'supplier/company/verify/identity/',
         'public-case-study-detail': '/public/case-study/{id}/',
         'public-profile-detail': '/public/company/{number}/',
-        'public-profile-list': '/public/company/',
         'search-companies': '/company/search/',
         'search-investment-support-directories': (
             '/investment-support-directory/search/'
@@ -59,26 +57,19 @@ class CompanyAPIClient(AbstractAPIClient):
             use_fallback_cache=True,
         )
 
-    def list_public_profiles(self, **kwargs):
-        url = '{path}?{querystring}'.format(
-            path=self.endpoints['public-profile-list'],
-            querystring=parse.urlencode(kwargs, doseq=True),
-        )
-        return self.get(url=url, use_fallback_cache=True)
-
     def validate_company_number(self, number):
-        url = self.endpoints['validate-company-number']
-        params = {'number': number}
-        return self.get(url, params=params)
+        return self.get(
+            url=self.endpoints['validate-company-number'],
+            params={'number': number},
+        )
 
     def create_case_study(self, data, sso_session_id):
         files = {}
         for field in ['image_one', 'image_two', 'image_three', 'video_one']:
             if data.get(field):
                 files[field] = data.pop(field)
-        url = self.endpoints['case-study-list']
         return self.post(
-            url,
+            url=self.endpoints['case-study-list'],
             data=data,
             files=files,
             authenticator=self.authenticator(sso_session_id),
@@ -89,12 +80,17 @@ class CompanyAPIClient(AbstractAPIClient):
         for field in ['image_one', 'image_two', 'image_three', 'video_one']:
             if data.get(field):
                 files[field] = data.pop(field)
-        url = self.endpoints['case-study-detail'].format(id=case_study_id)
         return self.patch(
-            url,
+            url=self.endpoints['case-study-detail'].format(id=case_study_id),
             data=data,
             files=files,
             authenticator=self.authenticator(sso_session_id),
+        )
+
+    def delete_case_study(self, sso_session_id, case_study_id):
+        return self.delete(
+            url=self.endpoints['case-study-detail'].format(id=case_study_id),
+            authenticator=self.authenticator(sso_session_id)
         )
 
     def retrieve_private_case_study(self, sso_session_id, case_study_id):
@@ -105,30 +101,28 @@ class CompanyAPIClient(AbstractAPIClient):
         )
 
     def retrieve_public_case_study(self, case_study_id):
-        url = self.endpoints['public-case-study-detail'].format(
-            id=case_study_id
-        )
-        return self.get(url=url, use_fallback_cache=True)
-
-    def delete_case_study(self, sso_session_id, case_study_id):
-        url = self.endpoints['case-study-detail'].format(id=case_study_id)
-        return self.delete(
-            url, authenticator=self.authenticator(sso_session_id)
+        return self.get(
+            url=self.endpoints['public-case-study-detail'].format(id=case_study_id),
+            use_fallback_cache=True
         )
 
     def verify_with_code(self, sso_session_id, code):
         return self.post(
-            self.endpoints['verify'],
+            url=self.endpoints['verify'],
             data={'code': code},
             authenticator=self.authenticator(sso_session_id),
         )
 
     def verify_with_companies_house(self, sso_session_id, access_token):
-        data = {'access_token': access_token}
-        url = self.endpoints['verify-companies-house']
         return self.post(
-            url,
-            data=data,
+            url=self.endpoints['verify-companies-house'],
+            data={'access_token': access_token},
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def verify_identity_request(self, sso_session_id):
+        return self.post(
+            url=self.endpoints['verify-identity-request'],
             authenticator=self.authenticator(sso_session_id),
         )
 
@@ -148,72 +142,61 @@ class CompanyAPIClient(AbstractAPIClient):
 
     def create_transfer_invite(self, sso_session_id, new_owner_email):
         return self.post(
-            self.endpoints['transfer-invite'],
+            url=self.endpoints['transfer-invite'],
             data={'new_owner_email': new_owner_email},
             authenticator=self.authenticator(sso_session_id),
         )
 
     def retrieve_transfer_invite(self, sso_session_id, invite_key):
-        url = self.endpoints['transfer-invite-detail'].format(
-            invite_key=invite_key
-        )
         return self.get(
-            url,
+            url=self.endpoints['transfer-invite-detail'].format(invite_key=invite_key),
             authenticator=self.authenticator(sso_session_id),
             use_fallback_cache=True,
         )
 
     def accept_transfer_invite(self, sso_session_id, invite_key):
-        url = self.endpoints['transfer-invite-detail'].format(
-            invite_key=invite_key
-        )
         return self.patch(
-            url,
+            url=self.endpoints['transfer-invite-detail'].format(invite_key=invite_key),
             data={'accepted': True},
             authenticator=self.authenticator(sso_session_id),
         )
 
     def create_collaboration_invite(self, sso_session_id, collaborator_email):
         return self.post(
-            self.endpoints['collaboration-invite'],
+            url=self.endpoints['collaboration-invite'],
             data={'collaborator_email': collaborator_email},
             authenticator=self.authenticator(sso_session_id))
 
     def retrieve_collaboration_invite(self, sso_session_id, invite_key):
-        url = self.endpoints['collaboration-invite-detail'].format(
-            invite_key=invite_key
-        )
         return self.get(
-            url,
+            url=self.endpoints['collaboration-invite-detail'].format(invite_key=invite_key),
             authenticator=self.authenticator(sso_session_id),
             use_fallback_cache=True,
         )
 
     def accept_collaboration_invite(self, sso_session_id, invite_key):
-        url = self.endpoints['collaboration-invite-detail'].format(
-            invite_key=invite_key
-        )
         return self.patch(
-            url,
+            url=self.endpoints['collaboration-invite-detail'].format(invite_key=invite_key),
             data={'accepted': True},
             authenticator=self.authenticator(sso_session_id),
         )
 
     def remove_collaborators(self, sso_session_id, sso_ids):
-        url = self.endpoints['remove-collaborators']
         return self.post(
-            url,
+            url=self.endpoints['remove-collaborators'],
             data={'sso_ids': sso_ids},
             authenticator=self.authenticator(sso_session_id),
         )
 
     def retrieve_collaborators(self, sso_session_id):
-        url = self.endpoints['collaborators']
-        return self.get(url, authenticator=self.authenticator(sso_session_id))
+        return self.get(
+            url=self.endpoints['collaborators'],
+            authenticator=self.authenticator(sso_session_id)
+        )
 
     def request_collaboration(self, company_number, collaborator_email):
         return self.post(
-            self.endpoints['request-collaboration'],
+            url=self.endpoints['request-collaboration'],
             data={
                 'company_number': company_number,
                 'collaborator_email': collaborator_email

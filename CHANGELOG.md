@@ -1,5 +1,17 @@
 # Changelog
 
+## [16.0.0](https://pypi.org/project/directory-api-client/16.0.0/) (2019-08-16)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/92/files)
+
+### Implemented enhancements
+- Support Django 1.11.23 through 3.x
+- Added request identity verification handler
+- Removed use of TestCase with pytest
+
+### Breaking changes
+- Dropped support form Django <1.11.23
+- Removed company.list_public_profiles
+
 ## [15.1.0](https://pypi.org/project/directory-api-client/15.1.0/) (2019-07-04)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/91/files)
 

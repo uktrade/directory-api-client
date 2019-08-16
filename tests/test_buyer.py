@@ -1,32 +1,32 @@
-from unittest import TestCase
-
-from tests import stub_request
+import pytest
 
 from directory_api_client.buyer import BuyerAPIClient
 
 
-class BuyerAPIClientTest(TestCase):
+@pytest.fixture
+def client():
+    return BuyerAPIClient(
+        base_url='https://example.com',
+        api_key='test',
+        sender_id='test',
+        timeout=5,
+    )
 
-    def setUp(self):
-        self.enrolment_client = BuyerAPIClient(
-            base_url='https://example.com',
-            api_key='test',
-            sender_id='test',
-            timeout=5,
-        )
 
-    @stub_request('https://example.com/buyer/', 'post')
-    def test_send_form(self, stub):
-        form_data = {'field': 'value'}
+def test_send_form(client, requests_mock):
+    requests_mock.post('https://example.com/buyer/')
 
-        self.enrolment_client.send_form(form_data)
+    form_data = {'field': 'value'}
 
-        request = stub.request_history[0]
-        assert request.json() == form_data
+    client.send_form(form_data)
 
-    @stub_request('https://example.com/buyer/csv-dump/', 'get')
-    def test_get_csv_dump(self, stub):
-        token = 'debug'
-        self.enrolment_client.get_csv_dump(token)
-        request = stub.request_history[0]
-        assert request.qs == {'token': ['debug']}
+    assert requests_mock.last_request.json() == form_data
+
+
+def test_get_csv_dump(client, requests_mock):
+    requests_mock.get('https://example.com/buyer/csv-dump/')
+
+    token = 'debug'
+    client.get_csv_dump(token)
+
+    assert requests_mock.last_request.qs == {'token': [token]}

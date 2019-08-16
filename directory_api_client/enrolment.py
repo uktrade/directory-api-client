@@ -19,10 +19,6 @@ class EnrolmentAPIClient(AbstractAPIClient):
             data=form_data
         )
 
-    def retrieve_trusted_source_signup_details(self, code):
-        url = self.endpoints['trusted-code'].format(code=code)
-        return self.get(url, use_fallback_cache=True)
-
     def retrieve_prepeveried_company(self, key):
         url = self.endpoints['preverified'].format(key=key)
         return self.get(url, use_fallback_cache=True)
