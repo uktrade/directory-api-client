@@ -1,4 +1,4 @@
-from unittest import TestCase
+import pytest
 
 from directory_api_client.buyer import BuyerAPIClient
 from directory_api_client.client import DirectoryAPIClient
@@ -7,59 +7,59 @@ from directory_api_client.enrolment import EnrolmentAPIClient
 from directory_api_client.supplier import SupplierAPIClient
 from directory_api_client.exporting import ExportingAPIClient
 
-from tests import stub_request
+
+@pytest.fixture
+def client():
+    return DirectoryAPIClient(
+        base_url='https://example.com',
+        api_key='test',
+        sender_id='test',
+        timeout=5,
+    )
 
 
-class DirectoryAPIClientTest(TestCase):
+def test_exporting(client, requests_mock):
+    assert isinstance(client.exporting, ExportingAPIClient)
+    assert client.exporting.base_url == 'https://example.com'
+    assert client.exporting.request_signer.secret == 'test'
 
-    def setUp(self):
-        self.base_url = 'https://example.com'
-        self.key = 'test'
-        self.client = DirectoryAPIClient(
-            base_url='https://example.com',
-            api_key='test',
-            sender_id='test',
-            timeout=5,
-        )
 
-    def test_exporting(self):
-        assert isinstance(self.client.exporting, ExportingAPIClient)
-        assert self.client.exporting.base_url == self.base_url
-        assert (
-            self.client.exporting.request_signer.secret == self.key
-        )
+def test_enrolment(client, requests_mock):
+    assert isinstance(client.enrolment, EnrolmentAPIClient)
+    assert client.enrolment.base_url == 'https://example.com'
+    assert client.enrolment.request_signer.secret == 'test'
 
-    def test_enrolment(self):
-        assert isinstance(self.client.enrolment, EnrolmentAPIClient)
-        assert self.client.enrolment.base_url == self.base_url
-        assert (
-            self.client.enrolment.request_signer.secret == self.key
-        )
 
-    def test_company(self):
-        assert isinstance(self.client.company, CompanyAPIClient)
-        assert self.client.company.base_url == self.base_url
-        assert self.client.company.request_signer.secret == self.key
+def test_company(client, requests_mock):
+    assert isinstance(client.company, CompanyAPIClient)
+    assert client.company.base_url == 'https://example.com'
+    assert client.company.request_signer.secret == 'test'
 
-    def test_supplier(self):
-        assert isinstance(self.client.supplier, SupplierAPIClient)
-        assert self.client.supplier.base_url == self.base_url
-        assert self.client.supplier.request_signer.secret == self.key
 
-    def test_buyer(self):
-        assert isinstance(self.client.buyer, BuyerAPIClient)
-        assert self.client.buyer.base_url == self.base_url
-        assert self.client.buyer.request_signer.secret == self.key
+def test_supplier(client, requests_mock):
+    assert isinstance(client.supplier, SupplierAPIClient)
+    assert client.supplier.base_url == 'https://example.com'
+    assert client.supplier.request_signer.secret == 'test'
 
-    @stub_request('https://example.com/healthcheck/ping/', 'get')
-    def test_ping(self, stub):
-        self.client.ping()
 
-        request = stub.request_history[0]
-        assert request
+def test_buyer(client, requests_mock):
+    assert isinstance(client.buyer, BuyerAPIClient)
+    assert client.buyer.base_url == 'https://example.com'
+    assert client.buyer.request_signer.secret == 'test'
 
-    def test_timeout(self):
-        assert self.client.timeout == 5
 
-    def test_sender_id(self):
-        assert self.client.request_signer.sender_id == 'test'
+def test_ping(client, requests_mock):
+    url = 'https://example.com/healthcheck/ping/'
+    requests_mock.get(url)
+
+    client.ping()
+
+    assert requests_mock.last_request.url == url
+
+
+def test_timeout(client):
+    assert client.timeout == 5
+
+
+def test_sender_id(client):
+    assert client.request_signer.sender_id == 'test'

@@ -1,24 +1,22 @@
-from unittest import TestCase
-
-from tests import stub_request
+import pytest
 
 from directory_api_client.exporting import ExportingAPIClient
 
 
-class ExportingAPIClientTest(TestCase):
-
-    def setUp(self):
-        self.client = ExportingAPIClient(
-            base_url='https://example.com',
-            api_key='test',
-            sender_id='test',
-            timeout=5,
-        )
-
-    @stub_request(
-        'https://example.com/exporting/offices/ABC%20123/', 'get'
+@pytest.fixture
+def client():
+    return ExportingAPIClient(
+        base_url='https://example.com',
+        api_key='test',
+        sender_id='test',
+        timeout=5,
     )
-    def test_lookup_regional_offices_by_postcode(self, stub):
-        self.client.lookup_regional_offices_by_postcode(
-            postcode='ABC 123'
-        )
+
+
+def test_lookup_regional_offices_by_postcode(client, requests_mock):
+    url = 'https://example.com/exporting/offices/ABC%20123/'
+    requests_mock.get(url)
+
+    client.lookup_regional_offices_by_postcode(postcode='ABC 123')
+
+    assert requests_mock.last_request.url == url
