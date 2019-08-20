@@ -385,3 +385,25 @@ def test_verify_identity_request(requests_mock, client):
 
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
     assert requests_mock.last_request.url == url
+
+
+def test_register_new_member(requests_mock, client):
+    url = 'https://example.com/supplier/company/add-new-member/'
+    requests_mock.post(url)
+
+    client.register_new_member(
+        company_number='1234567',
+        sso_id='123',
+        company_email='abc@def.com',
+        name='Abc def',
+        mobile_number=9876543210
+    )
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {
+        'company_number': '1234567',
+        'sso_id': '123',
+        'company_email': 'abc@def.com',
+        'name': 'Abc def',
+        'mobile_number': 9876543210,
+    }
