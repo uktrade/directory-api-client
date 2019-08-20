@@ -1,5 +1,11 @@
 # Changelog
 
+## [16.1.0](https://pypi.org/project/directory-api-client/16.1.0/) (2019-08-20)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/94/files)
+
+## Implemented enhancements
+- Add a new method to register second user to company profile
+
 ## [16.0.0](https://pypi.org/project/directory-api-client/16.0.0/) (2019-08-16)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/92/files)
 

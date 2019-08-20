@@ -385,3 +385,27 @@ def test_verify_identity_request(requests_mock, client):
 
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
     assert requests_mock.last_request.url == url
+
+
+def test_add_collaborator(requests_mock, client):
+    url = 'https://example.com/supplier/company/add-collaborator/'
+    requests_mock.post(url)
+
+    data = {
+        'company_number': '1234567',
+        'sso_id': '123',
+        'company_email': 'abc@def.com',
+        'name': 'Abc def',
+        'mobile_number': 9876543210,
+    }
+
+    client.add_collaborator(data)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {
+        'company_number': '1234567',
+        'sso_id': '123',
+        'company_email': 'abc@def.com',
+        'name': 'Abc def',
+        'mobile_number': 9876543210,
+    }
