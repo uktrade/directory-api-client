@@ -31,7 +31,7 @@ class CompanyAPIClient(AbstractAPIClient):
         'remove-collaborators': '/supplier/company/remove-collaborators/',
         'collaborators': '/supplier/company/collaborators/',
         'request-collaboration': '/supplier/company/collaborator-request/',
-        'register-new-company-member': '/supplier/company/add-new-member/',
+        'register-new-company-collaborator': '/supplier/company/add-new-collaborator/',
     }
     authenticator = SessionSSOAuthenticator
 
@@ -204,8 +204,8 @@ class CompanyAPIClient(AbstractAPIClient):
             },
         )
 
-    def register_new_member(self, data):
+    def register_new_collaborator(self, data):
         return self.post(
-            self.endpoints['register-new-company-member'],
+            self.endpoints['register-new-company-collaborator'],
             data=data
         )

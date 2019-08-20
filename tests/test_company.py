@@ -388,7 +388,7 @@ def test_verify_identity_request(requests_mock, client):
 
 
 def test_register_new_member(requests_mock, client):
-    url = 'https://example.com/supplier/company/add-new-member/'
+    url = 'https://example.com/supplier/company/add-new-collaborator/'
     requests_mock.post(url)
 
     data = {
@@ -399,7 +399,7 @@ def test_register_new_member(requests_mock, client):
         'mobile_number': 9876543210,
     }
 
-    client.register_new_member(data)
+    client.register_new_collaborator(data)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {
