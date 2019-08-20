@@ -387,7 +387,7 @@ def test_verify_identity_request(requests_mock, client):
     assert requests_mock.last_request.url == url
 
 
-def test_register_new_member(requests_mock, client):
+def test_add_new_member(requests_mock, client):
     url = 'https://example.com/supplier/company/add-new-collaborator/'
     requests_mock.post(url)
 
