@@ -399,7 +399,7 @@ def test_register_new_member(requests_mock, client):
         'mobile_number': 9876543210,
     }
 
-    client.register_new_collaborator(data)
+    client.add_new_collaborator(data)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {

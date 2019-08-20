@@ -206,7 +206,7 @@ class CompanyAPIClient(AbstractAPIClient):
             },
         )
 
-    def register_new_collaborator(self, data):
+    def add_new_collaborator(self, data):
         return self.post(
             self.endpoints['register-new-company-collaborator'],
             data=data
