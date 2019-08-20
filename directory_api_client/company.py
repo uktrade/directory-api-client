@@ -204,14 +204,15 @@ class CompanyAPIClient(AbstractAPIClient):
             },
         )
 
-    def register_new_member(self, sso_id, company_number, company_email, name, mobile_number=''):
+    def register_new_member(self, sso_id, company_number,
+                            company_email, **kwargs):
         return self.post(
             self.endpoints['register-new-company-member'],
             data={
                 'company_number': company_number,
                 'sso_id': sso_id,
                 'company_email': company_email,
-                'name': name,
-                'mobile_number': mobile_number,
+                'name': kwargs.get('name', ''),
+                'mobile_number': kwargs.get('mobile_number', ''),
             }
         )
