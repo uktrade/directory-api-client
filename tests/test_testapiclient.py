@@ -1,6 +1,6 @@
-import pytest
-
 from directory_api_client.testapiclient import DirectoryTestAPIClient
+
+import pytest
 
 
 @pytest.fixture
@@ -11,12 +11,6 @@ def client():
         sender_id='test',
         timeout=5,
     )
-
-
-def test_client_endpoints_urljoin(client):
-    """urljoin replaces base_url's path if endpoints start with with / """
-    for endpoint in client.endpoints.values():
-        assert not endpoint.startswith('/')
 
 
 def test_get_company_by_ch_id(client, requests_mock):

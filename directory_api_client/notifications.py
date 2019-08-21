@@ -1,12 +1,10 @@
 from directory_api_client.base import AbstractAPIClient
 
 
+url_unsubscribe = '/notifications/anonymous-unsubscribe/'
+
+
 class NotificationsAPIClient(AbstractAPIClient):
 
-    endpoints = {
-        'anonymous-unsubscribe': '/notifications/anonymous-unsubscribe/',
-    }
-
     def anonymous_unsubscribe(self, signed_email_address):
-        url = self.endpoints['anonymous-unsubscribe']
-        return self.post(url, {'email': signed_email_address})
+        return self.post(url=url_unsubscribe, data={'email': signed_email_address})

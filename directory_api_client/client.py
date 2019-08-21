@@ -9,11 +9,10 @@ from directory_api_client.notifications import NotificationsAPIClient
 from directory_api_client.exporting import ExportingAPIClient
 
 
-class DirectoryAPIClient(AbstractAPIClient):
+url_ping = '/healthcheck/ping/'
 
-    endpoints = {
-        'ping': 'healthcheck/ping/',
-    }
+
+class DirectoryAPIClient(AbstractAPIClient):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,7 +24,7 @@ class DirectoryAPIClient(AbstractAPIClient):
         self.exporting = ExportingAPIClient(*args, **kwargs)
 
     def ping(self):
-        return self.get(url=self.endpoints['ping'])
+        return self.get(url=url_ping)
 
 
 api_client = DirectoryAPIClient(

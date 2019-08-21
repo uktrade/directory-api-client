@@ -53,3 +53,13 @@ def test_get_csv_dump(client, requests_mock):
 
     assert requests_mock.last_request.url.startswith(url)
     assert requests_mock.last_request.qs == {'token': ['debug']}
+
+
+def test_disconnect_from_company(client, requests_mock):
+    url = 'https://example.com/supplier/company/disconnect/'
+    requests_mock.post(url)
+
+    client.disconnect_from_company('1')
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'
