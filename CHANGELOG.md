@@ -1,5 +1,11 @@
 # Changelog
 
+## [16.2.0](https://pypi.org/project/directory-api-client/16.2.0/) (2019-08-21)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/95/files)
+
+## Implemented enhancements
+- Add a new method to remove self from company profile
+
 ## [16.1.0](https://pypi.org/project/directory-api-client/16.1.0/) (2019-08-20)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/94/files)
 
