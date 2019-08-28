@@ -1,5 +1,9 @@
 # Changelog
 
+## [16.3.0](https://pypi.org/project/directory-api-client/16.3.0/) (2019-08-28)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/97/files)
+- Add handler for listing supplier sso ids
+
 ## [16.2.0](https://pypi.org/project/directory-api-client/16.2.0/) (2019-08-21)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/95/files)
 

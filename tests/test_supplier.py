@@ -63,3 +63,13 @@ def test_disconnect_from_company(client, requests_mock):
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
+
+def test_list_sso_ids(client, requests_mock):
+    url = 'https://example.com/external/supplier-sso/'
+
+    requests_mock.get(url)
+
+    client.list_sso_ids()
+
+    assert requests_mock.last_request.url == url
