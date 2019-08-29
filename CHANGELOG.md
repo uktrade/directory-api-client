@@ -8,9 +8,9 @@
 
 ## Breaking changes
 The following methods on `company` have been renamed for consistency:
-|----------------------------------|-------------------------------|
+
 | old name                         | new name                      |
-|----------------------------------|-------------------------------|
+| -------------------------------- | ----------------------------- |
 | update_profile                   | profile_update                |
 | retrieve_private_profile         | profile_retrieve              |
 | retrieve_public_profile          | published_profile_retrieve    |
@@ -29,7 +29,6 @@ The following methods on `company` have been renamed for consistency:
 | create_collaboration_invite      | collaborator_invite_create    |
 | retrieve_collaboration_invite    | collaborator_invite_retrieve  |
 | accept_collaboration_invite      | collaborator_invite_accept    |
-
 
 ## [16.3.0](https://pypi.org/project/directory-api-client/16.3.0/) (2019-08-28)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/96/files)
