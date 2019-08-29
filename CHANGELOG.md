@@ -1,7 +1,38 @@
 # Changelog
 
-## [16.3.0](https://pypi.org/project/directory-api-client/16.3.0/) (2019-08-28)
+## [17.0.0](https://pypi.org/project/directory-api-client/17.0.0/) (2019-08-29)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/97/files)
+
+## Implemented enhancements
+- added method `collaborator_invite_list`
+
+## Breaking changes
+The following methods on `company` have been renamed for consistency:
+|----------------------------------|-------------------------------|
+| old name                         | new name                      |
+|----------------------------------|-------------------------------|
+| update_profile                   | profile_update                |
+| retrieve_private_profile         | profile_retrieve              |
+| retrieve_public_profile          | published_profile_retrieve    |
+| create_case_study                | case_study_create             |
+| update_case_study                | case_study_update             |
+| delete_case_study                | case_study_delete             |
+| retrieve_private_case_study      | case_study_retrieve           |
+| retrieve_public_case_study       | published_case_study_retrieve |
+| request_collaboration            | collaborator_request_create   |
+| remove_collaborators             | collaborator_disconnect       |
+| add_collaborator                 | collaborator_create           |
+| retrieve_collaborators           | collaborator_list             |
+| create_transfer_invite           | collaborator_invite_create    |
+| retrieve_transfer_invite         | collaborator_invite_retrieve  |
+| accept_transfer_invite           | collaborator_invite_accept    |
+| create_collaboration_invite      | collaborator_invite_create    |
+| retrieve_collaboration_invite    | collaborator_invite_retrieve  |
+| accept_collaboration_invite      | collaborator_invite_accept    |
+
+
+## [16.3.0](https://pypi.org/project/directory-api-client/16.3.0/) (2019-08-28)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/96/files)
 - Add handler for listing supplier sso ids
 
 ## [16.2.0](https://pypi.org/project/directory-api-client/16.2.0/) (2019-08-21)

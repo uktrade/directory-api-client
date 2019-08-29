@@ -13,7 +13,7 @@ class SupplierAPIClient(AbstractAPIClient):
 
     authenticator = SessionSSOAuthenticator
 
-    def update_profile(self, sso_session_id, data):
+    def profile_update(self, sso_session_id, data):
         return self.patch(url=url_supplier, data=data, authenticator=self.authenticator(sso_session_id))
 
     def retrieve_profile(self, sso_session_id):
