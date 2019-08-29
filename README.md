@@ -54,7 +54,7 @@ Where feasible the response is cached to the client's fallback cache. This allow
 
 When enabling the fallback cache on a handler make sure that the request's querystring or url path are unique per user, otherwise the User B's details could be leaked User A.
 
-For example, `api_client.company.retrieve_private_profile` looks up the company for the authenticated user. The authentication header is not used when generating the cache key for the response. This means for that endpoint the querystring and url are the same for all users, so the cache key would therefore also be the same for all users. This means if API was down then all users would see the company details for the last user to successfully retrieve their company.
+For example, `api_client.company.profile_retrieve` looks up the company for the authenticated user. The authentication header is not used when generating the cache key for the response. This means for that endpoint the querystring and url are the same for all users, so the cache key would therefore also be the same for all users. This means if API was down then all users would see the company details for the last user to successfully retrieve their company.
 
 
 ## Publish to PyPI

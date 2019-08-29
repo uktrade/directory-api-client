@@ -15,20 +15,19 @@ url_published_profile_detail = '/public/company/{number}/'
 url_search_find_a_supplier = '/company/search/'
 url_search_investment_support_directory = '/investment-support-directory/search/'
 url_transfer_invite_create = '/supplier/company/transfer-ownership-invite/'
-url_transfer_invite_detail = '/supplier/company/transfer-ownership-invite/{invite_key}/'
-url_collaborator_invite_create = '/supplier/company/collaboration-invite/'
-url_collaborator_invite_detail = '/supplier/company/collaboration-invite/{invite_key}/'
 url_collaborator_list = '/supplier/company/collaborators/'
 url_collaborator_request = '/supplier/company/collaborator-request/'
 url_collaborator_add = '/supplier/company/add-collaborator/'
 url_collaborator_remove = '/supplier/company/remove-collaborators/'
+url_collaborator_invite = '/supplier/company/collaborator-invite/'
+url_collaborator_invite_detail = '/supplier/company/collaborator-invite/{invite_key}/'
 
 
 class CompanyAPIClient(AbstractAPIClient):
 
     authenticator = SessionSSOAuthenticator
 
-    def update_profile(self, sso_session_id, data):
+    def profile_update(self, sso_session_id, data):
         files = {}
         if 'logo' in data:
             files['logo'] = data.pop('logo')
@@ -39,16 +38,16 @@ class CompanyAPIClient(AbstractAPIClient):
             authenticator=self.authenticator(sso_session_id),
         )
 
-    def retrieve_private_profile(self, sso_session_id):
+    def profile_retrieve(self, sso_session_id):
         return self.get(url=url_profile, authenticator=self.authenticator(sso_session_id))
 
-    def retrieve_public_profile(self, number):
+    def published_profile_retrieve(self, number):
         return self.get(url=url_published_profile_detail.format(number=number), use_fallback_cache=True,)
 
     def validate_company_number(self, number):
         return self.get(url=url_validate_company_number, params={'number': number})
 
-    def create_case_study(self, data, sso_session_id):
+    def case_study_create(self, data, sso_session_id):
         files = {}
         for field in ['image_one', 'image_two', 'image_three', 'video_one']:
             if data.get(field):
@@ -60,7 +59,7 @@ class CompanyAPIClient(AbstractAPIClient):
             authenticator=self.authenticator(sso_session_id),
         )
 
-    def update_case_study(self, data, sso_session_id, case_study_id):
+    def case_study_update(self, data, sso_session_id, case_study_id):
         files = {}
         for field in ['image_one', 'image_two', 'image_three', 'video_one']:
             if data.get(field):
@@ -72,20 +71,20 @@ class CompanyAPIClient(AbstractAPIClient):
             authenticator=self.authenticator(sso_session_id),
         )
 
-    def delete_case_study(self, sso_session_id, case_study_id):
+    def case_study_delete(self, sso_session_id, case_study_id):
         return self.delete(
             url=url_case_study_detail.format(id=case_study_id),
             authenticator=self.authenticator(sso_session_id)
         )
 
-    def retrieve_private_case_study(self, sso_session_id, case_study_id):
+    def case_study_retrieve(self, sso_session_id, case_study_id):
         return self.get(
             url=url_case_study_detail.format(id=case_study_id),
             authenticator=self.authenticator(sso_session_id),
             use_fallback_cache=True,
         )
 
-    def retrieve_public_case_study(self, case_study_id):
+    def published_case_study_retrieve(self, case_study_id):
         return self.get(url=url_case_study_published_detail.format(id=case_study_id), use_fallback_cache=True)
 
     def verify_with_code(self, sso_session_id, code):
@@ -106,64 +105,51 @@ class CompanyAPIClient(AbstractAPIClient):
         return self.post(url=url_verify_with_identity_request, authenticator=self.authenticator(sso_session_id),)
 
     def search_find_a_supplier(self, **kwargs):
-        return self.get(url=url_search_find_a_supplier, params=kwargs, use_fallback_cache=True,)
+        return self.get(url=url_search_find_a_supplier, params=kwargs, use_fallback_cache=True)
 
     def search_investment_search_directory(self, **kwargs):
         return self.get(url=url_search_investment_support_directory, params=kwargs, use_fallback_cache=True)
 
-    def create_transfer_invite(self, sso_session_id, new_owner_email):
-        return self.post(
-            url=url_transfer_invite_create,
-            data={'new_owner_email': new_owner_email},
-            authenticator=self.authenticator(sso_session_id),
-        )
-
-    def retrieve_transfer_invite(self, sso_session_id, invite_key):
-        return self.get(
-            url=url_transfer_invite_detail.format(invite_key=invite_key),
-            authenticator=self.authenticator(sso_session_id),
-            use_fallback_cache=True,
-        )
-
-    def accept_transfer_invite(self, sso_session_id, invite_key):
-        return self.patch(
-            url=url_transfer_invite_detail.format(invite_key=invite_key),
-            data={'accepted': True},
-            authenticator=self.authenticator(sso_session_id),
-        )
-
-    def create_collaboration_invite(self, sso_session_id, collaborator_email):
-        return self.post(
-            url=url_collaborator_invite_create,
-            data={'collaborator_email': collaborator_email},
-            authenticator=self.authenticator(sso_session_id))
-
-    def retrieve_collaboration_invite(self, sso_session_id, invite_key):
-        return self.get(
-            url=url_collaborator_invite_detail.format(invite_key=invite_key),
-            authenticator=self.authenticator(sso_session_id),
-            use_fallback_cache=True,
-        )
-
-    def accept_collaboration_invite(self, sso_session_id, invite_key):
-        return self.patch(
-            url=url_collaborator_invite_detail.format(invite_key=invite_key),
-            data={'accepted': True},
-            authenticator=self.authenticator(sso_session_id),
-        )
-
-    def remove_collaborators(self, sso_session_id, sso_ids):
-        return self.post(
-            url=url_collaborator_remove,
-            data={'sso_ids': sso_ids},
-            authenticator=self.authenticator(sso_session_id),
-        )
-
-    def retrieve_collaborators(self, sso_session_id):
-        return self.get(url=url_collaborator_list, authenticator=self.authenticator(sso_session_id))
-
-    def request_collaboration(self, **kwargs):
+    def collaborator_request_create(self, **kwargs):
+        """Create a request to be invited as a collaborator for a company"""
         return self.post(url=url_collaborator_request, data=kwargs)
 
-    def add_collaborator(self, data):
-        return self.post(url_collaborator_add, data=data)
+    def collaborator_create(self, data):
+        """Create a supplier and adds it to a company"""
+        return self.post(url=url_collaborator_add, data=data)
+
+    def collaborator_list(self, sso_session_id):
+        """List the collaborators attached to a the current user's company"""
+        return self.get(url=url_collaborator_list, authenticator=self.authenticator(sso_session_id))
+
+    def collaborator_disconnect(self, sso_session_id, sso_id):
+        """Disconnect the current user from their company"""
+        return self.post(
+            url=url_collaborator_remove,
+            data={'sso_ids': [sso_id]},
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def collaborator_invite_create(self, sso_session_id, data):
+        """Invite a email address to become a collaborator of the current user's company"""
+        return self.post(url=url_collaborator_invite, data=data, authenticator=self.authenticator(sso_session_id))
+
+    def collaborator_invite_retrieve(self, sso_session_id, invite_key):
+        """Retrieve the details of a collaboration invite"""
+        return self.get(
+            url=url_collaborator_invite_detail.format(invite_key=invite_key),
+            authenticator=self.authenticator(sso_session_id),
+            use_fallback_cache=True,
+        )
+
+    def collaborator_invite_list(self, sso_session_id):
+        """List all collaboration invites for the current user's company"""
+        return self.get(url=url_collaborator_invite, authenticator=self.authenticator(sso_session_id))
+
+    def collaborator_invite_accept(self, sso_session_id, invite_key):
+        """Accept a collaboration invite. Become attached the the company"""
+        return self.patch(
+            url=url_collaborator_invite_detail.format(invite_key=invite_key),
+            data={'accepted': True},
+            authenticator=self.authenticator(sso_session_id),
+        )

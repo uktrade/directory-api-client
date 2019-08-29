@@ -13,12 +13,12 @@ def client():
     )
 
 
-def test_update_profile(client, requests_mock):
+def test_profile_update(client, requests_mock):
     url = 'https://example.com/supplier/'
     requests_mock.patch(url)
 
     data = {'key': 'value'}
-    client.update_profile(sso_session_id=1, data=data)
+    client.profile_update(sso_session_id=1, data=data)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == data

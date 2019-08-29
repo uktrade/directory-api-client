@@ -15,22 +15,22 @@ def client():
     )
 
 
-def test_update_profile_handles_data(requests_mock, client):
+def test_profile_update_handles_data(requests_mock, client):
     url = 'https://example.com/supplier/company/'
     requests_mock.patch(url)
     data = {'key': 'value'}
-    client.update_profile(sso_session_id=1, data=data)
+    client.profile_update(sso_session_id=1, data=data)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == data
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
 
-def test_update_profile_handles_files(requests_mock, client):
+def test_profile_update_handles_files(requests_mock, client):
     url = 'https://example.com/supplier/company/'
     requests_mock.patch(url)
 
-    client.update_profile(sso_session_id=1, data={'logo': StringIO('hello')})
+    client.profile_update(sso_session_id=1, data={'logo': StringIO('hello')})
 
     assert requests_mock.last_request.url == url
     assert 'Content-Disposition: form-data;' in requests_mock.last_request.text
@@ -38,7 +38,7 @@ def test_update_profile_handles_files(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
 
-def test_update_profile_handles_files_and_data(requests_mock, client):
+def test_profile_update_handles_files_and_data(requests_mock, client):
     url = 'https://example.com/supplier/company/'
     requests_mock.patch(url)
 
@@ -46,7 +46,7 @@ def test_update_profile_handles_files_and_data(requests_mock, client):
         'logo': StringIO('hello'),
         'key': 'value',
     }
-    client.update_profile(sso_session_id=1, data=data)
+    client.profile_update(sso_session_id=1, data=data)
 
     assert requests_mock.last_request.url == url
     assert 'Content-Disposition: form-data;' in requests_mock.last_request.text
@@ -55,21 +55,21 @@ def test_update_profile_handles_files_and_data(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
 
-def test_retrieve_private_profile(requests_mock, client):
+def test_profile_retrieve(requests_mock, client):
     url = 'https://example.com/supplier/company/'
     requests_mock.get(url)
 
-    client.retrieve_private_profile(sso_session_id=1)
+    client.profile_retrieve(sso_session_id=1)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'
 
 
-def test_retrieve_public_profile(requests_mock, client):
+def test_published_profile_retrieve(requests_mock, client):
     url = 'https://example.com/public/company/1/'
     requests_mock.get(url)
 
-    client.retrieve_public_profile(number=1)
+    client.published_profile_retrieve(number=1)
 
     assert requests_mock.last_request.url == url
 
@@ -84,19 +84,19 @@ def test_validate_company_number(requests_mock, client):
     assert requests_mock.last_request.query == 'number=01234567'
 
 
-def test_create_case_study(requests_mock, client):
+def test_case_study_create(requests_mock, client):
     url = 'https://example.com/supplier/company/case-study/'
     requests_mock.post(url)
 
     data = {'field': 'value'}
-    client.create_case_study(data=data, sso_session_id=2)
+    client.case_study_create(data=data, sso_session_id=2)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == data
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_create_case_study_handles_files(requests_mock, client):
+def test_case_study_create_handles_files(requests_mock, client):
     url = 'https://example.com/supplier/company/case-study/'
     requests_mock.post(url)
 
@@ -106,7 +106,7 @@ def test_create_case_study_handles_files(requests_mock, client):
         'image_three': StringIO('_image_three'),
         'video_one': StringIO('_video_one'),
     }
-    client.create_case_study(data=data, sso_session_id=2)
+    client.case_study_create(data=data, sso_session_id=2)
 
     assert requests_mock.last_request.url == url
     assert 'Content-Disposition: form-data;' in requests_mock.last_request.text
@@ -117,7 +117,7 @@ def test_create_case_study_handles_files(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_create_case_study_handles_files_and_data(requests_mock, client):
+def test_case_study_create_handles_files_and_data(requests_mock, client):
     url = 'https://example.com/supplier/company/case-study/'
     requests_mock.post(url)
 
@@ -126,7 +126,7 @@ def test_create_case_study_handles_files_and_data(requests_mock, client):
         'image_two': None,
         'field': 'value',
     }
-    client.create_case_study(sso_session_id=2, data=data)
+    client.case_study_create(sso_session_id=2, data=data)
 
     assert requests_mock.last_request.url == url
     assert 'Content-Disposition: form-data;' in requests_mock.last_request.text
@@ -135,18 +135,18 @@ def test_create_case_study_handles_files_and_data(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_update_case_study(requests_mock, client):
+def test_case_study_update(requests_mock, client):
     url = 'https://example.com/supplier/company/case-study/1/'
     requests_mock.patch(url)
 
     data = {'field': 'value'}
-    client.update_case_study(data=data, sso_session_id=2, case_study_id=1)
+    client.case_study_update(data=data, sso_session_id=2, case_study_id=1)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == data
 
 
-def test_update_case_study_hanles_files(requests_mock, client):
+def test_case_study_update_hanles_files(requests_mock, client):
     url = 'https://example.com/supplier/company/case-study/1/'
     requests_mock.patch(url)
 
@@ -156,7 +156,7 @@ def test_update_case_study_hanles_files(requests_mock, client):
         'image_three': StringIO('_image_three'),
         'video_one': StringIO('_video_one'),
     }
-    client.update_case_study(data=data, sso_session_id=2, case_study_id=1)
+    client.case_study_update(data=data, sso_session_id=2, case_study_id=1)
 
     assert requests_mock.last_request.url == url
     assert 'Content-Disposition: form-data;' in requests_mock.last_request.text
@@ -167,7 +167,7 @@ def test_update_case_study_hanles_files(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_update_case_study_hanles_files_and_data(requests_mock, client):
+def test_case_study_update_hanles_files_and_data(requests_mock, client):
     url = 'https://example.com/supplier/company/case-study/1/'
     requests_mock.patch(url)
 
@@ -176,7 +176,7 @@ def test_update_case_study_hanles_files_and_data(requests_mock, client):
         'image_two': None,
         'field': 'value',
     }
-    client.update_case_study(data=data, sso_session_id=2, case_study_id=1)
+    client.case_study_update(data=data, sso_session_id=2, case_study_id=1)
 
     assert requests_mock.last_request.url == url
     assert 'Content-Disposition: form-data;' in requests_mock.last_request.text
@@ -185,30 +185,30 @@ def test_update_case_study_hanles_files_and_data(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_delete_case_study(requests_mock, client):
+def test_case_study_delete(requests_mock, client):
     url = 'https://example.com/supplier/company/case-study/1/'
     requests_mock.delete(url)
 
-    client.delete_case_study(sso_session_id=2, case_study_id=1)
+    client.case_study_delete(sso_session_id=2, case_study_id=1)
 
     assert requests_mock.last_request.url == url
 
 
-def test_retrieve_private_case_study(requests_mock, client):
+def test_case_study_retrieve(requests_mock, client):
     url = 'https://example.com/supplier/company/case-study/1/'
     requests_mock.get(url)
 
-    client.retrieve_private_case_study(sso_session_id=2, case_study_id=1)
+    client.case_study_retrieve(sso_session_id=2, case_study_id=1)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_retrieve_public_case_study(requests_mock, client):
+def test_published_case_study_retrieve(requests_mock, client):
     url = 'https://example.com/public/case-study/1/'
     requests_mock.get(url)
 
-    client.retrieve_public_case_study(case_study_id=1)
+    client.published_case_study_retrieve(case_study_id=1)
 
     assert requests_mock.last_request.url == url
 
@@ -279,96 +279,64 @@ def test_search_investment_support_directory(requests_mock, client):
     assert 'expertise_languages=SPANISH' in requests_mock.last_request.url
 
 
-def test_create_transfer_invite(requests_mock, client):
-    url = 'https://example.com/supplier/company/transfer-ownership-invite/'
+def test_collaborator_invite_create(requests_mock, client):
+    url = 'https://example.com/supplier/company/collaborator-invite/'
     requests_mock.post(url)
 
-    client.create_transfer_invite(sso_session_id=2, new_owner_email='test@example.com')
-
-    assert requests_mock.last_request.url == url
-    assert requests_mock.last_request.json() == {'new_owner_email': 'test@example.com'}
-    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
-
-
-def test_retrieve_transfer_invite(requests_mock, client):
-    url = 'https://example.com/supplier/company/transfer-ownership-invite/123/'
-    requests_mock.get(url)
-
-    client.retrieve_transfer_invite(sso_session_id=2, invite_key='123')
-
-    assert requests_mock.last_request.url == url
-    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
-
-
-def test_accept_transfer_invite(requests_mock, client):
-    url = 'https://example.com/supplier/company/transfer-ownership-invite/123/'
-    requests_mock.patch(url)
-
-    client.accept_transfer_invite(sso_session_id=2, invite_key='123')
-
-    assert requests_mock.last_request.url == url
-    assert requests_mock.last_request.json() == {'accepted': True}
-    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
-
-
-def test_create_collaboration_invite(requests_mock, client):
-    url = 'https://example.com/supplier/company/collaboration-invite/'
-    requests_mock.post(url)
-
-    client.create_collaboration_invite(sso_session_id=2, collaborator_email='test@example.com')
+    client.collaborator_invite_create(sso_session_id=2, data={'collaborator_email': 'test@example.com'})
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {'collaborator_email': 'test@example.com'}
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_retrieve_collaboration_invite(requests_mock, client):
-    url = 'https://example.com/supplier/company/collaboration-invite/123/'
+def test_collaborator_invite_retrieve(requests_mock, client):
+    url = 'https://example.com/supplier/company/collaborator-invite/123/'
     requests_mock.get(url)
 
-    client.retrieve_collaboration_invite(sso_session_id=2, invite_key='123')
+    client.collaborator_invite_retrieve(sso_session_id=2, invite_key='123')
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_accept_collaboration_invite(requests_mock, client):
-    url = 'https://example.com/supplier/company/collaboration-invite/123/'
+def test_collaborator_invite_accept(requests_mock, client):
+    url = 'https://example.com/supplier/company/collaborator-invite/123/'
     requests_mock.patch(url)
 
-    client.accept_collaboration_invite(sso_session_id=2, invite_key='123')
+    client.collaborator_invite_accept(sso_session_id=2, invite_key='123')
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {'accepted': True}
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_remove_collaborators(requests_mock, client):
+def test_collaborator_disconnect(requests_mock, client):
     url = 'https://example.com/supplier/company/remove-collaborators/'
     requests_mock.post(url)
 
-    client.remove_collaborators(sso_session_id=2, sso_ids=[1, 2, 3])
+    client.collaborator_disconnect(sso_session_id=2, sso_id=1)
 
     assert requests_mock.last_request.url == url
-    assert requests_mock.last_request.json() == {'sso_ids': [1, 2, 3]}
+    assert requests_mock.last_request.json() == {'sso_ids': [1]}
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_retrieve_collaborators(requests_mock, client):
+def test_collaborator_list(requests_mock, client):
     url = 'https://example.com/supplier/company/collaborators/'
     requests_mock.get(url)
 
-    client.retrieve_collaborators(sso_session_id=2)
+    client.collaborator_list(sso_session_id=2)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_request_collaboration(requests_mock, client):
+def test_collaborator_request_create(requests_mock, client):
     url = 'https://example.com/supplier/company/collaborator-request/'
     requests_mock.post(url)
 
-    client.request_collaboration(company_number='1234567', collaborator_email='test@example.com')
+    client.collaborator_request_create(company_number='1234567', collaborator_email='test@example.com')
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {
@@ -387,7 +355,7 @@ def test_verify_identity_request(requests_mock, client):
     assert requests_mock.last_request.url == url
 
 
-def test_add_collaborator(requests_mock, client):
+def test_collaborator_create(requests_mock, client):
     url = 'https://example.com/supplier/company/add-collaborator/'
     requests_mock.post(url)
 
@@ -399,7 +367,7 @@ def test_add_collaborator(requests_mock, client):
         'mobile_number': 9876543210,
     }
 
-    client.add_collaborator(data)
+    client.collaborator_create(data)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {
@@ -409,3 +377,13 @@ def test_add_collaborator(requests_mock, client):
         'name': 'Abc def',
         'mobile_number': 9876543210,
     }
+
+
+def test_collaborator_invite_list(requests_mock, client):
+    url = 'https://example.com/supplier/company/collaborator-invite/'
+    requests_mock.get(url)
+
+    client.collaborator_invite_list(sso_session_id=2)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
