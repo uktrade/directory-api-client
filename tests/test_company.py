@@ -387,3 +387,22 @@ def test_collaborator_invite_list(requests_mock, client):
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_collaborator_invite_delete(requests_mock, client):
+    url = 'https://example.com/supplier/company/collaborator-invite/123/'
+    requests_mock.delete(url)
+
+    client.collaborator_invite_delete(sso_session_id=2, invite_key='123')
+
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_collaborator_role_update(requests_mock, client):
+    url = 'https://example.com/supplier/company/change-collaborator-role/123/'
+    requests_mock.patch(url)
+    client.collaborator_role_update(sso_session_id=1, sso_id='123', role='EDITOR')
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {'role': 'EDITOR'}
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'

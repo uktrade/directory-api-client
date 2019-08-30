@@ -1,5 +1,13 @@
 # Changelog
 
+## [17.1.0](https://pypi.org/project/directory-api-client/17.1.0/) (2019-08-30)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/98/files)
+
+## Implemented enhancements
+- added method `company.collaborator_invite_delete`
+- added method `company.collaborator_role_update`
+
+
 ## [17.0.0](https://pypi.org/project/directory-api-client/17.0.0/) (2019-08-29)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/97/files)
 
