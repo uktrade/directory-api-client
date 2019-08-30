@@ -21,6 +21,7 @@ url_collaborator_add = '/supplier/company/add-collaborator/'
 url_collaborator_remove = '/supplier/company/remove-collaborators/'
 url_collaborator_invite = '/supplier/company/collaborator-invite/'
 url_collaborator_invite_detail = '/supplier/company/collaborator-invite/{invite_key}/'
+url_collaborator_role_change = '/supplier/company/change-collaborator-role/{sso_id}/'
 
 
 class CompanyAPIClient(AbstractAPIClient):
@@ -123,7 +124,7 @@ class CompanyAPIClient(AbstractAPIClient):
         return self.get(url=url_collaborator_list, authenticator=self.authenticator(sso_session_id))
 
     def collaborator_disconnect(self, sso_session_id, sso_id):
-        """Disconnect the current user from their company"""
+        """Disconnect the specified user from their company"""
         return self.post(
             url=url_collaborator_remove,
             data={'sso_ids': [sso_id]},
@@ -153,3 +154,14 @@ class CompanyAPIClient(AbstractAPIClient):
             data={'accepted': True},
             authenticator=self.authenticator(sso_session_id),
         )
+
+    def collaborator_invite_delete(self, sso_session_id, invite_key):
+        """Delete a collaboration invite."""
+        return self.delete(
+            url=url_collaborator_invite_detail.format(invite_key=invite_key),
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def collaborator_role_update(self, sso_session_id, sso_id, role):
+        url = url_collaborator_role_change.format(sso_id=sso_id)
+        return self.patch(url=url, data={'role': role}, authenticator=self.authenticator(sso_session_id))
