@@ -135,11 +135,10 @@ class CompanyAPIClient(AbstractAPIClient):
         """Invite a email address to become a collaborator of the current user's company"""
         return self.post(url=url_collaborator_invite, data=data, authenticator=self.authenticator(sso_session_id))
 
-    def collaborator_invite_retrieve(self, sso_session_id, invite_key):
+    def collaborator_invite_retrieve(self, invite_key):
         """Retrieve the details of a collaboration invite"""
         return self.get(
             url=url_collaborator_invite_detail.format(invite_key=invite_key),
-            authenticator=self.authenticator(sso_session_id),
             use_fallback_cache=True,
         )
 

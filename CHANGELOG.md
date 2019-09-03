@@ -1,5 +1,12 @@
 # Changelog
 
+
+## [18.0.0](https://pypi.org/project/directory-api-client/18.0.0/) (2019-09-03)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/99/files)
+
+## Breaking changes
+- Remove `sso_session_id` from call signature of `company.collaborator_invite_retrieve`
+
 ## [17.1.0](https://pypi.org/project/directory-api-client/17.1.0/) (2019-08-30)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/98/files)
 
