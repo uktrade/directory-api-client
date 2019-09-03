@@ -294,10 +294,9 @@ def test_collaborator_invite_retrieve(requests_mock, client):
     url = 'https://example.com/supplier/company/collaborator-invite/123/'
     requests_mock.get(url)
 
-    client.collaborator_invite_retrieve(sso_session_id=2, invite_key='123')
+    client.collaborator_invite_retrieve(invite_key='123')
 
     assert requests_mock.last_request.url == url
-    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
 def test_collaborator_invite_accept(requests_mock, client):
