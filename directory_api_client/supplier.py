@@ -2,11 +2,12 @@ from directory_client_core.authentication import SessionSSOAuthenticator
 from directory_api_client.base import AbstractAPIClient
 
 
-url_supplier = '/supplier/'
 url_unsubscribe = '/supplier/unsubscribe/'
+url_supplier_update = '/supplier/'
 url_csv_dump = '/supplier/csv-dump/'
 url_disconnect_from_company = '/supplier/company/disconnect/'
 url_supplier_sso_ids = '/external/supplier-sso/'
+url_supplier_detail = '/supplier/{sso_id}/'
 
 
 class SupplierAPIClient(AbstractAPIClient):
@@ -14,10 +15,10 @@ class SupplierAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
 
     def profile_update(self, sso_session_id, data):
-        return self.patch(url=url_supplier, data=data, authenticator=self.authenticator(sso_session_id))
+        return self.patch(url=url_supplier_update, data=data, authenticator=self.authenticator(sso_session_id))
 
-    def retrieve_profile(self, sso_session_id):
-        return self.get(url=url_supplier, authenticator=self.authenticator(sso_session_id))
+    def retrieve_profile(self, sso_id):
+        return self.get(url=url_supplier_detail.format(sso_id=sso_id), use_fallback_cache=True)
 
     def unsubscribe(self, sso_session_id):
         return self.post(url=url_unsubscribe, authenticator=self.authenticator(sso_session_id))

@@ -1,4 +1,4 @@
-build: test_requirements test
+ARGUMENTS = $(filter-out $@,$(MAKECMDGOALS))
 
 clean:
 	-find . -type f -name "*.pyc" -delete
@@ -11,25 +11,11 @@ flake8:
 	flake8 . --exclude=.venv --max-line-length=120
 
 pytest:
-	pytest . --cov=. $(pytest_args) -v
-
-CODECOV := \
-	if [ "$$CODECOV_REPO_TOKEN" != "" ]; then \
-	   codecov --token=$$CODECOV_REPO_TOKEN ;\
-	fi
-
-test: flake8 pytest
-	$(CODECOV)
-
-integration_tests:
-	cd $(mktemp -d) && \
-	git clone https://github.com/uktrade/directory-tests && \
-	cd directory-tests && \
-	make docker_integration_tests
+	pytest $(ARGUMENTS) --cov=. -v
 
 publish:
 	rm -rf build dist; \
 	python setup.py bdist_wheel; \
 	twine upload --username $$DIRECTORY_PYPI_USERNAME --password $$DIRECTORY_PYPI_PASSWORD dist/*
 
-.PHONY: build clean test_requirements flake8 pytest test publish
+.PHONY: clean test_requirements flake8 pytest publish
