@@ -1,5 +1,11 @@
 # Changelog
 
+## [19.0.0](https://pypi.org/project/directory-api-client/19.0.0/) (2019-09-09)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/101/files)
+
+## Breaking changes
+- `supplier.retrieve_profile` now expects sso_id rather than sso_session_id
+
 
 ## [18.0.0](https://pypi.org/project/directory-api-client/18.0.0/) (2019-09-03)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/99/files)

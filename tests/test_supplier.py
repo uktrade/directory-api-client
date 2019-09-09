@@ -26,10 +26,10 @@ def test_profile_update(client, requests_mock):
 
 
 def test_retrieve_profile(client, requests_mock):
-    url = 'https://example.com/supplier/'
+    url = 'https://example.com/supplier/123/'
     requests_mock.get(url)
 
-    client.retrieve_profile(sso_session_id=1)
+    client.retrieve_profile(123)
 
     assert requests_mock.last_request.url == url
 
