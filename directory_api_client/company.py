@@ -115,9 +115,13 @@ class CompanyAPIClient(AbstractAPIClient):
         """Create a request to be invited as a collaborator for a company"""
         return self.post(url=url_collaborator_request, data=kwargs)
 
-    def collaborator_create(self, data):
+    def collaborator_create(self, sso_session_id, data):
         """Create a supplier and adds it to a company"""
-        return self.post(url=url_collaborator_add, data=data)
+        return self.post(
+            url=url_collaborator_add,
+            data=data,
+            authenticator=self.authenticator(sso_session_id)
+        )
 
     def collaborator_list(self, sso_session_id):
         """List the collaborators attached to a the current user's company"""

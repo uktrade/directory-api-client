@@ -366,9 +366,10 @@ def test_collaborator_create(requests_mock, client):
         'mobile_number': 9876543210,
     }
 
-    client.collaborator_create(data)
+    client.collaborator_create(sso_session_id=123, data=data)
 
     assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 123'
     assert requests_mock.last_request.json() == {
         'company_number': '1234567',
         'sso_id': '123',
