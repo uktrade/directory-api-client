@@ -303,10 +303,10 @@ def test_collaborator_invite_accept(requests_mock, client):
     url = 'https://example.com/supplier/company/collaborator-invite/123/'
     requests_mock.patch(url)
 
-    client.collaborator_invite_accept(sso_session_id=2, invite_key='123')
+    client.collaborator_invite_accept(sso_session_id=2, invite_key='123', name='john')
 
     assert requests_mock.last_request.url == url
-    assert requests_mock.last_request.json() == {'accepted': True}
+    assert requests_mock.last_request.json() == {'accepted': True, 'name': 'john'}
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
