@@ -406,3 +406,44 @@ def test_collaborator_role_update(requests_mock, client):
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {'role': 'EDITOR'}
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'
+
+
+def test_collaboration_request_create(requests_mock, client):
+    url = 'https://example.com/supplier/company/collaboration-request/'
+    requests_mock.post(url)
+
+    client.collaboration_request_create(sso_session_id=2, role='ADMIN')
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {'role': 'ADMIN'}
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_collaborator_request_list(requests_mock, client):
+    url = 'https://example.com/supplier/company/collaboration-request/'
+    requests_mock.get(url)
+
+    client.collaboration_request_list(sso_session_id=2)
+
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+    assert requests_mock.last_request.url == url
+
+
+def test_collaboration_request_accept(requests_mock, client):
+    url = 'https://example.com/supplier/company/collaboration-request/123/'
+    requests_mock.patch(url)
+
+    client.collaboration_request_accept(sso_session_id=2, request_key='123')
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {'accepted': True}
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_collaboration_request_delete(requests_mock, client):
+    url = 'https://example.com/supplier/company/collaboration-request/123/'
+    requests_mock.delete(url)
+
+    client.collaboration_request_delete(sso_session_id=2, request_key='123')
+
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'

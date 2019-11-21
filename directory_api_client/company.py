@@ -22,6 +22,8 @@ url_collaborator_remove = '/supplier/company/remove-collaborators/'
 url_collaborator_invite = '/supplier/company/collaborator-invite/'
 url_collaborator_invite_detail = '/supplier/company/collaborator-invite/{invite_key}/'
 url_collaborator_role_change = '/supplier/company/change-collaborator-role/{sso_id}/'
+url_collaboration_request = '/supplier/company/collaboration-request/'
+url_collaboration_request_detail = '/supplier/company/collaboration-request/{request_key}/'
 
 
 class CompanyAPIClient(AbstractAPIClient):
@@ -169,3 +171,32 @@ class CompanyAPIClient(AbstractAPIClient):
     def collaborator_role_update(self, sso_session_id, sso_id, role):
         url = url_collaborator_role_change.format(sso_id=sso_id)
         return self.patch(url=url, data={'role': role}, authenticator=self.authenticator(sso_session_id))
+
+    def collaboration_request_create(self, sso_session_id, role):
+        """Create a collaboration requests for the current user's company"""
+        return self.post(
+            url=url_collaboration_request,
+            data={'role': role, },
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def collaboration_request_list(self, sso_session_id):
+        """List all collaboration requests for the current user's company"""
+        return self.get(url=url_collaboration_request,
+                        authenticator=self.authenticator(sso_session_id))
+
+    def collaboration_request_accept(self, sso_session_id, request_key):
+        """Accept a collaboration request. Upgrade role"""
+        return self.patch(
+            url=url_collaboration_request_detail.format(
+                request_key=request_key),
+            data={'accepted': True},
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def collaboration_request_delete(self, sso_session_id, request_key):
+        """Delete a collaboration request."""
+        return self.delete(
+            url=url_collaboration_request_detail.format(request_key=request_key),
+            authenticator=self.authenticator(sso_session_id),
+        )

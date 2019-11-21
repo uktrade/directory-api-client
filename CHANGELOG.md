@@ -1,5 +1,9 @@
 # Changelog
 
+## [21.1.0](https://pypi.org/project/directory-api-client/21.1.0/) (2019-11-20)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/103/files)
+--TT-1608 allow collaboration requests
+
 ## [21.0.0](https://pypi.org/project/directory-api-client/21.0.0/) (2019-10-02)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/102/files)
 -- Add Name to be saved to supplier on collaborator_invite_accept
