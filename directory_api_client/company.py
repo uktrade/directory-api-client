@@ -152,12 +152,12 @@ class CompanyAPIClient(AbstractAPIClient):
         """List all collaboration invites for the current user's company"""
         return self.get(url=url_collaborator_invite, authenticator=self.authenticator(sso_session_id))
 
-    def collaborator_invite_accept(self, sso_session_id, invite_key, name):
+    def collaborator_invite_accept(self, sso_session_id, invite_key):
         """Accept a collaboration invite. Become attached the the company"""
         # Adding name to populate supplier can remove once we remove from supplier
         return self.patch(
             url=url_collaborator_invite_detail.format(invite_key=invite_key),
-            data={'accepted': True, 'name': name},
+            data={'accepted': True,},
             authenticator=self.authenticator(sso_session_id),
         )
 
