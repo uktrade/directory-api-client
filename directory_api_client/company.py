@@ -189,7 +189,8 @@ class CompanyAPIClient(AbstractAPIClient):
         """Accept a collaboration request. Upgrade role"""
         return self.patch(
             url=url_collaboration_request_detail.format(
-                request_key=request_key),
+                request_key=request_key
+            ),
             data={'accepted': True},
             authenticator=self.authenticator(sso_session_id),
         )
@@ -197,6 +198,8 @@ class CompanyAPIClient(AbstractAPIClient):
     def collaboration_request_delete(self, sso_session_id, request_key):
         """Delete a collaboration request."""
         return self.delete(
-            url=url_collaboration_request_detail.format(request_key=request_key),
+            url=url_collaboration_request_detail.format(
+                request_key=request_key
+            ),
             authenticator=self.authenticator(sso_session_id),
         )
