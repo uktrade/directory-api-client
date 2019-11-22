@@ -134,8 +134,8 @@ class CompanyAPIClient(AbstractAPIClient):
 
     def collaborator_invite_retrieve(self, invite_key):
         """Retrieve the details of a collaboration invite"""
-        return self.get( url=url_collaborator_invite_detail.format(
-            invite_key=invite_key), use_fallback_cache=True,
+        return self.get(
+            url=url_collaborator_invite_detail.format(invite_key=invite_key), use_fallback_cache=True,
         )
 
     def collaborator_invite_list(self, sso_session_id):
@@ -154,8 +154,7 @@ class CompanyAPIClient(AbstractAPIClient):
     def collaborator_invite_delete(self, sso_session_id, invite_key):
         """Delete a collaboration invite."""
         return self.delete(
-            url=url_collaborator_invite_detail.format(invite_key=invite_key),
-            authenticator=self.authenticator(sso_session_id),
+            url=url_collaborator_invite_detail.format(invite_key=invite_key),authenticator=self.authenticator(sso_session_id),
         )
 
     def collaborator_role_update(self, sso_session_id, sso_id, role):
