@@ -177,8 +177,8 @@ class CompanyAPIClient(AbstractAPIClient):
     def collaboration_request_accept(self, sso_session_id, request_key):
         """Accept a collaboration request. Upgrade role"""
         return self.patch(
-            url=url_collaboration_request_detail.format(
-                request_key=request_key), data={'accepted': True}, authenticator=self.authenticator(sso_session_id),
+            url=url_collaboration_request_detail.format(request_key=request_key), data={'accepted': True},
+            authenticator=self.authenticator(sso_session_id),
         )
 
     def collaboration_request_delete(self, sso_session_id, request_key):
