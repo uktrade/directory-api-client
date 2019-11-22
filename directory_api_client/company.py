@@ -154,7 +154,8 @@ class CompanyAPIClient(AbstractAPIClient):
     def collaborator_invite_delete(self, sso_session_id, invite_key):
         """Delete a collaboration invite."""
         return self.delete(
-            url=url_collaborator_invite_detail.format(invite_key=invite_key),authenticator=self.authenticator(sso_session_id),
+            url=url_collaborator_invite_detail.format(invite_key=invite_key),
+            authenticator=self.authenticator(sso_session_id),
         )
 
     def collaborator_role_update(self, sso_session_id, sso_id, role):
