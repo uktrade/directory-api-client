@@ -1,6 +1,6 @@
 # Changelog
 
-## [21.1.0](https://pypi.org/project/directory-api-client/21.1.0/) (2019-11-20)
+## [20.1.0](https://pypi.org/project/directory-api-client/21.1.0/) (2019-11-20)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/103/files)
 --TT-1608 allow collaboration requests
 
