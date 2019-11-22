@@ -306,7 +306,7 @@ def test_collaborator_invite_accept(requests_mock, client):
     client.collaborator_invite_accept(sso_session_id=2, invite_key='123',)
 
     assert requests_mock.last_request.url == url
-    assert requests_mock.last_request.json() == {'accepted': True,}
+    assert requests_mock.last_request.json() == {'accepted': True, }
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 

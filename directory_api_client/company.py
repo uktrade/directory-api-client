@@ -157,7 +157,7 @@ class CompanyAPIClient(AbstractAPIClient):
         # Adding name to populate supplier can remove once we remove from supplier
         return self.patch(
             url=url_collaborator_invite_detail.format(invite_key=invite_key),
-            data={'accepted': True,},
+            data={'accepted': True, },
             authenticator=self.authenticator(sso_session_id),
         )
 
