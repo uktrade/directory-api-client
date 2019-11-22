@@ -16,14 +16,14 @@ url_search_find_a_supplier = '/company/search/'
 url_search_investment_support_directory = '/investment-support-directory/search/'
 url_transfer_invite_create = '/supplier/company/transfer-ownership-invite/'
 url_collaborator_list = '/supplier/company/collaborators/'
-url_collaborator_request = '/supplier/company/collaborator-request/'
+url_collaborator_request = '/supplier/company/collaborator-request-old/'
 url_collaborator_add = '/supplier/company/add-collaborator/'
 url_collaborator_remove = '/supplier/company/remove-collaborators/'
 url_collaborator_invite = '/supplier/company/collaborator-invite/'
 url_collaborator_invite_detail = '/supplier/company/collaborator-invite/{invite_key}/'
 url_collaborator_role_change = '/supplier/company/change-collaborator-role/{sso_id}/'
-url_collaboration_request = '/supplier/company/collaboration-request/'
-url_collaboration_request_detail = '/supplier/company/collaboration-request/{request_key}/'
+url_collaboration_request = '/supplier/company/collaborator-request/'
+url_collaboration_request_detail = '/supplier/company/collaborator-request/{request_key}/'
 
 
 class CompanyAPIClient(AbstractAPIClient):

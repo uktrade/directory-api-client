@@ -332,7 +332,7 @@ def test_collaborator_list(requests_mock, client):
 
 
 def test_collaborator_request_create(requests_mock, client):
-    url = 'https://example.com/supplier/company/collaborator-request/'
+    url = 'https://example.com/supplier/company/collaborator-request-old/'
     requests_mock.post(url)
 
     client.collaborator_request_create(company_number='1234567', collaborator_email='test@example.com')
@@ -409,7 +409,7 @@ def test_collaborator_role_update(requests_mock, client):
 
 
 def test_collaboration_request_create(requests_mock, client):
-    url = 'https://example.com/supplier/company/collaboration-request/'
+    url = 'https://example.com/supplier/company/collaborator-request/'
     requests_mock.post(url)
 
     client.collaboration_request_create(sso_session_id=2, role='ADMIN')
@@ -420,7 +420,7 @@ def test_collaboration_request_create(requests_mock, client):
 
 
 def test_collaborator_request_list(requests_mock, client):
-    url = 'https://example.com/supplier/company/collaboration-request/'
+    url = 'https://example.com/supplier/company/collaborator-request/'
     requests_mock.get(url)
 
     client.collaboration_request_list(sso_session_id=2)
@@ -430,7 +430,7 @@ def test_collaborator_request_list(requests_mock, client):
 
 
 def test_collaboration_request_accept(requests_mock, client):
-    url = 'https://example.com/supplier/company/collaboration-request/123/'
+    url = 'https://example.com/supplier/company/collaborator-request/123/'
     requests_mock.patch(url)
 
     client.collaboration_request_accept(sso_session_id=2, request_key='123')
@@ -441,7 +441,7 @@ def test_collaboration_request_accept(requests_mock, client):
 
 
 def test_collaboration_request_delete(requests_mock, client):
-    url = 'https://example.com/supplier/company/collaboration-request/123/'
+    url = 'https://example.com/supplier/company/collaborator-request/123/'
     requests_mock.delete(url)
 
     client.collaboration_request_delete(sso_session_id=2, request_key='123')
