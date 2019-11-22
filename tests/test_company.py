@@ -331,19 +331,6 @@ def test_collaborator_list(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def test_collaborator_request_create(requests_mock, client):
-    url = 'https://example.com/supplier/company/collaborator-request-old/'
-    requests_mock.post(url)
-
-    client.collaborator_request_create(company_number='1234567', collaborator_email='test@example.com')
-
-    assert requests_mock.last_request.url == url
-    assert requests_mock.last_request.json() == {
-        'company_number': '1234567',
-        'collaborator_email': 'test@example.com',
-    }
-
-
 def test_verify_identity_request(requests_mock, client):
     url = 'https://example.com/supplier/company/verify/identity/'
     requests_mock.post(url)
