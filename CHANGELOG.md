@@ -1,8 +1,13 @@
 # Changelog
 
+## [21.0.1](https://pypi.org/project/directory-api-client/21.0.1/) (2020-01-28)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/104/files)
+- Do not use fallback cache on csv dumps
+
+
 ## [21.0.0](https://pypi.org/project/directory-api-client/21.0.0/) (2019-11-20)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/103/files)
---TT-1608 allow collaboration requests
+- TT-1608 allow collaboration requests
 
 ## [20.0.0](https://pypi.org/project/directory-api-client/20.0.0/) (2019-09-13)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/101/files)
