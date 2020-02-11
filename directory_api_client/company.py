@@ -16,12 +16,13 @@ url_search_find_a_supplier = '/company/search/'
 url_search_investment_support_directory = '/investment-support-directory/search/'
 url_transfer_invite_create = '/supplier/company/transfer-ownership-invite/'
 url_collaborator_list = '/supplier/company/collaborators/'
-url_collaborator_request = '/supplier/company/collaborator-request/'
 url_collaborator_add = '/supplier/company/add-collaborator/'
 url_collaborator_remove = '/supplier/company/remove-collaborators/'
 url_collaborator_invite = '/supplier/company/collaborator-invite/'
 url_collaborator_invite_detail = '/supplier/company/collaborator-invite/{invite_key}/'
 url_collaborator_role_change = '/supplier/company/change-collaborator-role/{sso_id}/'
+url_collaboration_request = '/supplier/company/collaborator-request/'
+url_collaboration_request_detail = '/supplier/company/collaborator-request/{request_key}/'
 
 
 class CompanyAPIClient(AbstractAPIClient):
@@ -111,17 +112,9 @@ class CompanyAPIClient(AbstractAPIClient):
     def search_investment_search_directory(self, **kwargs):
         return self.get(url=url_search_investment_support_directory, params=kwargs, use_fallback_cache=True)
 
-    def collaborator_request_create(self, **kwargs):
-        """Create a request to be invited as a collaborator for a company"""
-        return self.post(url=url_collaborator_request, data=kwargs)
-
     def collaborator_create(self, sso_session_id, data):
         """Create a supplier and adds it to a company"""
-        return self.post(
-            url=url_collaborator_add,
-            data=data,
-            authenticator=self.authenticator(sso_session_id)
-        )
+        return self.post(url=url_collaborator_add, data=data, authenticator=self.authenticator(sso_session_id))
 
     def collaborator_list(self, sso_session_id):
         """List the collaborators attached to a the current user's company"""
@@ -142,20 +135,19 @@ class CompanyAPIClient(AbstractAPIClient):
     def collaborator_invite_retrieve(self, invite_key):
         """Retrieve the details of a collaboration invite"""
         return self.get(
-            url=url_collaborator_invite_detail.format(invite_key=invite_key),
-            use_fallback_cache=True,
+            url=url_collaborator_invite_detail.format(invite_key=invite_key), use_fallback_cache=True,
         )
 
     def collaborator_invite_list(self, sso_session_id):
         """List all collaboration invites for the current user's company"""
         return self.get(url=url_collaborator_invite, authenticator=self.authenticator(sso_session_id))
 
-    def collaborator_invite_accept(self, sso_session_id, invite_key, name):
+    def collaborator_invite_accept(self, sso_session_id, invite_key):
         """Accept a collaboration invite. Become attached the the company"""
         # Adding name to populate supplier can remove once we remove from supplier
         return self.patch(
             url=url_collaborator_invite_detail.format(invite_key=invite_key),
-            data={'accepted': True, 'name': name},
+            data={'accepted': True},
             authenticator=self.authenticator(sso_session_id),
         )
 
@@ -169,3 +161,30 @@ class CompanyAPIClient(AbstractAPIClient):
     def collaborator_role_update(self, sso_session_id, sso_id, role):
         url = url_collaborator_role_change.format(sso_id=sso_id)
         return self.patch(url=url, data={'role': role}, authenticator=self.authenticator(sso_session_id))
+
+    def collaboration_request_create(self, sso_session_id, role):
+        """Create a collaboration requests for the current user's company"""
+        return self.post(
+            url=url_collaboration_request,
+            data={'role': role},
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def collaboration_request_list(self, sso_session_id):
+        """List all collaboration requests for the current user's company"""
+        return self.get(url=url_collaboration_request, authenticator=self.authenticator(sso_session_id))
+
+    def collaboration_request_accept(self, sso_session_id, request_key):
+        """Accept a collaboration request. Upgrade role"""
+        return self.patch(
+            url=url_collaboration_request_detail.format(request_key=request_key),
+            data={'accepted': True},
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def collaboration_request_delete(self, sso_session_id, request_key):
+        """Delete a collaboration request."""
+        return self.delete(
+            url=url_collaboration_request_detail.format(request_key=request_key),
+            authenticator=self.authenticator(sso_session_id),
+        )

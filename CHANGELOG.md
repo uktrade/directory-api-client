@@ -10,7 +10,6 @@
 
 ## [20.0.0](https://pypi.org/project/directory-api-client/20.0.0/) (2019-09-13)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/101/files)
-
 ## Fixed Bugs
 - Added authentication to collaborator_create
 

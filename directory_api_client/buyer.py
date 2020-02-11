@@ -11,4 +11,4 @@ class BuyerAPIClient(AbstractAPIClient):
         return self.post(url_save, data=form_data)
 
     def get_csv_dump(self, token):
-        return self.get(url_csv_dump, params={'token': token}, use_fallback_cache=True)
+        return self.get(url_csv_dump, params={'token': token}, use_fallback_cache=False)
