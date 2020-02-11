@@ -31,6 +31,7 @@ def test_exportplan_retrieve(client, requests_mock):
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
+
 def test_exportplan_create(requests_mock, client):
     url = 'https://example.com/exportplan/company-export-plan/'
     requests_mock.post(url)
@@ -39,6 +40,7 @@ def test_exportplan_create(requests_mock, client):
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {'export_commodity_codes': ['101.102.1']}
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
 
 def test_exportplan_update(requests_mock, client):
     url = 'https://example.com/exportplan/company-export-plan/123/'

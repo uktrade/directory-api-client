@@ -12,10 +12,14 @@ class ExportPlanAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
 
     def exportplan_update(self, sso_session_id, id, data):
-        return self.patch(url=url_exportplan_update.format(pk=id), data=data, authenticator=self.authenticator(sso_session_id))
+        return self.patch(
+            url=url_exportplan_update.format(pk=id), data=data, authenticator=self.authenticator(sso_session_id)
+        )
 
     def exportplan_detail(self, sso_session_id, id):
-        return self.get(url=url_exportplan_detail.format(pk=id), use_fallback_cache=True, authenticator=self.authenticator(sso_session_id))
+        return self.get(
+            url=url_exportplan_detail.format(pk=id), use_fallback_cache=True, authenticator=self.authenticator(sso_session_id)
+        )
 
     def exportplan_create(self, sso_session_id, data):
         return self.post(url=url_exportplan_create, data=data, authenticator=self.authenticator(sso_session_id))
