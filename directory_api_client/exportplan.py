@@ -18,7 +18,9 @@ class ExportPlanAPIClient(AbstractAPIClient):
 
     def exportplan_detail(self, sso_session_id, id):
         return self.get(
-            url=url_exportplan_detail.format(pk=id), use_fallback_cache=True, authenticator=self.authenticator(sso_session_id)
+            url=url_exportplan_detail.format(pk=id),
+            use_fallback_cache=True,
+            authenticator=self.authenticator(sso_session_id)
         )
 
     def exportplan_create(self, sso_session_id, data):
