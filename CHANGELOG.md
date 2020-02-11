@@ -1,5 +1,9 @@
 # Changelog
 
+## [21.1.0](https://pypi.org/project/directory-api-client/21.1.0/) (2020-02-11)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/103/files)
+- add export plan saving and retrieving 
+
 ## [21.0.0](https://pypi.org/project/directory-api-client/21.0.0/) (2019-10-02)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/102/files)
 -- Add Name to be saved to supplier on collaborator_invite_accept
