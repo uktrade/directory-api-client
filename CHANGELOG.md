@@ -1,5 +1,9 @@
 # Changelog
 
+## [21.2.0](https://pypi.org/project/directory-api-client/21.2.0/) (2020-02-12)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/104/files)
+- Add user location create handler
+
 ## [21.1.0](https://pypi.org/project/directory-api-client/21.1.0/) (2020-02-11)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/103/files)
 - add export plan saving and retrieving 
