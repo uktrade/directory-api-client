@@ -6,6 +6,7 @@ from directory_api_client.company import CompanyAPIClient
 from directory_api_client.enrolment import EnrolmentAPIClient
 from directory_api_client.supplier import SupplierAPIClient
 from directory_api_client.exporting import ExportingAPIClient
+from directory_api_client.personalisation import PersonalisationAPIClient
 
 
 @pytest.fixture
@@ -46,6 +47,12 @@ def test_buyer(client, requests_mock):
     assert isinstance(client.buyer, BuyerAPIClient)
     assert client.buyer.base_url == 'https://example.com'
     assert client.buyer.request_signer.secret == 'test'
+
+
+def test_personalisation(client, requests_mock):
+    assert isinstance(client.personalisation, PersonalisationAPIClient)
+    assert client.personalisation.base_url == 'https://example.com'
+    assert client.personalisation.request_signer.secret == 'test'
 
 
 def test_ping(client, requests_mock):
