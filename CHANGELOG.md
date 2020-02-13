@@ -1,5 +1,9 @@
 # Changelog
 
+## [21.2.1](https://pypi.org/project/directory-api-client/21.2.1/) (2020-02-13)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/105/files)
+- fix expose exportplan client
+
 ## [21.2.0](https://pypi.org/project/directory-api-client/21.2.0/) (2020-02-12)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/104/files)
 - Add user location create handler

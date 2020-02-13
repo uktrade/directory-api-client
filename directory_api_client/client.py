@@ -7,7 +7,7 @@ from directory_api_client.enrolment import EnrolmentAPIClient
 from directory_api_client.supplier import SupplierAPIClient
 from directory_api_client.notifications import NotificationsAPIClient
 from directory_api_client.exporting import ExportingAPIClient
-
+from directory_api_client.exportplan import ExportPlanAPIClient
 
 url_ping = '/healthcheck/ping/'
 
@@ -22,6 +22,7 @@ class DirectoryAPIClient(AbstractAPIClient):
         self.buyer = BuyerAPIClient(*args, **kwargs)
         self.notifications = NotificationsAPIClient(*args, **kwargs)
         self.exporting = ExportingAPIClient(*args, **kwargs)
+        self.exportplan = ExportPlanAPIClient(*args, **kwargs)
 
     def ping(self):
         return self.get(url=url_ping)
