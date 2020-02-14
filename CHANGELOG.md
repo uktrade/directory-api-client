@@ -1,5 +1,8 @@
 # Changelog
 
+## [21.2.2](https://pypi.org/project/directory-api-client/21.2.2/) (2020-02-14)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/108/files)
+- fix expose exportplan client
 
 ## [21.2.1](https://pypi.org/project/directory-api-client/21.2.1/) (2020-02-13)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/104/files)
