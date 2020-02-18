@@ -1,3 +1,5 @@
+import base64
+
 from directory_api_client.testapiclient import DirectoryTestAPIClient
 
 import pytest
@@ -11,6 +13,18 @@ def client():
         sender_id='test',
         timeout=5,
     )
+
+
+class BasicAuthenticator:
+    def __init__(self, username: str, password: str):
+        credentials = f"{username}:{password}"
+        encoded_credentials = base64.b64encode(credentials.encode("ascii"))
+        self.headers = {"Authorization": f"Basic {encoded_credentials.decode('ascii')}"}
+
+
+@pytest.fixture
+def basic_authenticator():
+    return BasicAuthenticator("user", "password")
 
 
 def test_get_company_by_ch_id(client, requests_mock):
@@ -158,3 +172,35 @@ def test_get_published_companies_with_one_filter(client, requests_mock):
 
     assert requests_mock.last_request.url.startswith(url)
     assert 'minimal_number_of_sectors=5' in requests_mock.last_request.url
+
+
+def test_get_company_by_ch_id_with_authenticator(
+        client, requests_mock, basic_authenticator
+):
+    url = 'http://test.uk/testapi/company/12345678/'
+    requests_mock.get(url)
+    client.get_company_by_ch_id(ch_id='12345678', authenticator=basic_authenticator)
+
+    assert requests_mock.last_request.headers['Authorization'].startswith('Basic ')
+
+
+def test_delete_company_by_ch_id_with_authenticator(
+        client, requests_mock, basic_authenticator
+):
+    url = 'http://test.uk/testapi/company/ch_ID_00/'
+    requests_mock.delete(url)
+
+    client.delete_company_by_ch_id(ch_id='ch_ID_00', authenticator=basic_authenticator)
+
+    assert requests_mock.last_request.headers['Authorization'].startswith('Basic ')
+
+
+def test_get_published_companies_without_optional_parameters_with_authenticator(
+        client, requests_mock, basic_authenticator
+):
+    url = 'http://test.uk/testapi/companies/published/'
+    requests_mock.get(url)
+
+    client.get_published_companies(authenticator=basic_authenticator)
+
+    assert requests_mock.last_request.headers['Authorization'].startswith('Basic ')
