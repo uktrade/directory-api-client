@@ -1,5 +1,9 @@
 # Changelog
 
+## [21.3.0](https://pypi.org/project/directory-api-client/21.2.2/) (2020-02-18)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/109/files)
+- TT-2288 Add support for custom authenticators in Test API helpers
+
 ## [21.2.2](https://pypi.org/project/directory-api-client/21.2.2/) (2020-02-14)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/108/files)
 - fix expose exportplan client
