@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='directory_api_client',
-    version='21.2.2',
+    version='21.3.0',
     url='https://github.com/uktrade/directory-api-client',
     license='MIT',
     author='Department for International Trade',
@@ -13,20 +13,20 @@ setup(
     long_description_content_type='text/markdown',
     include_package_data=True,
     install_requires=[
-        'django>=1.11.23,<3.0a1',
-        'requests>=2.18.4,<3.0.0',
+        'django>=2.2.10,<3.0a1',
+        'requests>=2.22.0,<3.0.0',
         'directory_client_core>=6.1.0,<7.0.0',
     ],
     extras_require={
         'test': [
-            'pytest==3.0.2',
-            'pytest-cov==2.3.1',
-            'flake8==3.0.4',
-            'requests_mock==1.6.0',
-            'codecov==2.0.9',
-            'twine>=1.11.0,<2.0.0',
-            'wheel>=0.31.0,<1.0.0',
-            'setuptools>=38.6.0,<39.0.0',
+            'codecov==2.0.15',
+            'flake8==3.7.9',
+            'pytest-cov==2.8.1',
+            'pytest==5.3.5',
+            'requests_mock==1.7.0',
+            'setuptools>=45.2.0,<50.0.0',
+            'twine>=3.1.1,<4.0.0',
+            'wheel>=0.34.2,<1.0.0',
         ]
     },
     classifiers=[
