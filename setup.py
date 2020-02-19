@@ -19,14 +19,14 @@ setup(
     ],
     extras_require={
         'test': [
-            'pytest==4.6.5',
-            'pytest-cov==2.7.1',
-            'flake8==3.7.8',
-            'requests_mock==1.6.0',
             'codecov==2.0.15',
+            'flake8==3.7.9',
+            'pytest-cov==2.8.1',
+            'pytest==5.3.5',
+            'requests_mock==1.7.0',
+            'setuptools>=45.2.0,<50.0.0',
             'twine>=3.1.1,<4.0.0',
             'wheel>=0.34.2,<1.0.0',
-            'setuptools>=45.2.0,<50.0.0',
         ]
     },
     classifiers=[
