@@ -13,14 +13,14 @@ class PersonalisationAPIClient(AbstractAPIClient):
     def user_location_create(self, sso_session_id, data):
         return self.post(url=url_user_location_create, data=data, authenticator=self.authenticator(sso_session_id))
 
-    def events(self, sso_session_id, lat='', lng=''):
+    def events_by_location_list(self, sso_session_id, lat='', lng=''):
         return self.get(url=url_events, params={
           'sso_id': sso_session_id,
           'lat': lat,
           'lng': lng
         }, authenticator=self.authenticator(sso_session_id))
 
-    def export_opportunities(self, sso_session_id):
+    def export_opportunities_by_relevance_list(self, sso_session_id):
         return self.get(url=url_export_opportunities, params={
           'sso_id': sso_session_id
         }, authenticator=self.authenticator(sso_session_id))
