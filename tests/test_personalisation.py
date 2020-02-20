@@ -22,3 +22,19 @@ def test_personalisation_create(requests_mock, client):
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == data
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+def test_personalisation_events(requests_mock, client):
+    url = 'https://example.com/personalisation/events/?sso_id=2&lat=&lng='
+    requests_mock.get(url)
+    client.events(sso_session_id=2)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+def test_personalisation_export_opportunities(requests_mock, client):
+    url = 'https://example.com/personalisation/export-opportunities/?sso_id=2'
+    requests_mock.get(url)
+    client.export_opportunities(sso_session_id=2)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
