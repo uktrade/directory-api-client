@@ -25,7 +25,7 @@ def test_personalisation_create(requests_mock, client):
 
 
 def test_personalisation_events_by_location_list(requests_mock, client):
-    url = 'https://example.com/personalisation/events/?sso_id=2&lat=&lng='
+    url = 'https://example.com/personalisation/events/?lat=&lng='
     requests_mock.get(url)
     client.events_by_location_list(sso_session_id=2)
 
@@ -34,7 +34,7 @@ def test_personalisation_events_by_location_list(requests_mock, client):
 
 
 def test_personalisation_export_opportunities_by_relevance_list(requests_mock, client):
-    url = 'https://example.com/personalisation/export-opportunities/?sso_id=2'
+    url = 'https://example.com/personalisation/export-opportunities/'
     requests_mock.get(url)
     client.export_opportunities_by_relevance_list(sso_session_id=2)
 
