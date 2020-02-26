@@ -1,6 +1,10 @@
 # Changelog
 
-## [21.3.0](https://pypi.org/project/directory-api-client/21.2.2/) (2020-02-18)
+## [21.4.0](https://pypi.org/project/directory-api-client/21.4.0/) (2020-02-20)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/111/files)
+- MVP Add events personalisation
+
+## [21.3.0](https://pypi.org/project/directory-api-client/21.3.0/) (2020-02-18)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/109/files)
 - TT-2288 Add support for custom authenticators in Test API helpers
 
