@@ -1,6 +1,6 @@
 from directory_api_client.base import AbstractAPIClient
 
-url_corruption_perceptions_index= 'dataservices/corruption-perceptions-index/{country_code}/'
+url_corruption_perceptions_index = 'dataservices/corruption-perceptions-index/{country_code}/'
 url_easeofdoingbusiness = 'dataservices/easeofdoingbusiness/{country_code}/'
 
 
