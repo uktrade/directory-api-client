@@ -21,8 +21,11 @@ class PersonalisationAPIClient(AbstractAPIClient):
           'lng': lng
         }, authenticator=self.authenticator(sso_session_id))
 
-    def export_opportunities_by_relevance_list(self, sso_session_id, search_term=''):
-        url_export_opportunities = f'/personalisation/export-opportunities/?s={search_term}'
+    def export_opportunities_by_relevance_list(
+        self, sso_session_id, search_term=''
+    ):
+        url_export_opportunities =\
+            f'/personalisation/export-opportunities/?s={search_term}'
         return self.get(
             url=url_export_opportunities,
             authenticator=self.authenticator(sso_session_id)
