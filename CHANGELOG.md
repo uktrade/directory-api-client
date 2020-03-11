@@ -3,6 +3,9 @@
 ## [21.5.0](https://pypi.org/project/directory-api-client/21.5.0/) (2020-03-03)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/112/files)
 - MVP add dataservices
+## [21.5.0](https://pypi.org/project/directory-api-client/21.5.0/) (2020-03-11)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/112/files)
+- MVP Add Comtrade data
 
 ## [21.4.0](https://pypi.org/project/directory-api-client/21.4.0/) (2020-02-20)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/111/files)
