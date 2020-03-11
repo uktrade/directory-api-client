@@ -1,9 +1,9 @@
 from directory_client_core.authentication import SessionSSOAuthenticator
 from directory_api_client.base import AbstractAPIClient
 
-
 url_user_location_create = '/personalisation/user-location/'
 url_events = '/personalisation/events/'
+
 
 class PersonalisationAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
