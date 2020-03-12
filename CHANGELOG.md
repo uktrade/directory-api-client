@@ -1,11 +1,12 @@
 # Changelog
+
+## [21.7.0](https://pypi.org/project/directory-api-client/21.7.0/) (2020-03-12)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/113/files)
+- MVP Add search term to personalisation ExOps Api
+
 ## [21.6.0](https://pypi.org/project/directory-api-client/21.6.0/) (2020-03-11)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/114/files)
 - MVP Add Comtrade data
-
-## [21.6.0](https://pypi.org/project/directory-api-client/21.4.0/) (2020-03-11)
-[Full Changelog](https://github.com/uktrade/directory-api-client/pull/113/files)
-- MVP Add search term to personalisation ExOps Api
 
 ## [21.5.0](https://pypi.org/project/directory-api-client/21.5.0/) (2020-03-03)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/112/files)
