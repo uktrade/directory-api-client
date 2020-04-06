@@ -47,3 +47,13 @@ def test_personalisation_export_opportunities_by_relevance_list(requests_mock, c
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_recommended_countries_by_sector(requests_mock, client):
+    url = 'https://example.com/personalisation/recommended-countries/?sector=Food'
+    requests_mock.get(url)
+    sector = {'Food'}
+    client.recommended_countries_by_sector(sso_session_id=2, sector=sector)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'

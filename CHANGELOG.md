@@ -1,8 +1,7 @@
 # Changelog
-
-## [21.7.0](https://pypi.org/project/directory-api-client/21.7.0/) (2020-03-12)
-[Full Changelog](https://github.com/uktrade/directory-api-client/pull/113/files)
-- MVP Add search term to personalisation ExOps Api
+## [21.8.0](https://pypi.org/project/directory-api-client/21.7.0/) (2020-04-06)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/115/files)
+MVP-384 recommended countries
 
 ## [21.6.0](https://pypi.org/project/directory-api-client/21.6.0/) (2020-03-11)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/114/files)
