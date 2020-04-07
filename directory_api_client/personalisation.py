@@ -4,7 +4,7 @@ from directory_api_client.base import AbstractAPIClient
 url_user_location_create = '/personalisation/user-location/'
 url_events = '/personalisation/events/'
 url_export_opportunities = '/personalisation/export-opportunities/?s={}'
-url_recommended_countries = 'personalisation/recommended-countries/'
+url_recommended_countries = '/personalisation/recommended-countries/'
 
 
 class PersonalisationAPIClient(AbstractAPIClient):
