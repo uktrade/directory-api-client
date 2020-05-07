@@ -34,16 +34,16 @@ def test_personalisation_events_by_location_list(requests_mock, client):
 
 
 def test_personalisation_export_opportunities_by_relevance_list(requests_mock, client):
-    url = 'https://example.com/personalisation/export-opportunities/?s='
+    url = 'https://example.com/personalisation/export-opportunities/'
     requests_mock.get(url)
-    client.export_opportunities_by_relevance_list(sso_session_id=2)
+    client.export_opportunities_by_relevance_list(sso_session_id=2, query_params={})
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
     url = 'https://example.com/personalisation/export-opportunities/?s=food-and-drink'
     requests_mock.get(url)
-    client.export_opportunities_by_relevance_list(sso_session_id=2, search_term="food-and-drink")
+    client.export_opportunities_by_relevance_list(sso_session_id=2, query_params={'s': 'food-and-drink'})
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
