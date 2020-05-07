@@ -28,7 +28,9 @@ class PersonalisationAPIClient(AbstractAPIClient):
         self, sso_session_id, query_params
     ):
         return self.get(
-            url=url_export_opportunities.format(urllib.parse.urlencode(query_params)),
+            url=url_export_opportunities.format(
+                urllib.parse.urlencode(query_params)
+            ),
             authenticator=self.authenticator(sso_session_id)
         )
 
