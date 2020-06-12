@@ -1,6 +1,6 @@
 # Changelog
 ## [21.9.0](https://pypi.org/project/directory-api-client/21.9.0/) (2020-06-12)
-[Full Changelog](https://github.com/uktrade/directory-api-client/pull/116/files)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/117/files)
 GP2-125 - Add business objectives rest CRUD api
 
 ## [21.8.0](https://pypi.org/project/directory-api-client/21.8.0/) (2020-04-06)
