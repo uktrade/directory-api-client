@@ -50,3 +50,42 @@ def test_exportplan_update(requests_mock, client):
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {'export_commodity_codes': ['101.102.1']}
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_exportplan_objectives_list(client, requests_mock):
+    url = 'https://example.com/exportplan/company-objectives/'
+    requests_mock.get(url)
+
+    client.exportplan_objectives_list(sso_session_id=2)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_exportplan_objectives_retrieve(client, requests_mock):
+    url = 'https://example.com/exportplan/company-objectives/123/'
+    requests_mock.get(url)
+    client.exportplan_objectives_detail(id='123', sso_session_id=2)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_exportplan_objectives_create(requests_mock, client):
+    url = 'https://example.com/exportplan/company-objectives/'
+    requests_mock.post(url)
+    client.exportplan_objectives_create(sso_session_id=2, data={'description': 'new objective'})
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {'description': 'new objective'}
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_exportplan_objectives_update(requests_mock, client):
+    url = 'https://example.com/exportplan/company-objectives/123/'
+    requests_mock.patch(url)
+    client.exportplan_objectives_update(sso_session_id=2, id=123, data={'description': 'new objective'})
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {'description': 'new objective'}
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'

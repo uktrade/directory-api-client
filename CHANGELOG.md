@@ -1,4 +1,8 @@
 # Changelog
+## [21.9.0](https://pypi.org/project/directory-api-client/21.9.0/) (2020-06-12)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/116/files)
+GP2-125 - Add business objectives rest CRUD api
+
 ## [21.8.0](https://pypi.org/project/directory-api-client/21.8.0/) (2020-04-06)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/115/files)
 MVP-384 recommended countries
