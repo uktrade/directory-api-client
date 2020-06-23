@@ -1,4 +1,8 @@
 # Changelog
+## [21.10.0](https://pypi.org/project/directory-api-client/21.10.0/) (2020-06-12)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/118/files)
+GP2-125 - Add business objectives delete endpoint
+
 ## [21.9.0](https://pypi.org/project/directory-api-client/21.9.0/) (2020-06-12)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/117/files)
 GP2-125 - Add business objectives rest CRUD api
@@ -7,7 +11,7 @@ GP2-125 - Add business objectives rest CRUD api
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/115/files)
 MVP-384 recommended countries
 
-## [21.7.0](https://pypi.org/project/directory-api-client/21.7.0/) (2020-03-12)	
+## [21.7.0](https://pypi.org/project/directory-api-client/21.7.0/) (2020-03-12)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/113/files)
 - MVP Add search term to personalisation ExOps Api
 
@@ -40,7 +44,7 @@ MVP-384 recommended countries
 
 ## [21.1.0](https://pypi.org/project/directory-api-client/21.1.0/) (2020-02-11)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/103/files)
-- add export plan saving and retrieving 
+- add export plan saving and retrieving
 
 ## [21.0.0](https://pypi.org/project/directory-api-client/21.0.0/) (2019-10-02)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/102/files)
