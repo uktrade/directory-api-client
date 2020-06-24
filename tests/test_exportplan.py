@@ -89,3 +89,12 @@ def test_exportplan_objectives_update(requests_mock, client):
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.json() == {'description': 'new objective'}
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_exportplan_objectives_delete(requests_mock, client):
+    url = 'https://example.com/exportplan/company-objectives/123/'
+    requests_mock.delete(url)
+    client.exportplan_objectives_delete(sso_session_id=2, id=123)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
