@@ -1,7 +1,8 @@
 # Changelog
-## [21.11.0](https://pypi.org/project/directory-api-client/21.11.0/) (2020-07-02)
+## [22.0.0](https://pypi.org/project/directory-api-client/22.0.0/) (2020-07-02)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/119/files)
 GP2-169-load-IMF-Data
+Update method names for data services
 
 # Changelog
 ## [21.10.0](https://pypi.org/project/directory-api-client/21.10.0/) (2020-06-12)
