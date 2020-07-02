@@ -1,4 +1,9 @@
 # Changelog
+## [21.11.0](https://pypi.org/project/directory-api-client/21.11.0/) (2020-07-02)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/119/files)
+GP2-169-load-IMF-Data
+
+# Changelog
 ## [21.10.0](https://pypi.org/project/directory-api-client/21.10.0/) (2020-06-12)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/118/files)
 GP2-125 - Add business objectives delete endpoint

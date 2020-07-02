@@ -4,6 +4,7 @@ url_corruption_perceptions_index = 'dataservices/corruption-perceptions-index/{c
 url_easeofdoingbusiness = 'dataservices/easeofdoingbusiness/{country_code}/'
 url_lastyearimportdata = 'dataservices/lastyearimportdata/'
 url_historicalimportdata = 'dataservices/historicalimportdata/'
+url_worldeeconomicoutlookdata = 'dataservices/world-economic-outlook/{country_code}/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -30,4 +31,10 @@ class DataServicesAPIClient(AbstractAPIClient):
         return self.get(
             url=url_historicalimportdata,
             params={'commodity_code': commodity_code, 'country': country}
+        )
+
+    def get_world_economic_outlook_data(self, country_code):
+        return self.get(
+            url=url_worldeeconomicoutlookdata.format(country_code=country_code),
+            use_fallback_cache=True
         )

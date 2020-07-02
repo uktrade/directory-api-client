@@ -43,3 +43,11 @@ def test_get_historicalimportdata(requests_mock, client):
     client.get_historicalimportdata(commodity_code=1234, country='China')
 
     assert requests_mock.last_request.url == url
+
+
+def test_get_world_exconomic_outlook_data(client, requests_mock):
+    url = 'https://example.com/dataservices/world-economic-outlook/CHN/'
+    requests_mock.get(url)
+    client.get_world_economic_outlook_data(country_code='CHN')
+
+    assert requests_mock.last_request.url == url
