@@ -5,6 +5,9 @@ url_ease_of_doing_business = 'dataservices/easeofdoingbusiness/{country_code}/'
 url_last_year_import_data = 'dataservices/lastyearimportdata/'
 url_historical_import_data = 'dataservices/historicalimportdata/'
 url_world_economic_outlook_data = 'dataservices/world-economic-outlook/{country_code}/'
+url_country_data_data = 'dataservices/country-data/{country}/'
+url_cia_world_factbook_data = 'dataservices/cia-factbook-data/'
+url_population_data = 'dataservices/population-data/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -36,5 +39,25 @@ class DataServicesAPIClient(AbstractAPIClient):
     def get_world_economic_outlook_data(self, country_code):
         return self.get(
             url=url_world_economic_outlook_data.format(country_code=country_code),
+            use_fallback_cache=True
+        )
+
+    def get_country_data(self, country):
+        return self.get(
+            url=url_country_data_data.format(country=country),
+            use_fallback_cache=True
+        )
+
+    def get_cia_world_factbook_data(self, country, data_key):
+        return self.get(
+            url=url_cia_world_factbook_data,
+            params={'country': country, 'data_key': data_key},
+            use_fallback_cache=True
+        )
+
+    def get_population_data(self, country, target_ages):
+        return self.get(
+            url=url_population_data,
+            params={'country': country, 'target_ages': target_ages},
             use_fallback_cache=True
         )

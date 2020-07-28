@@ -1,4 +1,9 @@
 # Changelog
+## [22.1.0](https://pypi.org/project/directory-api-client/22.1.0/) (2020-07-28)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/200/files)
+GP2-188 target-research-data
+
+# Changelog
 ## [22.0.0](https://pypi.org/project/directory-api-client/22.0.0/) (2020-07-02)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/119/files)
 GP2-169-load-IMF-Data
