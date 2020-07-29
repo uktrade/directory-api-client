@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='directory_api_client',
-    version='22.0.0',
+    version='22.1.0',
     url='https://github.com/uktrade/directory-api-client',
     license='MIT',
     author='Department for International Trade',
@@ -19,7 +19,7 @@ setup(
     ],
     extras_require={
         'test': [
-            'codecov==2.0.15',
+            'codecov==2.1.7',
             'flake8==3.7.9',
             'pytest-cov==2.8.1',
             'pytest==5.3.5',
