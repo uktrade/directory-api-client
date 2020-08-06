@@ -1,4 +1,9 @@
 # Changelog
+## [22.2.0](https://pypi.org/project/directory-api-client/22.2.0/) (2020-08-04)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/201/files)
+GP2-315-route-to-market
+
+# Changelog
 ## [22.1.0](https://pypi.org/project/directory-api-client/22.1.0/) (2020-07-28)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/200/files)
 GP2-188 target-research-data
