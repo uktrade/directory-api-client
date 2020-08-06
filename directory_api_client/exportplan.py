@@ -13,6 +13,12 @@ url_exportplan_objectives_detail = '/exportplan/company-objectives/{pk}/'
 url_exportplan_objectives_list = '/exportplan/company-objectives/'
 
 
+url_route_to_market_create = '/exportplan/route-to-markets/'
+url_route_to_market_update = '/exportplan/route-to-markets/{pk}/'
+url_route_to_market_detail = '/exportplan/route-to-markets/{pk}/'
+url_route_to_market_list = '/exportplan/route-to-markets/'
+
+
 class ExportPlanAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
 
@@ -63,3 +69,33 @@ class ExportPlanAPIClient(AbstractAPIClient):
 
     def exportplan_objectives_list(self, sso_session_id):
         return self.get(url=url_exportplan_objectives_list, authenticator=self.authenticator(sso_session_id))
+
+    def route_to_market_update(self, sso_session_id, id, data):
+        return self.patch(
+            url=url_route_to_market_update.format(pk=id),
+            data=data,
+            authenticator=self.authenticator(sso_session_id)
+        )
+
+    def route_to_market_delete(self, sso_session_id, id):
+        return self.delete(
+            url=url_route_to_market_update.format(pk=id),
+            authenticator=self.authenticator(sso_session_id)
+        )
+
+    def route_to_market_detail(self, sso_session_id, id):
+        return self.get(
+            url=url_route_to_market_detail.format(pk=id),
+            use_fallback_cache=True,
+            authenticator=self.authenticator(sso_session_id)
+        )
+
+    def route_to_market_create(self, sso_session_id, data):
+        return self.post(
+            url=url_route_to_market_create,
+            data=data,
+            authenticator=self.authenticator(sso_session_id)
+        )
+
+    def route_to_market_list(self, sso_session_id):
+        return self.get(url=url_route_to_market_list, authenticator=self.authenticator(sso_session_id))
