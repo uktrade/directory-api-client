@@ -146,3 +146,51 @@ def test_route_to_market_delete(requests_mock, client):
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_target_market_documents_list(client, requests_mock):
+    url = 'https://example.com/exportplan/target-market-documents/'
+    requests_mock.get(url)
+
+    client.target_market_documents_list(sso_session_id=2)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_target_market_documents_retrieve(client, requests_mock):
+    url = 'https://example.com/exportplan/target-market-documents/123/'
+    requests_mock.get(url)
+    client.target_market_documents_detail(id='123', sso_session_id=2)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_target_market_documents_create(requests_mock, client):
+    url = 'https://example.com/exportplan/target-market-documents/'
+    requests_mock.post(url)
+    client.target_market_documents_create(sso_session_id=2, data={'document_name': 'new doc'})
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {'document_name': 'new doc'}
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_target_market_documents_update(requests_mock, client):
+    url = 'https://example.com/exportplan/target-market-documents/123/'
+    requests_mock.patch(url)
+    client.target_market_documents_update(sso_session_id=2, id=123, data={'document_name': 'new doc'})
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {'document_name': 'new doc'}
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_target_market_documents_delete(requests_mock, client):
+    url = 'https://example.com/exportplan/target-market-documents/123/'
+    requests_mock.delete(url)
+    client.target_market_documents_delete(sso_session_id=2, id=123)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'

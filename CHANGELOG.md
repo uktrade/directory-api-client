@@ -1,4 +1,10 @@
 # Changelog
+# Changelog
+
+## [22.3.0](https://pypi.org/project/directory-api-client/22.3.0/) (2020-08-18)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/202/files)
+GP2-339-add-adaption-tm-documents
+
 ## [22.2.0](https://pypi.org/project/directory-api-client/22.2.0/) (2020-08-04)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/201/files)
 GP2-315-route-to-market
