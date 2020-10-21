@@ -1,5 +1,8 @@
 # Changelog
-# Changelog
+
+## [22.4.0](https://pypi.org/project/directory-api-client/22.4.0/) (2020-10-21)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/123/files)
+* GP2-510 -  Suggested Countries endpoint
 
 ## [22.3.0](https://pypi.org/project/directory-api-client/22.3.0/) (2020-08-18)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/122/files)
