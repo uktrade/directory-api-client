@@ -23,6 +23,7 @@ url_collaborator_invite_detail = '/supplier/company/collaborator-invite/{invite_
 url_collaborator_role_change = '/supplier/company/change-collaborator-role/{sso_id}/'
 url_collaboration_request = '/supplier/company/collaborator-request/'
 url_collaboration_request_detail = '/supplier/company/collaborator-request/{request_key}/'
+url_company_delete_by_sso_id = '/supplier/company/{sso_id}/{request_key}/'
 
 
 class CompanyAPIClient(AbstractAPIClient):
@@ -187,4 +188,10 @@ class CompanyAPIClient(AbstractAPIClient):
         return self.delete(
             url=url_collaboration_request_detail.format(request_key=request_key),
             authenticator=self.authenticator(sso_session_id),
+        )
+
+    def delete_company_by_sso_id(self, sso_id, request_key):
+        return self.delete(
+            url=url_company_delete_by_sso_id.format(sso_id=sso_id, request_key=request_key),
+            authenticator=self.authenticator(sso_id),
         )

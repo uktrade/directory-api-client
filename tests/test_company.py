@@ -434,3 +434,14 @@ def test_collaboration_request_delete(requests_mock, client):
     client.collaboration_request_delete(sso_session_id=2, request_key='123')
 
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_delete_company_handles_user(requests_mock, client):
+    url = 'https://example.com/supplier/company/1/123/'
+    requests_mock.delete(url)
+
+    client.delete_company_by_sso_id(sso_id=1, request_key='123')
+
+    assert requests_mock.last_request.url == url
+
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 1'

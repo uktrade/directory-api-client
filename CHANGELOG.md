@@ -1,5 +1,11 @@
 # Changelog
 
+
+## [22.5.0](https://pypi.org/project/directory-api-client/22.5.0/) (2020-10-21)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/124/files)
+* GBAU-217 -  Data retention - added delete endpoint for complete deletion by sso_id
+
+
 ## [22.4.0](https://pypi.org/project/directory-api-client/22.4.0/) (2020-10-21)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/123/files)
 * GP2-510 -  Suggested Countries endpoint
