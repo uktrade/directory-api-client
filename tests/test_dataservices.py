@@ -75,3 +75,11 @@ def test_get_population_data(client, requests_mock):
     client.get_population_data(country='China', target_ages=['0-20', '21-35'])
 
     assert requests_mock.last_request.url == url
+
+
+def test_get_population_data_by_country(client, requests_mock):
+    url = 'https://example.com/dataservices/population-data-by-country/?country=Germany'
+    requests_mock.get(url)
+    client.get_population_data_by_country(country='Germany')
+
+    assert requests_mock.last_request.url == url
