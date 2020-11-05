@@ -1,7 +1,11 @@
 # Changelog
 
+## [22.6.0](https://pypi.org/project/directory-api-client/22.6.0/) (2020-11-04)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/125/files)
+* GB2-918 - Added endpoint for target market data
 
-## [22.5.0](https://pypi.org/project/directory-api-client/22.5.0/) (2020-10-21)
+
+## [22.5.0](https://pypi.org/project/directory-api-client/22.5.0/) (2020-11-03)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/124/files)
 * GBAU-217 -  Data retention - added delete endpoint for complete deletion by sso_id
 

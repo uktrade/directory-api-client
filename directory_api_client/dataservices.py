@@ -8,6 +8,7 @@ url_world_economic_outlook_data = 'dataservices/world-economic-outlook/{country_
 url_country_data_data = 'dataservices/country-data/{country}/'
 url_cia_world_factbook_data = 'dataservices/cia-factbook-data/'
 url_population_data = 'dataservices/population-data/'
+url_population_data_by_country = 'dataservices/population-data-by-country/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -59,5 +60,12 @@ class DataServicesAPIClient(AbstractAPIClient):
         return self.get(
             url=url_population_data,
             params={'country': country, 'target_ages': target_ages},
+            use_fallback_cache=True
+        )
+
+    def get_population_data_by_country(self, country: list):
+        return self.get(
+            url=url_population_data_by_country,
+            params={'country': country},
             use_fallback_cache=True
         )
