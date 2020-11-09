@@ -1,5 +1,9 @@
 # Changelog
 
+## [22.7.0](https://pypi.org/project/directory-api-client/22.7.0/) (2020-11-09)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/126/files)
+* GB2-918 - Amended request param to plural
+
 ## [22.6.0](https://pypi.org/project/directory-api-client/22.6.0/) (2020-11-04)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/125/files)
 * GB2-918 - Added endpoint for target market data
