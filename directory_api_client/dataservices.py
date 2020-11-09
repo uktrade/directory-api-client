@@ -63,9 +63,9 @@ class DataServicesAPIClient(AbstractAPIClient):
             use_fallback_cache=True
         )
 
-    def get_population_data_by_country(self, country: list):
+    def get_population_data_by_country(self, countries: list):
         return self.get(
             url=url_population_data_by_country,
-            params={'country': country},
+            params={'countries': countries},
             use_fallback_cache=True
         )
