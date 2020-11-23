@@ -1,5 +1,9 @@
 # Changelog
 
+## [22.8.0](https://pypi.org/project/directory-api-client/22.8.0/) (2020-11-23)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/127/files)
+* GB2-1025 - Added endpoint for ComTrade's economy data
+
 ## [22.7.0](https://pypi.org/project/directory-api-client/22.7.0/) (2020-11-09)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/126/files)
 * GB2-918 - Amended request param to plural
