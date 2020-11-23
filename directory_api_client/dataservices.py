@@ -9,6 +9,7 @@ url_country_data_data = 'dataservices/country-data/{country}/'
 url_cia_world_factbook_data = 'dataservices/cia-factbook-data/'
 url_population_data = 'dataservices/population-data/'
 url_population_data_by_country = 'dataservices/population-data-by-country/'
+url_last_year_import_data_from_uk = 'dataservices/lastyearimportdatafromuk/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -68,4 +69,10 @@ class DataServicesAPIClient(AbstractAPIClient):
             url=url_population_data_by_country,
             params={'countries': countries},
             use_fallback_cache=True
+        )
+
+    def get_last_year_import_data_from_uk(self, commodity_code, countries):
+        return self.get(
+            url=url_last_year_import_data_from_uk,
+            params={'commodity_code': commodity_code, 'countries': countries}
         )
