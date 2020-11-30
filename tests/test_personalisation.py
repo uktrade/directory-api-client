@@ -57,13 +57,3 @@ def test_recommended_countries_by_sector(requests_mock, client):
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
-
-
-def test_suggested_countries_by_hs_code(requests_mock, client):
-    url = 'https://example.com/personalisation/suggested-countries/?hs_code=1'
-    requests_mock.get(url)
-    hs_code = {'1'}
-    client.suggested_countries_by_hs_code(sso_session_id=2, hs_code=hs_code)
-
-    assert requests_mock.last_request.url == url
-    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'

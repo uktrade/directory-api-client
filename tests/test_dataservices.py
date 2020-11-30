@@ -91,3 +91,12 @@ def test_get_last_year_import_data_from_uk(client, requests_mock):
     client.get_last_year_import_data_from_uk(countries='Germany', commodity_code=123456)
 
     assert requests_mock.last_request.url == url
+
+
+def test_suggested_countries_by_hs_code(requests_mock, client):
+    url = 'https://example.com/dataservices/suggested-countries/?hs_code=1'
+    requests_mock.get(url)
+    hs_code = {'1'}
+    client.suggested_countries_by_hs_code(hs_code=hs_code)
+
+    assert requests_mock.last_request.url == url
