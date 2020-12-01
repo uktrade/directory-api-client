@@ -1,5 +1,10 @@
 # Changelog
 
+
+## [22.9.0](https://pypi.org/project/directory-api-client/22.9.0/) (2020-11-30)
+[Full Changelog](https://github.com/uktrade/directory-api-client/pull/128/files)
+* GP2-1063 - Moved SuggestedCountries under dataservices app
+
 ## [22.8.0](https://pypi.org/project/directory-api-client/22.8.0/) (2020-11-23)
 [Full Changelog](https://github.com/uktrade/directory-api-client/pull/127/files)
 * GB2-1025 - Added endpoint for ComTrade's economy data

@@ -5,7 +5,6 @@ url_user_location_create = '/personalisation/user-location/'
 url_events = '/personalisation/events/'
 url_export_opportunities = '/personalisation/export-opportunities/?s={}'
 url_recommended_countries = '/personalisation/recommended-countries/'
-url_suggested_countries = '/personalisation/suggested-countries/'
 
 
 class PersonalisationAPIClient(AbstractAPIClient):
@@ -37,11 +36,4 @@ class PersonalisationAPIClient(AbstractAPIClient):
     ):
         return self.get(
             url=url_recommended_countries, params={'sector': sector, }, authenticator=self.authenticator(sso_session_id)
-        )
-
-    def suggested_countries_by_hs_code(
-        self, sso_session_id, hs_code
-    ):
-        return self.get(
-            url=url_suggested_countries, params={'hs_code': hs_code, }, authenticator=self.authenticator(sso_session_id)
         )
