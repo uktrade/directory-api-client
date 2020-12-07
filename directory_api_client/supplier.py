@@ -1,6 +1,6 @@
 from directory_client_core.authentication import SessionSSOAuthenticator
-from directory_api_client.base import AbstractAPIClient
 
+from directory_api_client.base import AbstractAPIClient
 
 url_unsubscribe = '/supplier/unsubscribe/'
 url_supplier_update = '/supplier/'

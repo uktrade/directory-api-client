@@ -1,6 +1,6 @@
 from directory_client_core.authentication import SessionSSOAuthenticator
-from directory_api_client.base import AbstractAPIClient
 
+from directory_api_client.base import AbstractAPIClient
 
 url_exportplan_create = '/exportplan/company-export-plan/'
 url_exportplan_update = '/exportplan/company-export-plan/{pk}/'
@@ -36,7 +36,7 @@ class ExportPlanAPIClient(AbstractAPIClient):
         return self.get(
             url=url_exportplan_detail.format(pk=id),
             use_fallback_cache=True,
-            authenticator=self.authenticator(sso_session_id)
+            authenticator=self.authenticator(sso_session_id),
         )
 
     def exportplan_create(self, sso_session_id, data):
@@ -49,27 +49,24 @@ class ExportPlanAPIClient(AbstractAPIClient):
         return self.patch(
             url=url_exportplan_objectives_update.format(pk=id),
             data=data,
-            authenticator=self.authenticator(sso_session_id)
+            authenticator=self.authenticator(sso_session_id),
         )
 
     def exportplan_objectives_delete(self, sso_session_id, id):
         return self.delete(
-            url=url_exportplan_objectives_update.format(pk=id),
-            authenticator=self.authenticator(sso_session_id)
+            url=url_exportplan_objectives_update.format(pk=id), authenticator=self.authenticator(sso_session_id)
         )
 
     def exportplan_objectives_detail(self, sso_session_id, id):
         return self.get(
             url=url_exportplan_objectives_detail.format(pk=id),
             use_fallback_cache=True,
-            authenticator=self.authenticator(sso_session_id)
+            authenticator=self.authenticator(sso_session_id),
         )
 
     def exportplan_objectives_create(self, sso_session_id, data):
         return self.post(
-            url=url_exportplan_objectives_create,
-            data=data,
-            authenticator=self.authenticator(sso_session_id)
+            url=url_exportplan_objectives_create, data=data, authenticator=self.authenticator(sso_session_id)
         )
 
     def exportplan_objectives_list(self, sso_session_id):
@@ -77,30 +74,23 @@ class ExportPlanAPIClient(AbstractAPIClient):
 
     def route_to_market_update(self, sso_session_id, id, data):
         return self.patch(
-            url=url_route_to_market_update.format(pk=id),
-            data=data,
-            authenticator=self.authenticator(sso_session_id)
+            url=url_route_to_market_update.format(pk=id), data=data, authenticator=self.authenticator(sso_session_id)
         )
 
     def route_to_market_delete(self, sso_session_id, id):
         return self.delete(
-            url=url_route_to_market_update.format(pk=id),
-            authenticator=self.authenticator(sso_session_id)
+            url=url_route_to_market_update.format(pk=id), authenticator=self.authenticator(sso_session_id)
         )
 
     def route_to_market_detail(self, sso_session_id, id):
         return self.get(
             url=url_route_to_market_detail.format(pk=id),
             use_fallback_cache=True,
-            authenticator=self.authenticator(sso_session_id)
+            authenticator=self.authenticator(sso_session_id),
         )
 
     def route_to_market_create(self, sso_session_id, data):
-        return self.post(
-            url=url_route_to_market_create,
-            data=data,
-            authenticator=self.authenticator(sso_session_id)
-        )
+        return self.post(url=url_route_to_market_create, data=data, authenticator=self.authenticator(sso_session_id))
 
     def route_to_market_list(self, sso_session_id):
         return self.get(url=url_route_to_market_list, authenticator=self.authenticator(sso_session_id))
@@ -109,27 +99,24 @@ class ExportPlanAPIClient(AbstractAPIClient):
         return self.patch(
             url=url_target_market_documents_update.format(pk=id),
             data=data,
-            authenticator=self.authenticator(sso_session_id)
+            authenticator=self.authenticator(sso_session_id),
         )
 
     def target_market_documents_delete(self, sso_session_id, id):
         return self.delete(
-            url=url_target_market_documents_update.format(pk=id),
-            authenticator=self.authenticator(sso_session_id)
+            url=url_target_market_documents_update.format(pk=id), authenticator=self.authenticator(sso_session_id)
         )
 
     def target_market_documents_detail(self, sso_session_id, id):
         return self.get(
             url=url_target_market_documents_detail.format(pk=id),
             use_fallback_cache=True,
-            authenticator=self.authenticator(sso_session_id)
+            authenticator=self.authenticator(sso_session_id),
         )
 
     def target_market_documents_create(self, sso_session_id, data):
         return self.post(
-            url=url_target_market_documents_create,
-            data=data,
-            authenticator=self.authenticator(sso_session_id)
+            url=url_target_market_documents_create, data=data, authenticator=self.authenticator(sso_session_id)
         )
 
     def target_market_documents_list(self, sso_session_id):

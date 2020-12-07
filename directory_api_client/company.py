@@ -2,7 +2,6 @@ from directory_client_core.authentication import SessionSSOAuthenticator
 
 from directory_api_client.base import AbstractAPIClient
 
-
 url_profile = '/supplier/company/'
 url_case_study_detail = '/supplier/company/case-study/{id}/'
 url_case_study_published_detail = '/public/case-study/{id}/'
@@ -45,7 +44,10 @@ class CompanyAPIClient(AbstractAPIClient):
         return self.get(url=url_profile, authenticator=self.authenticator(sso_session_id))
 
     def published_profile_retrieve(self, number):
-        return self.get(url=url_published_profile_detail.format(number=number), use_fallback_cache=True,)
+        return self.get(
+            url=url_published_profile_detail.format(number=number),
+            use_fallback_cache=True,
+        )
 
     def validate_company_number(self, number):
         return self.get(url=url_validate_company_number, params={'number': number})
@@ -76,8 +78,7 @@ class CompanyAPIClient(AbstractAPIClient):
 
     def case_study_delete(self, sso_session_id, case_study_id):
         return self.delete(
-            url=url_case_study_detail.format(id=case_study_id),
-            authenticator=self.authenticator(sso_session_id)
+            url=url_case_study_detail.format(id=case_study_id), authenticator=self.authenticator(sso_session_id)
         )
 
     def case_study_retrieve(self, sso_session_id, case_study_id):
@@ -105,7 +106,10 @@ class CompanyAPIClient(AbstractAPIClient):
         )
 
     def verify_identity_request(self, sso_session_id):
-        return self.post(url=url_verify_with_identity_request, authenticator=self.authenticator(sso_session_id),)
+        return self.post(
+            url=url_verify_with_identity_request,
+            authenticator=self.authenticator(sso_session_id),
+        )
 
     def search_find_a_supplier(self, **kwargs):
         return self.get(url=url_search_find_a_supplier, params=kwargs, use_fallback_cache=True)
@@ -136,7 +140,8 @@ class CompanyAPIClient(AbstractAPIClient):
     def collaborator_invite_retrieve(self, invite_key):
         """Retrieve the details of a collaboration invite"""
         return self.get(
-            url=url_collaborator_invite_detail.format(invite_key=invite_key), use_fallback_cache=True,
+            url=url_collaborator_invite_detail.format(invite_key=invite_key),
+            use_fallback_cache=True,
         )
 
     def collaborator_invite_list(self, sso_session_id):

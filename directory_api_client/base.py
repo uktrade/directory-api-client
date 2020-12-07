@@ -1,8 +1,6 @@
-import pkg_resources
-
 import directory_client_core.base
+import pkg_resources
 from directory_client_core.helpers import fallback
-
 from django.core.cache import caches
 
 
