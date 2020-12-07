@@ -15,4 +15,14 @@ publish:
 	python setup.py bdist_wheel; \
 	twine upload --username $$DIRECTORY_PYPI_USERNAME --password $$DIRECTORY_PYPI_PASSWORD dist/*
 
-.PHONY: clean test_requirements flake8 pytest publish
+# configuration for black and isort is in pyproject.toml
+autoformat:
+	isort $(PWD)
+	black $(PWD)
+
+checks:
+	isort $(PWD) --check
+	black $(PWD) --check --verbose
+	flake8 .
+
+.PHONY: clean test_requirements flake8 pytest publish autoformat checks

@@ -1,9 +1,8 @@
-from setuptools import setup, find_packages
-
+from setuptools import find_packages, setup
 
 setup(
     name='directory_api_client',
-    version='22.9.0',
+    version='22.9.1',
     url='https://github.com/uktrade/directory-api-client',
     license='MIT',
     author='Department for International Trade',
@@ -20,13 +19,17 @@ setup(
     extras_require={
         'test': [
             'codecov==2.1.7',
-            'flake8==3.7.9',
             'pytest-cov==2.8.1',
             'pytest==5.3.5',
             'requests_mock==1.7.0',
             'setuptools>=45.2.0,<50.0.0',
             'twine>=3.1.1,<4.0.0',
             'wheel>=0.34.2,<1.0.0',
+            'black==20.8b1',
+            'blacken-docs==1.6.0',
+            'isort==5.6.4',
+            'flake8==3.8.4',
+            'pre-commit-hooks==3.3.0',
         ]
     },
     classifiers=[
@@ -44,5 +47,5 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Software Development :: Libraries :: Python Modules',
-    ]
+    ],
 )
