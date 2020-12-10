@@ -1,6 +1,6 @@
 # Changelog
 
-## [22.9.1](https://pypi.org/project/directory-api-client/22.9.0/) (2020-12-08)
+## [22.9.1](https://pypi.org/project/directory-api-client/22.9.1/) (2020-12-10)
 * GP2-1068 - adopt Black auto-formatting + provide optional pre-commit config
 
 ## [22.9.0](https://pypi.org/project/directory-api-client/22.9.0/) (2020-11-30)
