@@ -4,9 +4,9 @@ from directory_api_client.buyer import BuyerAPIClient
 from directory_api_client.client import DirectoryAPIClient
 from directory_api_client.company import CompanyAPIClient
 from directory_api_client.enrolment import EnrolmentAPIClient
-from directory_api_client.supplier import SupplierAPIClient
 from directory_api_client.exporting import ExportingAPIClient
 from directory_api_client.personalisation import PersonalisationAPIClient
+from directory_api_client.supplier import SupplierAPIClient
 
 
 @pytest.fixture

@@ -1,5 +1,6 @@
 def pytest_configure():
     from django.conf import settings
+
     settings.configure(
         URLS_EXCLUDED_FROM_SIGNATURE_CHECK=[],
         DIRECTORY_API_CLIENT_BASE_URL='https://api.com',
@@ -12,5 +13,5 @@ def pytest_configure():
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
                 'LOCATION': 'unique-snowflake',
             }
-        }
+        },
     )

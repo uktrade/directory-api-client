@@ -2,14 +2,12 @@ from directory_client_core.authentication import SessionSSOAuthenticator
 
 from directory_api_client.base import AbstractAPIClient
 
-
 url_enrolment = '/enrolment/'
 url_preverified = '/enrolment/preverified-company/{key}/'
 url_preverified_claim = '/enrolment/preverified-company/{key}/claim/'
 
 
 class EnrolmentAPIClient(AbstractAPIClient):
-
     def send_form(self, form_data):
         return self.post(url=url_enrolment, data=form_data)
 
