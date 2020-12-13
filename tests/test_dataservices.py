@@ -86,9 +86,9 @@ def test_get_population_data_by_country(client, requests_mock):
 
 
 def test_get_last_year_import_data_from_uk(client, requests_mock):
-    url = 'https://example.com/dataservices/lastyearimportdatafromuk/?commodity_code=123456&countries=Germany'
+    url = 'https://example.com/dataservices/lastyearimportdatafromuk/?commodity_code=123456&country=Germany'
     requests_mock.get(url)
-    client.get_last_year_import_data_from_uk(countries='Germany', commodity_code=123456)
+    client.get_last_year_import_data_from_uk(country='Germany', commodity_code=123456)
 
     assert requests_mock.last_request.url == url
 

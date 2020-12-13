@@ -1,5 +1,8 @@
 # Changelog
 
+## [22.10.0](https://pypi.org/project/directory-api-client/22.10.0/) (2020-12-10)
+* GP2-1025 - Refactor comtrade endpoint
+
 ## [22.9.1](https://pypi.org/project/directory-api-client/22.9.1/) (2020-12-10)
 * GP2-1068 - adopt Black auto-formatting + provide optional pre-commit config
 
