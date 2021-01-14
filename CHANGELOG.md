@@ -1,5 +1,8 @@
 # Changelog
 
+## [22.11.0](https://pypi.org/project/directory-api-client/22.11.0/) (2021-01-14)
+* GP2-1258 - Add enpoint for society data
+
 ## [22.10.0](https://pypi.org/project/directory-api-client/22.10.0/) (2020-12-10)
 * GP2-1025 - Refactor comtrade endpoint
 
