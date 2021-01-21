@@ -194,3 +194,51 @@ def test_target_market_documents_delete(requests_mock, client):
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_funding_credit_options_list(client, requests_mock):
+    url = 'https://example.com/exportplan/funding-credit-options/'
+    requests_mock.get(url)
+
+    client.funding_credit_options_list(sso_session_id=2)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_funding_credit_options__retrieve(client, requests_mock):
+    url = 'https://example.com/exportplan/funding-credit-options/123/'
+    requests_mock.get(url)
+    client.funding_credit_options_detail(id='123', sso_session_id=2)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_funding_credit_options__create(requests_mock, client):
+    url = 'https://example.com/exportplan/funding-credit-options/'
+    requests_mock.post(url)
+    client.funding_credit_options_create(sso_session_id=2, data={'document_name': 'new doc'})
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {'document_name': 'new doc'}
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_funding_credit_options__update(requests_mock, client):
+    url = 'https://example.com/exportplan/funding-credit-options/123/'
+    requests_mock.patch(url)
+    client.funding_credit_options_update(sso_session_id=2, id=123, data={'document_name': 'new doc'})
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.json() == {'document_name': 'new doc'}
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_funding_credit_options__delete(requests_mock, client):
+    url = 'https://example.com/exportplan/funding-credit-options/123/'
+    requests_mock.delete(url)
+    client.funding_credit_options_delete(sso_session_id=2, id=123)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'

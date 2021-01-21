@@ -1,4 +1,6 @@
 # Changelog
+## [22.12.0](https://pypi.org/project/directory-api-client/22.12.0/) (2021-01-21)
+* GP2-1359 - add credit funding options methods
 
 ## [22.11.0](https://pypi.org/project/directory-api-client/22.11.0/) (2021-01-14)
 * GP2-1258 - Add enpoint for society data

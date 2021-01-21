@@ -23,6 +23,11 @@ url_target_market_documents_update = '/exportplan/target-market-documents/{pk}/'
 url_target_market_documents_detail = '/exportplan/target-market-documents/{pk}/'
 url_target_market_documents_list = '/exportplan/target-market-documents/'
 
+url_funding_credit_options_create = '/exportplan/funding-credit-options/'
+url_funding_credit_options_update = '/exportplan/funding-credit-options/{pk}/'
+url_funding_credit_options_detail = '/exportplan/funding-credit-options/{pk}/'
+url_funding_credit_options_list = '/exportplan/funding-credit-options/'
+
 
 class ExportPlanAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
@@ -121,3 +126,30 @@ class ExportPlanAPIClient(AbstractAPIClient):
 
     def target_market_documents_list(self, sso_session_id):
         return self.get(url=url_target_market_documents_list, authenticator=self.authenticator(sso_session_id))
+
+    def funding_credit_options_update(self, sso_session_id, id, data):
+        return self.patch(
+            url=url_funding_credit_options_update.format(pk=id),
+            data=data,
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def funding_credit_options_delete(self, sso_session_id, id):
+        return self.delete(
+            url=url_funding_credit_options_update.format(pk=id), authenticator=self.authenticator(sso_session_id)
+        )
+
+    def funding_credit_options_detail(self, sso_session_id, id):
+        return self.get(
+            url=url_funding_credit_options_detail.format(pk=id),
+            use_fallback_cache=True,
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def funding_credit_options_create(self, sso_session_id, data):
+        return self.post(
+            url=url_funding_credit_options_create, data=data, authenticator=self.authenticator(sso_session_id)
+        )
+
+    def funding_credit_options_list(self, sso_session_id):
+        return self.get(url=url_funding_credit_options_list, authenticator=self.authenticator(sso_session_id))
