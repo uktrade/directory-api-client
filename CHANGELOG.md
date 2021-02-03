@@ -1,9 +1,14 @@
 # Changelog
+
+## [22.13.0](https://pypi.org/project/directory-api-client/22.13.0/) (2021-02-03)
+* GP2-1344 - added trading blocs endpoint
+
+
 ## [22.12.0](https://pypi.org/project/directory-api-client/22.12.0/) (2021-01-21)
 * GP2-1359 - add credit funding options methods
 
 ## [22.11.0](https://pypi.org/project/directory-api-client/22.11.0/) (2021-01-14)
-* GP2-1258 - Add enpoint for society data
+* GP2-1258 - Add endpoint for society data
 
 ## [22.10.0](https://pypi.org/project/directory-api-client/22.10.0/) (2020-12-10)
 * GP2-1025 - Refactor comtrade endpoint

@@ -12,6 +12,7 @@ url_society_data_by_country = 'dataservices/society-data-by-country/'
 url_last_year_import_data = 'dataservices/lastyearimportdata/'
 url_last_year_import_data_from_uk = 'dataservices/lastyearimportdatafromuk/'
 url_suggested_countries = '/dataservices/suggested-countries/'
+url_trading_blocs_by_country = '/dataservices/trading-blocs/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -62,5 +63,13 @@ class DataServicesAPIClient(AbstractAPIClient):
             url=url_suggested_countries,
             params={
                 'hs_code': hs_code,
+            },
+        )
+
+    def trading_blocs_by_country(self, iso2):
+        return self.get(
+            url=url_trading_blocs_by_country,
+            params={
+                'iso2': iso2,
             },
         )
