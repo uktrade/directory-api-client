@@ -108,3 +108,12 @@ def test_suggested_countries_by_hs_code(requests_mock, client):
     client.suggested_countries_by_hs_code(hs_code=hs_code)
 
     assert requests_mock.last_request.url == url
+
+
+def test_trading_blocs_by_country(requests_mock, client):
+    url = 'https://example.com/dataservices/trading-blocs/?iso2=IN'
+    requests_mock.get(url)
+    iso2 = {'IN'}
+    client.trading_blocs_by_country(iso2=iso2)
+
+    assert requests_mock.last_request.url == url
