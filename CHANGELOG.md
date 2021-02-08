@@ -1,5 +1,5 @@
 # Changelog
-## [22.14.0](https://pypi.org/project/directory-api-client/22.14.0/) (2021-02-05)
+## [22.14.0](https://pypi.org/project/directory-api-client/22.14.0/) (2021-02-08)
 * NOTICKET - add generic model export plan CRUD endpoints
 
 ## [22.13.0](https://pypi.org/project/directory-api-client/22.13.0/) (2021-02-03)
