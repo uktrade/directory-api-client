@@ -29,6 +29,11 @@ url_funding_credit_options_detail = '/exportplan/funding-credit-options/{pk}/'
 url_funding_credit_options_list = '/exportplan/funding-credit-options/'
 
 
+url_model_object_create = 'exportplan/export-plan-model-object-list-create/'
+url_model_object_update_delete = 'exportplan/export-plan-model-object-update-delete/{pk}/'
+url_model_object_details = 'exportplan/export-plan-model-object-detail/{pk}/{model_name}/'
+
+
 class ExportPlanAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
 
@@ -153,3 +158,32 @@ class ExportPlanAPIClient(AbstractAPIClient):
 
     def funding_credit_options_list(self, sso_session_id):
         return self.get(url=url_funding_credit_options_list, authenticator=self.authenticator(sso_session_id))
+
+    def model_object_update(self, sso_session_id, id, data, model_name):
+        data['model_name'] = model_name
+        return self.patch(
+            url=url_model_object_update_delete.format(pk=id),
+            data=data,
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def model_object_delete(self, sso_session_id, id, model_name):
+        data = {'model_name': model_name}
+        return self.delete(
+            url=url_model_object_update_delete.format(pk=id),
+            data=data,
+            authenticator=self.authenticator(sso_session_id)
+        )
+
+    def model_object_detail(self, sso_session_id, id, model_name):
+        return self.get(
+            url=url_model_object_details.format(pk=id, model_name=model_name),
+            use_fallback_cache=True,
+            authenticator=self.authenticator(sso_session_id),
+        )
+
+    def model_object_create(self, sso_session_id, data, model_name):
+        data['model_name'] = model_name
+        return self.post(
+            url=url_model_object_create, data=data, authenticator=self.authenticator(sso_session_id)
+        )
