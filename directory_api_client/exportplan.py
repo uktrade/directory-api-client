@@ -172,7 +172,7 @@ class ExportPlanAPIClient(AbstractAPIClient):
         return self.delete(
             url=url_model_object_update_delete.format(pk=id),
             data=data,
-            authenticator=self.authenticator(sso_session_id)
+            authenticator=self.authenticator(sso_session_id),
         )
 
     def model_object_detail(self, sso_session_id, id, model_name):
@@ -184,6 +184,4 @@ class ExportPlanAPIClient(AbstractAPIClient):
 
     def model_object_create(self, sso_session_id, data, model_name):
         data['model_name'] = model_name
-        return self.post(
-            url=url_model_object_create, data=data, authenticator=self.authenticator(sso_session_id)
-        )
+        return self.post(url=url_model_object_create, data=data, authenticator=self.authenticator(sso_session_id))
