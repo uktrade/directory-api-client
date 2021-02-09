@@ -1,6 +1,7 @@
 # Changelog
 ## [22.14.0](https://pypi.org/project/directory-api-client/22.14.0/) (2021-02-08)
 * NOTICKET - add generic model object export plan CRUD endpoints
+* NOTICKET - upgrade pip install on publish and test
 
 ## [22.13.0](https://pypi.org/project/directory-api-client/22.13.0/) (2021-02-03)
 * GP2-1344 - added trading blocs endpoint
