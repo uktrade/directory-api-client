@@ -46,8 +46,8 @@ jobs:
       - run:
           command: |
             python3 -m venv .venv
-            pip install --upgrade pip
             . .venv/bin/activate
+            pip install --upgrade pip
             make test_requirements
             make publish
 
