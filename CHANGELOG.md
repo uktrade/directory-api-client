@@ -1,4 +1,7 @@
 # Changelog
+
+* GP2-1398 - added multiple country endpoints for import data and country data
+
 ## [22.14.0](https://pypi.org/project/directory-api-client/22.14.0/) (2021-02-08)
 * NOTICKET - add generic model object export plan CRUD endpoints
 * NOTICKET - upgrade pip install on publish and test
