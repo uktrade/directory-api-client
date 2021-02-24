@@ -60,6 +60,11 @@ def test_get_country_data(client, requests_mock):
 
     assert requests_mock.last_request.url == url
 
+def test_get_country_data_by_country(client, requests_mock):
+    url = 'https://example.com/dataservices/country-data/'
+    requests_mock.get(url)
+    client.get_country_data_by_country(countries=['FR','BE'], fields=['TestModel'])
+    assert requests_mock.last_request.url == f'{url}?countries=FR&countries=BE&fields=TestModel'
 
 def test_get_cia_world_factbook_data(client, requests_mock):
     url = 'https://example.com/dataservices/cia-factbook-data/?country=China&data_key=government%2C+languages'
@@ -89,14 +94,6 @@ def test_get_society_data_by_country(client, requests_mock):
     url = 'https://example.com/dataservices/society-data-by-country/?countries=Germany'
     requests_mock.get(url)
     client.get_society_data_by_country(countries='Germany')
-
-    assert requests_mock.last_request.url == url
-
-
-def test_get_last_year_import_data_from_uk(client, requests_mock):
-    url = 'https://example.com/dataservices/lastyearimportdatafromuk/?commodity_code=123456&country=Germany'
-    requests_mock.get(url)
-    client.get_last_year_import_data_from_uk(country='Germany', commodity_code=123456)
 
     assert requests_mock.last_request.url == url
 
