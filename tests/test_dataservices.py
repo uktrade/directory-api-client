@@ -60,13 +60,11 @@ def test_get_country_data(client, requests_mock):
 
     assert requests_mock.last_request.url == url
 
-
 def test_get_country_data_by_country(client, requests_mock):
     url = 'https://example.com/dataservices/country-data/'
     requests_mock.get(url)
-    client.get_country_data_by_country(countries=['FR', 'BE'], fields=['TestModel'])
+    client.get_country_data_by_country(countries=['FR','BE'], fields=['TestModel'])
     assert requests_mock.last_request.url == f'{url}?countries=FR&countries=BE&fields=TestModel'
-
 
 def test_get_cia_world_factbook_data(client, requests_mock):
     url = 'https://example.com/dataservices/cia-factbook-data/?country=China&data_key=government%2C+languages'
@@ -98,6 +96,14 @@ def test_get_society_data_by_country(client, requests_mock):
     client.get_society_data_by_country(countries='Germany')
 
     assert requests_mock.last_request.url == url
+
+
+def test_get_last_year_import_data_by_country(client, requests_mock):
+    url = 'https://example.com/dataservices/lastyearimportdatabycountry/'
+    requests_mock.get(url)
+    client.get_last_year_import_data_by_country(countries=['GE','BE'], commodity_code=123456)
+
+    assert requests_mock.last_request.url == f'{url}?commodity_code=123456&countries=GE&countries=BE'
 
 
 def test_suggested_countries_by_hs_code(requests_mock, client):
