@@ -4,13 +4,14 @@ url_corruption_perceptions_index = 'dataservices/corruption-perceptions-index/{c
 url_ease_of_doing_business = 'dataservices/easeofdoingbusiness/{country_code}/'
 url_historical_import_data = 'dataservices/historicalimportdata/'
 url_world_economic_outlook_data = 'dataservices/world-economic-outlook/{country_code}/'
-url_country_data_data = 'dataservices/country-data/{country}/'
+url_country_data = 'dataservices/country-data/{country}/'
+url_country_data_by_country = 'dataservices/country-data/'
 url_cia_world_factbook_data = 'dataservices/cia-factbook-data/'
 url_population_data = 'dataservices/population-data/'
 url_population_data_by_country = 'dataservices/population-data-by-country/'
 url_society_data_by_country = 'dataservices/society-data-by-country/'
 url_last_year_import_data = 'dataservices/lastyearimportdata/'
-url_last_year_import_data_from_uk = 'dataservices/lastyearimportdatafromuk/'
+url_last_year_import_data_by_country = 'dataservices/lastyearimportdatabycountry/'
 url_suggested_countries = '/dataservices/suggested-countries/'
 url_trading_blocs_by_country = '/dataservices/trading-blocs/'
 
@@ -35,7 +36,10 @@ class DataServicesAPIClient(AbstractAPIClient):
         return self.get(url=url_world_economic_outlook_data.format(country_code=country_code), use_fallback_cache=True)
 
     def get_country_data(self, country):
-        return self.get(url=url_country_data_data.format(country=country), use_fallback_cache=True)
+        return self.get(url=url_country_data.format(country=country), use_fallback_cache=True)
+
+    def get_country_data_by_country(self, countries, fields):
+        return self.get(url=url_country_data_by_country, params={'countries': countries, 'fields': fields})
 
     def get_cia_world_factbook_data(self, country, data_key):
         return self.get(
@@ -53,9 +57,9 @@ class DataServicesAPIClient(AbstractAPIClient):
     def get_society_data_by_country(self, countries: list):
         return self.get(url=url_society_data_by_country, params={'countries': countries}, use_fallback_cache=True)
 
-    def get_last_year_import_data_from_uk(self, commodity_code, country):
+    def get_last_year_import_data_by_country(self, commodity_code, countries: list):
         return self.get(
-            url=url_last_year_import_data_from_uk, params={'commodity_code': commodity_code, 'country': country}
+            url=url_last_year_import_data_by_country, params={'commodity_code': commodity_code, 'countries': countries}
         )
 
     def suggested_countries_by_hs_code(self, hs_code):
