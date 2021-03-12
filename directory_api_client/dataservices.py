@@ -2,15 +2,12 @@ from directory_api_client.base import AbstractAPIClient
 
 url_corruption_perceptions_index = 'dataservices/corruption-perceptions-index/{country_code}/'
 url_ease_of_doing_business = 'dataservices/easeofdoingbusiness/{country_code}/'
-url_historical_import_data = 'dataservices/historicalimportdata/'
-url_world_economic_outlook_data = 'dataservices/world-economic-outlook/{country_code}/'
 url_country_data = 'dataservices/country-data/{country}/'
 url_country_data_by_country = 'dataservices/country-data/'
 url_cia_world_factbook_data = 'dataservices/cia-factbook-data/'
 url_population_data = 'dataservices/population-data/'
 url_population_data_by_country = 'dataservices/population-data-by-country/'
 url_society_data_by_country = 'dataservices/society-data-by-country/'
-url_last_year_import_data = 'dataservices/lastyearimportdata/'
 url_last_year_import_data_by_country = 'dataservices/lastyearimportdatabycountry/'
 url_suggested_countries = '/dataservices/suggested-countries/'
 url_trading_blocs_by_country = '/dataservices/trading-blocs/'
@@ -25,15 +22,6 @@ class DataServicesAPIClient(AbstractAPIClient):
             url=url_ease_of_doing_business.format(country_code=country_code),
             use_fallback_cache=True,
         )
-
-    def get_last_year_import_data(self, commodity_code, country):
-        return self.get(url=url_last_year_import_data, params={'commodity_code': commodity_code, 'country': country})
-
-    def get_historical_import_data(self, commodity_code, country):
-        return self.get(url=url_historical_import_data, params={'commodity_code': commodity_code, 'country': country})
-
-    def get_world_economic_outlook_data(self, country_code):
-        return self.get(url=url_world_economic_outlook_data.format(country_code=country_code), use_fallback_cache=True)
 
     def get_country_data(self, country):
         return self.get(url=url_country_data.format(country=country), use_fallback_cache=True)
