@@ -29,30 +29,6 @@ def test_get_easeofdoingbusiness(client, requests_mock):
     assert requests_mock.last_request.url == url
 
 
-def test_get_lastyearimportdata(requests_mock, client):
-    url = 'https://example.com/dataservices/lastyearimportdata/?commodity_code=1234&country=China'
-    requests_mock.get(url)
-    client.get_last_year_import_data(commodity_code=1234, country='China')
-
-    assert requests_mock.last_request.url == url
-
-
-def test_get_historicalimportdata(requests_mock, client):
-    url = 'https://example.com/dataservices/historicalimportdata/?commodity_code=1234&country=China'
-    requests_mock.get(url)
-    client.get_historical_import_data(commodity_code=1234, country='China')
-
-    assert requests_mock.last_request.url == url
-
-
-def test_get_world_exconomic_outlook_data(client, requests_mock):
-    url = 'https://example.com/dataservices/world-economic-outlook/CHN/'
-    requests_mock.get(url)
-    client.get_world_economic_outlook_data(country_code='CHN')
-
-    assert requests_mock.last_request.url == url
-
-
 def test_get_country_data(client, requests_mock):
     url = 'https://example.com/dataservices/country-data/China/'
     requests_mock.get(url)
