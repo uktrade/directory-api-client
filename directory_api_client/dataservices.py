@@ -68,6 +68,4 @@ class DataServicesAPIClient(AbstractAPIClient):
         )
 
     def get_trade_barriers(self, sectors: list, countries: list):
-        return self.get(
-            url=url_trade_barriers, params={'sectors': sectors, 'countries': countries}
-        )
+        return self.get(url=url_trade_barriers, params={'sectors': sectors, 'countries': countries})
