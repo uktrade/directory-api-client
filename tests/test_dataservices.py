@@ -100,3 +100,11 @@ def test_trading_blocs_by_country(requests_mock, client):
     client.trading_blocs_by_country(iso2=iso2)
 
     assert requests_mock.last_request.url == url
+
+
+def test_get_trade_barriers_by_countries_sectors(requests_mock, client):
+    url = 'https://example.com/dataservices/trade-barriers/'
+    requests_mock.get(url)
+    client.get_trade_barriers(countries=['GE', 'BE'], sectors=['Automotive', 'Technology'])
+
+    assert requests_mock.last_request.url == f'{url}?sectors=Automotive&sectors=Technology&countries=GE&countries=BE'

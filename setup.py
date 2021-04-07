@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='directory_api_client',
-    version='22.16.0',
+    version='22.17.0',
     url='https://github.com/uktrade/directory-api-client',
     license='MIT',
     author='Department for International Trade',
