@@ -1,7 +1,7 @@
 # Changelog
 
 ## [22.16.0](https://pypi.org/project/directory-api-client/22.16.0/) (2021-04-07)
-- GP2-1920 Update countries to fix population data
+- GP2-1709 -trade barrier integratio
 
 ## [22.15.0](https://pypi.org/project/directory-api-client/22.15.0/) (2021-02-26)
 * GP2-1398 - added multiple country endpoints for import data and country data
