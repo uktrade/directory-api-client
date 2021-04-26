@@ -1,4 +1,6 @@
 # Changelog
+## [22.18.0](https://pypi.org/project/directory-api-client/22.18.0/) (2021-04-06)
+- GP2-2336-collapse-api-object remove redudant collection add/remove/delete methods
 
 ## [22.17.0](https://pypi.org/project/directory-api-client/22.17.0/) (2021-04-07)
 - GP2-1709 -trade barrier integratio
