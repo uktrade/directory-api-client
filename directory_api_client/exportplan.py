@@ -11,6 +11,8 @@ url_model_object_create = 'exportplan/export-plan-model-object-list-create/'
 url_model_object_update_delete = 'exportplan/export-plan-model-object-update-delete/{pk}/'
 url_model_object_details = 'exportplan/export-plan-model-object-detail/{pk}/{model_name}/'
 
+url_exportplan_pdf_upload = 'exportplan/pdf-upload/'
+
 
 class ExportPlanAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
@@ -59,3 +61,14 @@ class ExportPlanAPIClient(AbstractAPIClient):
     def model_object_create(self, sso_session_id, data, model_name):
         data['model_name'] = model_name
         return self.post(url=url_model_object_create, data=data, authenticator=self.authenticator(sso_session_id))
+
+    def pdf_upload(self, sso_session_id, data):
+        files = {}
+        if 'pdf_file' in data:
+            files['pdf_file'] = data.pop('pdf_file')
+        return self.post(
+            url=url_exportplan_pdf_upload,
+            data=data,
+            files=files,
+            authenticator=self.authenticator(sso_session_id),
+        )
