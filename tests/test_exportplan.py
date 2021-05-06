@@ -1,3 +1,5 @@
+from io import StringIO
+
 import pytest
 
 from directory_api_client.exportplan import ExportPlanAPIClient
@@ -87,4 +89,21 @@ def test_model_object_delete(requests_mock, client):
     client.model_object_delete(sso_session_id=2, id=123, model_name='mymodel')
 
     assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
+def test_pdf_upload(requests_mock, client):
+    url = 'https://example.com/exportplan/pdf-upload/'
+    requests_mock.post(url)
+
+    data = {
+        'companyexportplan': 1,
+        'pdf_file': StringIO('hello'),
+    }
+    client.pdf_upload(sso_session_id=2, data=data)
+
+    assert requests_mock.last_request.url == url
+    assert 'Content-Disposition: form-data;' in requests_mock.last_request.text
+    assert 'name="companyexportplan"\r\n\r\n1\r\n' in requests_mock.last_request.text
+    assert 'filename="pdf_file"\r\n\r\nhello\r\n' in requests_mock.last_request.text
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'

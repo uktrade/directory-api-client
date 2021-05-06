@@ -1,4 +1,7 @@
 # Changelog
+## [22.19.0](https://pypi.org/project/directory-api-client/22.19.0/) (2021-05-04)
+- GP2-2401- ahh method for export plan pdf save
+
 ## [22.18.0](https://pypi.org/project/directory-api-client/22.18.0/) (2021-04-06)
 - GP2-2336-collapse-api-object remove redudant collection add/remove/delete methods
 
