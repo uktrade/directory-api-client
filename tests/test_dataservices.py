@@ -13,30 +13,6 @@ def client():
     )
 
 
-def test_get_corruption_perceptions_index(client, requests_mock):
-    url = 'https://example.com/dataservices/corruption-perceptions-index/CHN/'
-    requests_mock.get(url)
-    client.get_corruption_perceptions_index(country_code='CHN')
-
-    assert requests_mock.last_request.url == url
-
-
-def test_get_easeofdoingbusiness(client, requests_mock):
-    url = 'https://example.com/dataservices/easeofdoingbusiness/CHN/'
-    requests_mock.get(url)
-    client.get_ease_of_doing_business(country_code='CHN')
-
-    assert requests_mock.last_request.url == url
-
-
-def test_get_country_data(client, requests_mock):
-    url = 'https://example.com/dataservices/country-data/China/'
-    requests_mock.get(url)
-    client.get_country_data(country='China')
-
-    assert requests_mock.last_request.url == url
-
-
 def test_get_country_data_by_country(client, requests_mock):
     url = 'https://example.com/dataservices/country-data/'
     requests_mock.get(url)
