@@ -1,4 +1,8 @@
 # Changelog
+
+## [22.20.1](https://pypi.org/project/directory-api-client/22.20.1/) (2021-06-15)
+- GP2-2841 - Upgrading python version for CircleCI images
+
 ## [22.20.0](https://pypi.org/project/directory-api-client/22.20.0/) (2021-06-07)
 - GP2-2856 - remove unused api calls
 
