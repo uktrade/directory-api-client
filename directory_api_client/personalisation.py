@@ -7,7 +7,7 @@ url_events = '/personalisation/events/'
 url_export_opportunities = '/personalisation/export-opportunities/?s={}'
 url_recommended_countries = '/personalisation/recommended-countries/'
 url_user_product = '/personalisation/user-products/'
-
+url_user_market = '/personalisation/user-markets/'
 
 class PersonalisationAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
@@ -39,3 +39,9 @@ class PersonalisationAPIClient(AbstractAPIClient):
 
     def add_update_user_product(self, sso_session_id, data):
         return self.post(url=url_user_product, data=data, authenticator=self.authenticator(sso_session_id))
+
+    def get_user_markets(self, sso_session_id):
+        return self.get(url=url_user_market, authenticator=self.authenticator(sso_session_id))
+
+    def add_update_user_market(self, sso_session_id, data):
+        return self.post(url=url_user_market, data=data, authenticator=self.authenticator(sso_session_id))
