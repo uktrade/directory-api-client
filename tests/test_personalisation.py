@@ -79,7 +79,7 @@ def test_get_user_markets(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def add_update_user_product(requests_mock, client):
+def test_add_update_user_product(requests_mock, client):
     url = 'https://example.com/personalisation/user-products/'
     requests_mock.post(url)
     data = {'my_product': 'sample'}
@@ -89,7 +89,7 @@ def add_update_user_product(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
-def add_update_user_market(requests_mock, client):
+def test_add_update_user_market(requests_mock, client):
     url = 'https://example.com/personalisation/user-markets/'
     requests_mock.post(url)
     data = {'my_market': 'sample'}
