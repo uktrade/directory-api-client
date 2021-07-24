@@ -1,4 +1,7 @@
 # Changelog
+## [22.21.0](https://pypi.org/project/directory-api-client/22.21.0/) (2021-07-24)
+- GP2-3115 - remodel-multiple-products
+
 ## [22.20.0](https://pypi.org/project/directory-api-client/22.20.0/) (2021-06-07)
 - GP2-2856 - remove unused api calls
 

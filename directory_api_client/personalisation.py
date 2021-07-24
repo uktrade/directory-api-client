@@ -9,6 +9,7 @@ url_recommended_countries = '/personalisation/recommended-countries/'
 url_user_product = '/personalisation/user-products/'
 url_user_market = '/personalisation/user-markets/'
 
+
 class PersonalisationAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
 
