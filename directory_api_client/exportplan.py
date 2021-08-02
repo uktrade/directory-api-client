@@ -13,6 +13,7 @@ url_model_object_details = 'exportplan/export-plan-model-object-detail/{pk}/{mod
 
 url_exportplan_pdf_upload = 'exportplan/pdf-upload/'
 
+url_exportplan_detail_list = '/exportplan/export-plan-list/'
 
 class ExportPlanAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
@@ -72,3 +73,6 @@ class ExportPlanAPIClient(AbstractAPIClient):
             files=files,
             authenticator=self.authenticator(sso_session_id),
         )
+
+    def exportplan_detail_list(self, sso_session_id):
+        return self.get(url=url_exportplan_detail_list, authenticator=self.authenticator(sso_session_id))
