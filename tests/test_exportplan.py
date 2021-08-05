@@ -24,6 +24,14 @@ def test_exportplan_retrieve(client, requests_mock):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
+def test_exportplan_detail_list(client, requests_mock):
+    url = 'https://example.com/exportplan/detail-list/'
+    requests_mock.get(url)
+    client.detail_list(sso_session_id=2)
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
 def test_exportplan_create(requests_mock, client):
     url = 'https://example.com/exportplan/create/'
     requests_mock.post(url)
