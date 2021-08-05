@@ -19,19 +19,19 @@ url_exportplan_create = 'exportplan/create/'
 class ExportPlanAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
 
-    def exportplan_update(self, sso_session_id, id, data):
+    def update(self, sso_session_id, id, data):
         return self.patch(
             url=url_exportplan_update.format(pk=id), data=data, authenticator=self.authenticator(sso_session_id)
         )
 
-    def exportplan_detail(self, sso_session_id, id):
+    def detail(self, sso_session_id, id):
         return self.get(
             url=url_exportplan_detail.format(pk=id),
             use_fallback_cache=True,
             authenticator=self.authenticator(sso_session_id),
         )
 
-    def exportplan_create(self, sso_session_id, data):
+    def create(self, sso_session_id, data):
         return self.post(url=url_exportplan_create, data=data, authenticator=self.authenticator(sso_session_id))
 
     def model_object_update(self, sso_session_id, id, data, model_name):
@@ -72,5 +72,5 @@ class ExportPlanAPIClient(AbstractAPIClient):
             authenticator=self.authenticator(sso_session_id),
         )
 
-    def exportplan_detail_list(self, sso_session_id):
+    def detail_list(self, sso_session_id):
         return self.get(url=url_exportplan_detail_list, authenticator=self.authenticator(sso_session_id))
