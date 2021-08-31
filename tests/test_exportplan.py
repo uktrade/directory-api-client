@@ -42,6 +42,15 @@ def test_exportplan_create(requests_mock, client):
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
+def test_exportplan_delete(requests_mock, client):
+    url = 'https://example.com/exportplan/company-export-plan/123/'
+    requests_mock.delete(url)
+    client.delete_export_plan(sso_session_id=2, id=123)
+
+    assert requests_mock.last_request.url == url
+    assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
+
+
 def test_exportplan_update(requests_mock, client):
     url = 'https://example.com/exportplan/company-export-plan/123/'
     requests_mock.patch(url)
