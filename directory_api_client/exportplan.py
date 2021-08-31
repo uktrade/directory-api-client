@@ -2,8 +2,7 @@ from directory_client_core.authentication import SessionSSOAuthenticator
 
 from directory_api_client.base import AbstractAPIClient
 
-url_exportplan_update = '/exportplan/company-export-plan/{pk}/'
-url_exportplan_detail = '/exportplan/company-export-plan/{pk}/'
+url_exportplan = '/exportplan/company-export-plan/{pk}/'
 
 url_model_object_create = 'exportplan/export-plan-model-object-list-create/'
 url_model_object_update_delete = 'exportplan/export-plan-model-object-update-delete/{pk}/'
@@ -21,18 +20,21 @@ class ExportPlanAPIClient(AbstractAPIClient):
 
     def update(self, sso_session_id, id, data):
         return self.patch(
-            url=url_exportplan_update.format(pk=id), data=data, authenticator=self.authenticator(sso_session_id)
+            url=url_exportplan.format(pk=id), data=data, authenticator=self.authenticator(sso_session_id)
         )
 
     def detail(self, sso_session_id, id):
         return self.get(
-            url=url_exportplan_detail.format(pk=id),
+            url=url_exportplan.format(pk=id),
             use_fallback_cache=True,
             authenticator=self.authenticator(sso_session_id),
         )
 
     def create(self, sso_session_id, data):
         return self.post(url=url_exportplan_create, data=data, authenticator=self.authenticator(sso_session_id))
+
+    def delete_export_plan(self, sso_session_id, id):
+        return self.delete(url=url_exportplan.format(pk=id), authenticator=self.authenticator(sso_session_id))
 
     def model_object_update(self, sso_session_id, id, data, model_name):
         data['model_name'] = model_name
