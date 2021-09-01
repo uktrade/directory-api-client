@@ -19,9 +19,7 @@ class ExportPlanAPIClient(AbstractAPIClient):
     authenticator = SessionSSOAuthenticator
 
     def update(self, sso_session_id, id, data):
-        return self.patch(
-            url=url_exportplan.format(pk=id), data=data, authenticator=self.authenticator(sso_session_id)
-        )
+        return self.patch(url=url_exportplan.format(pk=id), data=data, authenticator=self.authenticator(sso_session_id))
 
     def detail(self, sso_session_id, id):
         return self.get(
