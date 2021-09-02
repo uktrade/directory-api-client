@@ -1,4 +1,8 @@
 # Changelog
+## [23.1.4](https://pypi.org/project/directory-api-client/23.1.4/) (2021-09-02)
+- No ticket - Test publish process
+
+# Changelog
 ## [23.1.3](https://pypi.org/project/directory-api-client/23.1.3/) (2021-09-01)
 - GP2-3275 - Export-plan-delete
 
