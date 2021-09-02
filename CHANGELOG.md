@@ -1,6 +1,6 @@
 # Changelog
 ## [23.10.0](https://pypi.org/project/directory-api-client/23.10.0/) (2021-09-01)
-- GP2-3275 - Export-plan-delete
+- GP2-3275 - Export plan delete
 
 # Changelog
 ## [23.00.0](https://pypi.org/project/directory-api-client/23.00.0/) (2021-06-07)
