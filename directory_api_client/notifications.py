@@ -4,5 +4,5 @@ url_unsubscribe = '/notifications/anonymous-unsubscribe/'
 
 
 class NotificationsAPIClient(AbstractAPIClient):
-    def anonymous_unsubscribe(self, signed_email_address):
-        return self.post(url=url_unsubscribe, data={'email': signed_email_address})
+    def anonymous_unsubscribe(self, uidb64, token):
+        return self.post(url=url_unsubscribe, data={'uidb64': uidb64, 'token': token})
