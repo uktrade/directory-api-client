@@ -24,7 +24,6 @@ class ExportPlanAPIClient(AbstractAPIClient):
     def detail(self, sso_session_id, id):
         return self.get(
             url=url_exportplan.format(pk=id),
-            use_fallback_cache=True,
             authenticator=self.authenticator(sso_session_id),
         )
 
@@ -53,7 +52,6 @@ class ExportPlanAPIClient(AbstractAPIClient):
     def model_object_detail(self, sso_session_id, id, model_name):
         return self.get(
             url=url_model_object_details.format(pk=id, model_name=model_name),
-            use_fallback_cache=True,
             authenticator=self.authenticator(sso_session_id),
         )
 

@@ -1,4 +1,7 @@
 # Changelog
+## [23.1.5](https://pypi.org/project/directory-api-client/23.1.5/) (2021-09-09)
+GP2-3341-fix-ep-caching
+
 ## [23.1.4](https://pypi.org/project/directory-api-client/23.1.4/) (2021-09-02)
 - No ticket - Test publish process
 
