@@ -1,15 +1,17 @@
 # Changelog
+
+## [24.0.0](https://pypi.org/project/directory-api-client/24.0.0/) (2021-09-16)
+- GP2-3343 - Anonymous unsubscribe via token - Breaking change
+
 ## [23.1.5](https://pypi.org/project/directory-api-client/23.1.5/) (2021-09-09)
-GP2-3341-fix-ep-caching
+- GP2-3341-fix-ep-caching
 
 ## [23.1.4](https://pypi.org/project/directory-api-client/23.1.4/) (2021-09-02)
 - No ticket - Test publish process
 
-# Changelog
 ## [23.1.3](https://pypi.org/project/directory-api-client/23.1.3/) (2021-09-01)
 - GP2-3275 - Export-plan-delete
 
-# Changelog
 ## [23.00.0](https://pypi.org/project/directory-api-client/23.00.0/) (2021-06-07)
 - GP2-3173 multi-Export-plan-list Breaking change
 
