@@ -1,5 +1,9 @@
 # Changelog
 
+## [24.1.0](https://pypi.org/project/directory-api-client/24.1.0/) (2021-11-19)
+- GP2-3123-remove-redundant-code
+ removed get_population_data , get_population_data_by_country
+
 ## [24.0.0](https://pypi.org/project/directory-api-client/24.0.0/) (2021-09-16)
 - GP2-3343 - Anonymous unsubscribe via token - Breaking change
 

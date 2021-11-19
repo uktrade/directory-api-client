@@ -2,8 +2,6 @@ from directory_api_client.base import AbstractAPIClient
 
 url_country_data_by_country = 'dataservices/country-data/'
 url_cia_world_factbook_data = 'dataservices/cia-factbook-data/'
-url_population_data = 'dataservices/population-data/'
-url_population_data_by_country = 'dataservices/population-data-by-country/'
 url_society_data_by_country = 'dataservices/society-data-by-country/'
 url_last_year_import_data_by_country = 'dataservices/lastyearimportdatabycountry/'
 url_suggested_countries = '/dataservices/suggested-countries/'
@@ -19,14 +17,6 @@ class DataServicesAPIClient(AbstractAPIClient):
         return self.get(
             url=url_cia_world_factbook_data, params={'country': country, 'data_key': data_key}, use_fallback_cache=True
         )
-
-    def get_population_data(self, country, target_ages):
-        return self.get(
-            url=url_population_data, params={'country': country, 'target_ages': target_ages}, use_fallback_cache=True
-        )
-
-    def get_population_data_by_country(self, countries: list):
-        return self.get(url=url_population_data_by_country, params={'countries': countries}, use_fallback_cache=True)
 
     def get_society_data_by_country(self, countries: list):
         return self.get(url=url_society_data_by_country, params={'countries': countries}, use_fallback_cache=True)
