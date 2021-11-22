@@ -28,22 +28,6 @@ def test_get_cia_world_factbook_data(client, requests_mock):
     assert requests_mock.last_request.url == url
 
 
-def test_get_population_data(client, requests_mock):
-    url = 'https://example.com/dataservices/population-data/?country=China&target_ages=0-20&target_ages=21-35'
-    requests_mock.get(url)
-    client.get_population_data(country='China', target_ages=['0-20', '21-35'])
-
-    assert requests_mock.last_request.url == url
-
-
-def test_get_population_data_by_country(client, requests_mock):
-    url = 'https://example.com/dataservices/population-data-by-country/?countries=Germany'
-    requests_mock.get(url)
-    client.get_population_data_by_country(countries='Germany')
-
-    assert requests_mock.last_request.url == url
-
-
 def test_get_society_data_by_country(client, requests_mock):
     url = 'https://example.com/dataservices/society-data-by-country/?countries=Germany'
     requests_mock.get(url)
