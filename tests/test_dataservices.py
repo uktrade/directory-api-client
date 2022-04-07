@@ -85,3 +85,10 @@ def test_get_commodity_exports_data_by_country(requests_mock, client):
 
     assert requests_mock.last_request.url == f'{url}?iso2=FR'
 
+
+def test_get_trade_in_service_data_by_country(requests_mock, client):
+    url = 'https://example.com/dataservices/trade-in-service-by-country/'
+    requests_mock.get(url)
+    client.get_trade_in_service_data_by_country(iso2='FR')
+
+    assert requests_mock.last_request.url == f'{url}?iso2=FR'

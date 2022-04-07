@@ -9,6 +9,7 @@ url_trading_blocs_by_country = '/dataservices/trading-blocs/'
 url_trade_barriers = '/dataservices/trade-barriers/'
 url_total_trade_data_by_country = '/dataservices/uk-total-trade-data-by-country/'
 url_commodity_exports_data_by_country = '/dataservices/commodity-exports-data-by-country/'
+url_trade_in_service_data_by_country = '/dataservices/trade-in-service-by-country/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -58,6 +59,14 @@ class DataServicesAPIClient(AbstractAPIClient):
     def get_commodity_exports_data_by_country(self, iso2):
         return self.get(
             url=url_commodity_exports_data_by_country,
+            params={
+                'iso2': iso2
+            },
+        )
+
+    def get_trade_in_service_data_by_country(self, iso2):
+        return self.get(
+            url=url_trade_in_service_data_by_country,
             params={
                 'iso2': iso2
             },
