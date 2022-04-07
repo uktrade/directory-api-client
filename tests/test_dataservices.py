@@ -71,8 +71,17 @@ def test_get_trade_barriers_by_countries_sectors(requests_mock, client):
 
 
 def test_get_total_trade_data_by_country(requests_mock, client):
-    url = 'https://example.com/dataservices/uk-total-trade-data-by-country/FR/'
+    url = 'https://example.com/dataservices/uk-total-trade-data-by-country/iso2=FR'
     requests_mock.get(url)
     client.get_total_trade_data_by_country(iso2='FR')
 
     assert requests_mock.last_request.url == url
+
+
+def test_get_commodity_exports_data_by_country(requests_mock, client):
+    url = 'https://example.com/dataservices/commodity-exports-data-by-country/'
+    requests_mock.get(url)
+    client.get_commodity_exports_data_by_country(iso2='FR')
+
+    assert requests_mock.last_request.url == f'{url}?iso2=FR'
+
