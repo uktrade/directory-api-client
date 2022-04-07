@@ -7,6 +7,7 @@ url_last_year_import_data_by_country = 'dataservices/lastyearimportdatabycountry
 url_suggested_countries = '/dataservices/suggested-countries/'
 url_trading_blocs_by_country = '/dataservices/trading-blocs/'
 url_trade_barriers = '/dataservices/trade-barriers/'
+url_total_trade_data_by_country = '/dataservices/uk-total-trade-data-by-country/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -44,3 +45,8 @@ class DataServicesAPIClient(AbstractAPIClient):
 
     def get_trade_barriers(self, sectors: list, countries: list):
         return self.get(url=url_trade_barriers, params={'sectors': sectors, 'countries': countries})
+
+    def get_total_trade_data_by_country(self, iso2):
+        return self.get(
+            url=url_total_trade_data_by_country + iso2 + '/',
+        )
