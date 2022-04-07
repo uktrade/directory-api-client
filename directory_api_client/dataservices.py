@@ -51,23 +51,17 @@ class DataServicesAPIClient(AbstractAPIClient):
     def get_total_trade_data_by_country(self, iso2):
         return self.get(
             url=url_total_trade_data_by_country,
-            params={
-                'iso2': iso2
-            },
+            params={'iso2': iso2},
         )
 
     def get_commodity_exports_data_by_country(self, iso2):
         return self.get(
             url=url_commodity_exports_data_by_country,
-            params={
-                'iso2': iso2
-            },
+            params={'iso2': iso2},
         )
 
     def get_trade_in_service_data_by_country(self, iso2):
         return self.get(
             url=url_trade_in_service_data_by_country,
-            params={
-                'iso2': iso2
-            },
+            params={'iso2': iso2},
         )
