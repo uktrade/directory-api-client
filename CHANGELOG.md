@@ -1,5 +1,8 @@
 # Changelog
 
+## [24.3.0](https://pypi.org/project/directory-api-client/24.3.0/) (2022-04-27)
+- GLS-186 - Data Services' trade highlights endpoint
+
 ## [24.2.0](https://pypi.org/project/directory-api-client/24.2.0/) (2022-03-11)
 - GLS-163/GLS-173 - add get_total_trade_data_by_country, get_commodity_exports_data_by_country and get_trade_in_service_data_by_country
 

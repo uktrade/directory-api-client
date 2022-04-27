@@ -70,10 +70,22 @@ def test_get_trade_barriers_by_countries_sectors(requests_mock, client):
     assert requests_mock.last_request.url == f'{url}?sectors=Automotive&sectors=Technology&countries=GE&countries=BE'
 
 
-def test_get_total_trade_data_by_country(requests_mock, client):
-    url = 'https://example.com/dataservices/uk-total-trade-data-by-country/'
+def test_get_market_trends_by_country(requests_mock, client):
+    url = 'https://example.com/dataservices/uk-market-trends/'
     requests_mock.get(url)
-    client.get_total_trade_data_by_country(iso2='FR')
+    client.get_market_trends_by_country(iso2='FR', from_year=2020)
+
+    assert requests_mock.last_request.url == f'{url}?iso2=FR&from_year=2020'
+
+    client.get_market_trends_by_country(iso2='FR')
+
+    assert requests_mock.last_request.url == f'{url}?iso2=FR'
+
+
+def test_get_trade_highlights_by_country(requests_mock, client):
+    url = 'https://example.com/dataservices/uk-trade-highlights/'
+    requests_mock.get(url)
+    client.get_trade_highlights_by_country(iso2='FR')
 
     assert requests_mock.last_request.url == f'{url}?iso2=FR'
 
