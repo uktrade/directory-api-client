@@ -10,7 +10,7 @@ url_trade_barriers = '/dataservices/trade-barriers/'
 url_market_trends = '/dataservices/uk-market-trends/'
 url_trade_highlights = '/dataservices/uk-trade-highlights/'
 url_commodity_exports_data_by_country = '/dataservices/commodity-exports-data-by-country/'
-url_trade_in_service_data_by_country = '/dataservices/trade-in-service-by-country/'
+url_top_five_services = '/dataservices/top-five-services/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -73,8 +73,5 @@ class DataServicesAPIClient(AbstractAPIClient):
             params={'iso2': iso2},
         )
 
-    def get_trade_in_service_data_by_country(self, iso2):
-        return self.get(
-            url=url_trade_in_service_data_by_country,
-            params={'iso2': iso2},
-        )
+    def get_top_five_services_by_country(self, iso2, year):
+        return self.get(url=url_top_five_services, params={'iso2': iso2, 'year': year})

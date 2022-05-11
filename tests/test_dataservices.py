@@ -98,9 +98,9 @@ def test_get_commodity_exports_data_by_country(requests_mock, client):
     assert requests_mock.last_request.url == f'{url}?iso2=FR'
 
 
-def test_get_trade_in_service_data_by_country(requests_mock, client):
-    url = 'https://example.com/dataservices/trade-in-service-by-country/'
+def test_get_top_five_services(requests_mock, client):
+    url = 'https://example.com/dataservices/top-five-services/'
     requests_mock.get(url)
-    client.get_trade_in_service_data_by_country(iso2='FR')
+    client.get_top_five_services_by_country(iso2='FR', year='2020')
 
-    assert requests_mock.last_request.url == f'{url}?iso2=FR'
+    assert requests_mock.last_request.url == f'{url}?iso2=FR&year=2020'
