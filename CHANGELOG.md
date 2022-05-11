@@ -1,5 +1,9 @@
 # Changelog
 
+## [24.5.0](https://pypi.org/project/directory-api-client/24.5.0/) (2022-05-11)
+
+- GLS-186 - Data Services' top five goods
+
 ## [24.4.0](https://pypi.org/project/directory-api-client/24.4.0/) (2022-05-11)
 
 - GLS-186 - Data Services' top five services
