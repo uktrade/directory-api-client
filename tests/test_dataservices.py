@@ -104,3 +104,11 @@ def test_get_top_five_services(requests_mock, client):
     client.get_top_five_services_by_country(iso2='FR', year='2020')
 
     assert requests_mock.last_request.url == f'{url}?iso2=FR&year=2020'
+
+
+def test_get_top_five_goods(requests_mock, client):
+    url = 'https://example.com/dataservices/top-five-goods/'
+    requests_mock.get(url)
+    client.get_top_five_goods_by_country(iso2='FR', year='2020')
+
+    assert requests_mock.last_request.url == f'{url}?iso2=FR&year=2020'
