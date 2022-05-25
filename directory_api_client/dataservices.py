@@ -74,8 +74,8 @@ class DataServicesAPIClient(AbstractAPIClient):
             params={'iso2': iso2},
         )
 
-    def get_top_five_services_by_country(self, iso2, year):
-        return self.get(url=url_top_five_services, params={'iso2': iso2, 'year': year})
+    def get_top_five_services_by_country(self, iso2):
+        return self.get(url=url_top_five_services, params={'iso2': iso2})
 
-    def get_top_five_goods_by_country(self, iso2, year):
-        return self.get(url=url_top_five_goods, params={'iso2': iso2, 'year': year})
+    def get_top_five_goods_by_country(self, iso2):
+        return self.get(url=url_top_five_goods, params={'iso2': iso2})
