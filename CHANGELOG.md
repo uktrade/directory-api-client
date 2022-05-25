@@ -1,5 +1,9 @@
 # Changelog
 
+## [24.5.1](https://pypi.org/project/directory-api-client/24.5.1/) (2022-05-25)
+
+- GLS-186 - Remove unused year parameter
+
 ## [24.5.0](https://pypi.org/project/directory-api-client/24.5.0/) (2022-05-11)
 
 - GLS-186 - Data Services' top five goods
