@@ -1,5 +1,9 @@
 # Changelog
 
+## [24.6.0](https://pypi.org/project/directory-api-client/24.6.0/) (2022-05-25)
+
+- GLS-360 - Data services economic highlights endpoint
+
 ## [24.5.1](https://pypi.org/project/directory-api-client/24.5.1/) (2022-05-25)
 
 - GLS-186 - Remove unused year parameter
