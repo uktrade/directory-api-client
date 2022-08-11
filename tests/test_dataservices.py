@@ -112,3 +112,10 @@ def test_get_top_five_goods(requests_mock, client):
     client.get_top_five_goods_by_country(iso2='FR')
 
     assert requests_mock.last_request.url == f'{url}?iso2=FR'
+
+
+def test_get_economic_highlights(requests_mock, client):
+    url = 'https://example.com/dataservices/economic-highlights/'
+    requests_mock.get(url)
+    client.get_economic_highlights_by_country(iso2='FR')
+    assert requests_mock.last_request.url == f'{url}?iso2=FR'
