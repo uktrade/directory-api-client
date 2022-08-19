@@ -1,5 +1,9 @@
 # Changelog
 
+## [25.0.0](https://pypi.org/project/directory-api-client/25.0.0/) (2022-08-19)
+
+- GLS-391 - Increase django requirements
+
 ## [24.6.0](https://pypi.org/project/directory-api-client/24.6.0/) (2022-05-25)
 
 - GLS-360 - Data services economic highlights endpoint
