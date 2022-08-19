@@ -1,5 +1,9 @@
 # Changelog
 
+## [25.1.0](https://pypi.org/project/directory-api-client/25.1.0/) (2022-08-19)
+
+- GLS-391 - Increase directory_client_core version for Django 3.2 upgrade
+
 ## [25.0.0](https://pypi.org/project/directory-api-client/25.0.0/) (2022-08-19)
 
 - GLS-391 - Increase django requirements
