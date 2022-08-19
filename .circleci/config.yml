@@ -2,7 +2,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/python:3.6.6
+      - image: cimg/python:3.9
     steps:
       - checkout
       - run:
@@ -16,7 +16,7 @@ jobs:
 
   flake8:
     docker:
-      - image: circleci/python:3.6.6
+      - image: cimg/python:3.9
     steps:
       - checkout
       - run:
@@ -27,7 +27,7 @@ jobs:
             flake8
   black:
     docker:
-      - image: circleci/python:3.6.6
+      - image: cimg/python:3.9
     steps:
       - checkout
       - run:
@@ -36,11 +36,11 @@ jobs:
             python3 -m venv .venv
             . .venv/bin/activate
             pip install black
-            black ./ --check           
+            black ./ --check
 
   publish_to_pypi:
     docker:
-      - image: circleci/python:3.6.6
+      - image: cimg/python:3.9
     steps:
       - checkout
       - run:
