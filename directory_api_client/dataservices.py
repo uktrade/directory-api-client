@@ -13,6 +13,7 @@ url_commodity_exports_data_by_country = '/dataservices/commodity-exports-data-by
 url_top_five_services = '/dataservices/top-five-services/'
 url_top_five_goods = '/dataservices/top-five-goods/'
 url_economic_highlights = "/dataservices/economic-highlights/"
+url_uk_free_trade_agreements = "/dataservices/uk-free-trade-agreements/"
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -83,3 +84,6 @@ class DataServicesAPIClient(AbstractAPIClient):
 
     def get_economic_highlights_by_country(self, iso2):
         return self.get(url=url_economic_highlights, params={"iso2": iso2})
+
+    def list_uk_free_trade_agreements(self):
+        return self.get(url=url_uk_free_trade_agreements)

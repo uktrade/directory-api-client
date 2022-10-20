@@ -119,3 +119,10 @@ def test_get_economic_highlights(requests_mock, client):
     requests_mock.get(url)
     client.get_economic_highlights_by_country(iso2='FR')
     assert requests_mock.last_request.url == f'{url}?iso2=FR'
+
+
+def test_list_uk_free_trade_agreements(requests_mock, client):
+    url = 'https://example.com/dataservices/uk-free-trade-agreements/'
+    requests_mock.get(url)
+    client.list_uk_free_trade_agreements()
+    assert requests_mock.last_request.url == url
