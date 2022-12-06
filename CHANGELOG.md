@@ -1,5 +1,9 @@
 # Changelog
 
+## [26.1.0](https://pypi.org/project/directory-api-client/26.1.0/) (2022-10-20)
+
+- KLS-245 - Survey details endpoint
+
 ## [26.0.0](https://pypi.org/project/directory-api-client/26.0.0/) (2022-10-20)
 
 - KLS-97 - Data services UK's FTAs endpoint
