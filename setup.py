@@ -25,7 +25,7 @@ setup(
             'setuptools>=45.2.0,<50.0.0',
             'twine>=3.1.1,<4.0.0',
             'wheel>=0.34.2,<1.0.0',
-            'black==20.8b1',
+            'black==22.10.0',
             'blacken-docs==1.6.0',
             'isort==5.6.4',
             'flake8==5.0.4',
