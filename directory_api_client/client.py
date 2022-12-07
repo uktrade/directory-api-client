@@ -10,6 +10,7 @@ from directory_api_client.exportplan import ExportPlanAPIClient
 from directory_api_client.notifications import NotificationsAPIClient
 from directory_api_client.personalisation import PersonalisationAPIClient
 from directory_api_client.supplier import SupplierAPIClient
+from directory_api_client.survey import SurveyAPIClient
 
 url_ping = '/healthcheck/ping/'
 
@@ -26,6 +27,7 @@ class DirectoryAPIClient(AbstractAPIClient):
         self.exportplan = ExportPlanAPIClient(*args, **kwargs)
         self.personalisation = PersonalisationAPIClient(*args, **kwargs)
         self.dataservices = DataServicesAPIClient(*args, **kwargs)
+        self.survey = SurveyAPIClient(*args, **kwargs)
 
     def ping(self):
         return self.get(url=url_ping)
