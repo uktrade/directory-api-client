@@ -18,3 +18,6 @@ def test_get_survey_details(requests_mock, client):
     requests_mock.get(url)
     client.get_survey_details(id='123')
     assert requests_mock.last_request.url == url
+
+
+# Adding a change to test codecov
