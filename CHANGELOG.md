@@ -1,6 +1,9 @@
 # Changelog
 
-## [26.1.0](https://pypi.org/project/directory-api-client/26.1.0/) (2022-10-20)
+## [26.2.0](https://pypi.org/project/directory-api-client/26.2.0/) (2023-01-10)
+- Upgrade Wheel package to 0.38.1
+
+## [26.1.0](https://pypi.org/project/directory-api-client/26.1.0/) (2022-12-07)
 
 - KLS-245 - Survey details endpoint
 
