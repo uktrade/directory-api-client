@@ -1,6 +1,11 @@
 # Changelog
 
+## [26.2.1](https://pypi.org/project/directory-api-client/26.2.1/) (2023-02-16)
+
+- KLS-400 - Upgrade vulnerable django version to Django 3.2.18
+
 ## [26.2.0](https://pypi.org/project/directory-api-client/26.2.0/) (2023-01-10)
+
 - Upgrade Wheel package to 0.38.1
 
 ## [26.1.0](https://pypi.org/project/directory-api-client/26.1.0/) (2022-12-07)
