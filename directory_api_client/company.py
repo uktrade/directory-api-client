@@ -26,7 +26,6 @@ url_company_delete_by_sso_id = '/supplier/company/{sso_id}/{request_key}/'
 
 
 class CompanyAPIClient(AbstractAPIClient):
-
     authenticator = SessionSSOAuthenticator
 
     def profile_update(self, sso_session_id, data):

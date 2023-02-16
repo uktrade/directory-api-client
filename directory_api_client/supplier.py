@@ -11,7 +11,6 @@ url_supplier_detail = '/supplier/{sso_id}/'
 
 
 class SupplierAPIClient(AbstractAPIClient):
-
     authenticator = SessionSSOAuthenticator
 
     def profile_update(self, sso_session_id, data):

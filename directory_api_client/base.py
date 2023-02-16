@@ -5,7 +5,6 @@ from django.core.cache import caches
 
 
 class AbstractAPIClient(directory_client_core.base.AbstractAPIClient):
-
     version = pkg_resources.get_distribution(__package__).version
 
     @fallback(cache=caches['api_fallback'])
