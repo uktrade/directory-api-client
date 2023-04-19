@@ -11,8 +11,7 @@ jobs:
             . .venv/bin/activate
             pip install --upgrade pip
             make test_requirements
-            make pytest
-            codecov
+            make pytest_codecov -- --codecov-token=${CODECOV_TOKEN}
 
   flake8:
     docker:

@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='directory_api_client',
-    version='26.2.1',
+    version='26.2.2',
     url='https://github.com/uktrade/directory-api-client',
     license='MIT',
     author='Department for International Trade',
@@ -18,9 +18,10 @@ setup(
     ],
     extras_require={
         'test': [
-            'codecov==2.1.7',
-            'pytest-cov==2.8.1',
+            'pytest-cov',
             'pytest==5.4.0',
+            'pytest-codecov',
+            'GitPython',
             'requests_mock==1.7.0',
             'setuptools>=45.2.0,<50.0.0',
             'twine>=3.1.1,<4.0.0',
