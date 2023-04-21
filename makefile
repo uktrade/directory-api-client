@@ -8,7 +8,16 @@ test_requirements:
 	pip install -e .[test]
 
 pytest:
-	pytest $(ARGUMENTS) --cov=. -v
+	pytest . --capture=no -vv
+
+pytest_codecov:
+	pytest \
+		--junitxml=test-reports/junit.xml \
+		--cov-config=.coveragerc \
+		--cov-report=term \
+		--cov=. \
+		--codecov \
+		$(ARGUMENTS)
 
 publish:
 	rm -rf build dist; \
