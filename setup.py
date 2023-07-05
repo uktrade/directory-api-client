@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='directory_api_client',
-    version='26.4.0',
+    version='26.4.1',
     url='https://github.com/uktrade/directory-api-client',
     license='MIT',
     author='Department for International Trade',
@@ -14,7 +14,7 @@ setup(
     install_requires=[
         'django>=3.2.18,<=4.2.3',
         'requests>=2.22.0,<3.0.0',
-        'directory_client_core>=7.1.1,<8.0.0',
+        'directory_client_core>=7.2.4,<8.0.0',
     ],
     extras_require={
         'test': [
