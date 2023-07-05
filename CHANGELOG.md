@@ -1,5 +1,9 @@
 # Changelog
 
+## [26.4.0](https://pypi.org/project/directory-api-client/26.4.0/) (2023-07-03)
+
+- KLS-822 - Upgrade django version to Django 4.2.3
+
 ## [26.2.1](https://pypi.org/project/directory-api-client/26.2.1/) (2023-02-16)
 
 - KLS-400 - Upgrade vulnerable django version to Django 3.2.18
