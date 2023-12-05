@@ -12,7 +12,7 @@ setup(
     long_description_content_type='text/markdown',
     include_package_data=True,
     install_requires=[
-        'django>=3.2.18,<=4.2.3',
+        'django>=3.2.18,<=4.2.6',
         'requests>=2.22.0,<3.0.0',
         'directory_client_core>=7.1.1,<8.0.0',
     ],
