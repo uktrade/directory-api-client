@@ -1,5 +1,9 @@
 # Changelog
 
+## [26.4.12]() (2024-02-19)
+
+- KLS-1948 - Use at least 7.2.12 of directory-client-core
+
 ## [26.4.2](https://pypi.org/project/directory-api-client/26.4.2/) (2023-07-06)
 
 - KLS-822 - Use at least 7.2.5 of directory-client-core
