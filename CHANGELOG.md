@@ -1,5 +1,9 @@
 # Changelog
 
+## [26.4.7](https://github.com/uktrade/directory-api-client/pull/180) (2024-02-21)
+
+- POLS-94 - Add code owners file
+
 ## [26.4.12](https://github.com/uktrade/directory-api-client/pull/179) (2024-02-19)
 
 - KLS-1948 - Use at least 7.2.12 of directory-client-core
