@@ -126,3 +126,17 @@ def test_list_uk_free_trade_agreements(requests_mock, client):
     requests_mock.get(url)
     client.list_uk_free_trade_agreements()
     assert requests_mock.last_request.url == url
+
+
+def test_business_cluster_information_sic_only(requests_mock, client):
+    url = 'https://example.com/dataservices/business-cluster-information/'
+    requests_mock.get(url)
+    client.get_business_cluster_information(sic_code='12345')
+    assert requests_mock.last_request.url == f'{url}?sic_code=12345'
+
+
+def test_business_cluster_information_sic_and_geo(requests_mock, client):
+    url = 'https://example.com/dataservices/business-cluster-information/'
+    requests_mock.get(url)
+    client.get_business_cluster_information(sic_code='12345', geo_code='AB0001')
+    assert requests_mock.last_request.url == f'{url}?sic_code=12345&geo_code=AB0001'
