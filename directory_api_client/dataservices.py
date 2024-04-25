@@ -12,8 +12,9 @@ url_trade_highlights = '/dataservices/uk-trade-highlights/'
 url_commodity_exports_data_by_country = '/dataservices/commodity-exports-data-by-country/'
 url_top_five_services = '/dataservices/top-five-services/'
 url_top_five_goods = '/dataservices/top-five-goods/'
-url_economic_highlights = "/dataservices/economic-highlights/"
-url_uk_free_trade_agreements = "/dataservices/uk-free-trade-agreements/"
+url_economic_highlights = '/dataservices/economic-highlights/'
+url_uk_free_trade_agreements = '/dataservices/uk-free-trade-agreements/'
+url_business_cluster_information = 'dataservices/business-cluster-information/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -83,7 +84,17 @@ class DataServicesAPIClient(AbstractAPIClient):
         return self.get(url=url_top_five_goods, params={'iso2': iso2})
 
     def get_economic_highlights_by_country(self, iso2):
-        return self.get(url=url_economic_highlights, params={"iso2": iso2})
+        return self.get(url=url_economic_highlights, params={'iso2': iso2})
 
     def list_uk_free_trade_agreements(self):
         return self.get(url=url_uk_free_trade_agreements)
+
+    def get_business_cluster_information(self, sic_code, geo_code=None):
+        params = {'sic_code': sic_code}
+        if geo_code:
+            params['geo_code'] = geo_code
+
+        return self.get(
+            url=url_business_cluster_information,
+            params=params,
+        )

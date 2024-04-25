@@ -17,14 +17,14 @@ def client():
 
 class BasicAuthenticator:
     def __init__(self, username: str, password: str):
-        credentials = f"{username}:{password}"
-        encoded_credentials = base64.b64encode(credentials.encode("ascii"))
-        self.headers = {"Authorization": f"Basic {encoded_credentials.decode('ascii')}"}
+        credentials = f'{username}:{password}'
+        encoded_credentials = base64.b64encode(credentials.encode('ascii'))
+        self.headers = {'Authorization': f"Basic {encoded_credentials.decode('ascii')}"}
 
 
 @pytest.fixture
 def basic_authenticator():
-    return BasicAuthenticator("user", "password")
+    return BasicAuthenticator('user', 'password')
 
 
 def test_get_company_by_ch_id(client, requests_mock):
