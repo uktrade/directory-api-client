@@ -129,14 +129,33 @@ def test_list_uk_free_trade_agreements(requests_mock, client):
 
 
 def test_business_cluster_information_sic_only(requests_mock, client):
-    url = 'https://example.com/dataservices/business-cluster-information/'
+    url = 'https://example.com/dataservices/business-cluster-information-by-sic/'
     requests_mock.get(url)
-    client.get_business_cluster_information(sic_code='12345')
+    client.get_business_cluster_information_by_sic(sic_code='12345')
     assert requests_mock.last_request.url == f'{url}?sic_code=12345'
 
 
 def test_business_cluster_information_sic_and_geo(requests_mock, client):
-    url = 'https://example.com/dataservices/business-cluster-information/'
+    url = 'https://example.com/dataservices/business-cluster-information-by-sic/'
     requests_mock.get(url)
-    client.get_business_cluster_information(sic_code='12345', geo_code='AB0001')
-    assert requests_mock.last_request.url == f'{url}?sic_code=12345&geo_code=AB0001'
+    client.get_business_cluster_information_by_sic(sic_code='12345', geo_code='AB0001,XY12345')
+    assert requests_mock.last_request.url == f'{url}?sic_code=12345&geo_code=AB0001%2CXY12345'
+
+
+def test_business_cluster_information_dbt_sector_only(requests_mock, client):
+    url = 'https://example.com/dataservices/business-cluster-information-by-dbt-sector/'
+    requests_mock.get(url)
+    client.get_business_cluster_information_by_dbt_sector(dbt_sector_name='Financial and professional services')
+    assert requests_mock.last_request.url == f'{url}?dbt_sector_name=Financial+and+professional+services'
+
+
+def test_business_cluster_information_dbt_sector_and_geo(requests_mock, client):
+    url = 'https://example.com/dataservices/business-cluster-information-by-dbt-sector/'
+    requests_mock.get(url)
+    client.get_business_cluster_information_by_dbt_sector(
+        dbt_sector_name='Financial and professional services', geo_code='AB0001,XY12345'
+    )
+    assert (
+        requests_mock.last_request.url
+        == f'{url}?dbt_sector_name=Financial+and+professional+services&geo_code=AB0001%2CXY12345'
+    )
