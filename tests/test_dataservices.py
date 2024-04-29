@@ -13,6 +13,13 @@ def client():
     )
 
 
+def test_get_markets_data(client, requests_mock):
+    url = 'https://example.com/dataservices/markets/'
+    requests_mock.get(url)
+    client.get_markets_data()
+    assert requests_mock.last_request.url == url
+
+
 def test_get_country_data_by_country(client, requests_mock):
     url = 'https://example.com/dataservices/country-data/'
     requests_mock.get(url)
