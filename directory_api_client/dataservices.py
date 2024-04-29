@@ -1,5 +1,6 @@
 from directory_api_client.base import AbstractAPIClient
 
+url_markets = 'dataservices/markets/'
 url_country_data_by_country = 'dataservices/country-data/'
 url_cia_world_factbook_data = 'dataservices/cia-factbook-data/'
 url_society_data_by_country = 'dataservices/society-data-by-country/'
@@ -18,6 +19,9 @@ url_business_cluster_information = 'dataservices/business-cluster-information/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
+    def get_markets_data(self):
+        return self.get(url=url_markets)
+
     def get_country_data_by_country(self, countries, fields):
         return self.get(url=url_country_data_by_country, params={'countries': countries, 'fields': fields})
 
