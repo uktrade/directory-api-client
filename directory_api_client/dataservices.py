@@ -14,7 +14,8 @@ url_top_five_services = '/dataservices/top-five-services/'
 url_top_five_goods = '/dataservices/top-five-goods/'
 url_economic_highlights = '/dataservices/economic-highlights/'
 url_uk_free_trade_agreements = '/dataservices/uk-free-trade-agreements/'
-url_business_cluster_information = 'dataservices/business-cluster-information/'
+url_business_cluster_information_by_sic = 'dataservices/business-cluster-information-by-sic/'
+url_business_cluster_information_by_dbt_sector = 'dataservices/business-cluster-information-by-dbt-sector/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -89,12 +90,22 @@ class DataServicesAPIClient(AbstractAPIClient):
     def list_uk_free_trade_agreements(self):
         return self.get(url=url_uk_free_trade_agreements)
 
-    def get_business_cluster_information(self, sic_code, geo_code=None):
+    def get_business_cluster_information_by_sic(self, sic_code, geo_code=None):
         params = {'sic_code': sic_code}
         if geo_code:
             params['geo_code'] = geo_code
 
         return self.get(
-            url=url_business_cluster_information,
+            url=url_business_cluster_information_by_sic,
+            params=params,
+        )
+
+    def get_business_cluster_information_by_dbt_sector(self, dbt_sector_name, geo_code=None):
+        params = {'dbt_sector_name': dbt_sector_name}
+        if geo_code:
+            params['geo_code'] = geo_code
+
+        return self.get(
+            url=url_business_cluster_information_by_dbt_sector,
             params=params,
         )
