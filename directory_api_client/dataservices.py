@@ -17,6 +17,8 @@ url_economic_highlights = '/dataservices/economic-highlights/'
 url_uk_free_trade_agreements = '/dataservices/uk-free-trade-agreements/'
 url_business_cluster_information_by_sic = 'dataservices/business-cluster-information-by-sic/'
 url_business_cluster_information_by_dbt_sector = 'dataservices/business-cluster-information-by-dbt-sector/'
+url_eyb_salary_data = 'dataservices/eyb-salary-data/'
+url_eyb_commercial_rent_data = 'dataservices/eyb-commercial-rent-data/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -113,3 +115,25 @@ class DataServicesAPIClient(AbstractAPIClient):
             url=url_business_cluster_information_by_dbt_sector,
             params=params,
         )
+
+    def get_eyb_salary_data(self, geo_description, vertical=None, professional_level=None):
+        params = {'geo_description': geo_description}
+
+        if vertical:
+            params['vertical'] = vertical
+
+        if professional_level:
+            params['professional_level'] = professional_level
+
+        return self.get(url=url_eyb_salary_data, params=params)
+
+    def get_eyb_commercial_rent_data(self, geo_description, vertical=None, sub_vertical=None):
+        params = {'geo_description': geo_description}
+
+        if vertical:
+            params['vertical'] = vertical
+
+        if sub_vertical:
+            params['sub_vertical'] = sub_vertical
+
+        return self.get(url=url_eyb_commercial_rent_data, params=params)
