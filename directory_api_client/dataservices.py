@@ -116,14 +116,14 @@ class DataServicesAPIClient(AbstractAPIClient):
             params=params,
         )
 
-    def get_eyb_salary_data(self, geo_description, vertical=None, professional_level=None):
-        params = {'geo_description': geo_description}
-
-        if vertical:
-            params['vertical'] = vertical
+    def get_eyb_salary_data(self, vertical, professional_level=None, geo_description=None):
+        params = {'vertical': vertical}
 
         if professional_level:
             params['professional_level'] = professional_level
+
+        if geo_description:
+            params['geo_description'] = geo_description
 
         return self.get(url=url_eyb_salary_data, params=params)
 

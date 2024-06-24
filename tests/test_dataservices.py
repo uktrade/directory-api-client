@@ -168,27 +168,27 @@ def test_business_cluster_information_dbt_sector_and_geo(requests_mock, client):
     )
 
 
-def test_eyb_salary_geo_description(requests_mock, client):
+def test_eyb_salary_vertical(requests_mock, client):
     url = 'https://example.com/dataservices/eyb-salary-data/'
     requests_mock.get(url)
-    client.get_eyb_salary_data(geo_description='London')
-    assert requests_mock.last_request.url == f'{url}?geo_description=London'
+    client.get_eyb_salary_data(vertical='Advanced Engineering')
+    assert requests_mock.last_request.url == f'{url}?vertical=Advanced+Engineering'
 
 
 def test_eyb_salary_geo_description_vertical(requests_mock, client):
     url = 'https://example.com/dataservices/eyb-salary-data/'
     requests_mock.get(url)
-    client.get_eyb_salary_data(geo_description='London', vertical='Aerospace')
-    assert requests_mock.last_request.url == f'{url}?geo_description=London&vertical=Aerospace'
+    client.get_eyb_salary_data(vertical='Aerospace', geo_description='London')
+    assert requests_mock.last_request.url == f'{url}?vertical=Aerospace&geo_description=London'
 
 
 def test_eyb_salary_geo_description_vertical_professional_level(requests_mock, client):
     url = 'https://example.com/dataservices/eyb-salary-data/'
     requests_mock.get(url)
-    client.get_eyb_salary_data(geo_description='London', vertical='Aerospace', professional_level='Entry-level')
+    client.get_eyb_salary_data(vertical='Aerospace', professional_level='Entry-level', geo_description='London')
     assert (
         requests_mock.last_request.url
-        == f'{url}?geo_description=London&vertical=Aerospace&professional_level=Entry-level'
+        == f'{url}?vertical=Aerospace&professional_level=Entry-level&geo_description=London'
     )
 
 
