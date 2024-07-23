@@ -19,6 +19,9 @@ url_business_cluster_information_by_sic = 'dataservices/business-cluster-informa
 url_business_cluster_information_by_dbt_sector = 'dataservices/business-cluster-information-by-dbt-sector/'
 url_eyb_salary_data = 'dataservices/eyb-salary-data/'
 url_eyb_commercial_rent_data = 'dataservices/eyb-commercial-rent-data/'
+url_dbt_sector = 'dataservices/dbt-sector/'
+url_sector_gva_value_band = 'dataservices/sector-gva-value-band/'
+url_dbt_investment_opportunity = 'dataservices/dbt-investment-opportunity/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -137,3 +140,6 @@ class DataServicesAPIClient(AbstractAPIClient):
             params['sub_vertical'] = sub_vertical
 
         return self.get(url=url_eyb_commercial_rent_data, params=params)
+
+    def get_dbt_sectors(self):
+        return self.get(url=url_dbt_sector)
