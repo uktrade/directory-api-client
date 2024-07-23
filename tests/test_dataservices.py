@@ -219,5 +219,5 @@ def test_eyb_commercial_rent_data_geo_description_vertical_sub_vertical(requests
 def test_dbt_sectors(requests_mock, client):
     url = 'https://example.com/dataservices/dbt-sectors/'
     requests_mock.get(url)
-    client.get_dbt_sectors(geo_description='London')
+    client.get_dbt_sectors()
     assert requests_mock.last_request.url == f'{url}'
