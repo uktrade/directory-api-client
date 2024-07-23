@@ -23,6 +23,7 @@ url_dbt_sector = 'dataservices/dbt-sector/'
 url_sector_gva_value_band = 'dataservices/sector-gva-value-band/'
 url_dbt_investment_opportunity = 'dataservices/dbt-investment-opportunity/'
 
+
 class DataServicesAPIClient(AbstractAPIClient):
     def get_markets_data(self):
         return self.get(url=url_markets)
@@ -139,6 +140,6 @@ class DataServicesAPIClient(AbstractAPIClient):
             params['sub_vertical'] = sub_vertical
 
         return self.get(url=url_eyb_commercial_rent_data, params=params)
-    
+
     def get_dbt_sectors(self):
         return self.get(url=url_dbt_sector)
