@@ -143,3 +143,8 @@ class DataServicesAPIClient(AbstractAPIClient):
 
     def get_dbt_sectors(self):
         return self.get(url=url_dbt_sector)
+
+    def get_gva_bandings(self, full_sector_name):
+        params = {'full_sector_name': full_sector_name}
+
+        return self.get(url=url_sector_gva_value_band, params=params)
