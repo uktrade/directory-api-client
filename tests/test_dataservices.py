@@ -221,3 +221,10 @@ def test_dbt_sectors(requests_mock, client):
     requests_mock.get(url)
     client.get_dbt_sectors()
     assert requests_mock.last_request.url == f'{url}'
+
+
+def test_gva_bandings(requests_mock, client):
+    url = 'https://example.com/dataservices/sector-gva-value-band/'
+    requests_mock.get(url)
+    client.get_gva_bandings(full_sector_name='Aerospace')
+    assert requests_mock.last_request.url == f'{url}?full_sector_name=Aerospace'
