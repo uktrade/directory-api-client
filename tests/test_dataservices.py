@@ -228,3 +228,10 @@ def test_gva_bandings(requests_mock, client):
     requests_mock.get(url)
     client.get_gva_bandings(full_sector_name='Aerospace')
     assert requests_mock.last_request.url == f'{url}?full_sector_name=Aerospace'
+
+
+def test_(requests_mock, client):
+    url = 'https://example.com/dataservices/all-sectors-gva-value-bands/'
+    requests_mock.get(url)
+    client.get_all_sectors_gva_value_bands()
+    assert requests_mock.last_request.url == f'{url}'
