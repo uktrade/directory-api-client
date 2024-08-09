@@ -21,6 +21,7 @@ url_eyb_salary_data = 'dataservices/eyb-salary-data/'
 url_eyb_commercial_rent_data = 'dataservices/eyb-commercial-rent-data/'
 url_dbt_sector = 'dataservices/dbt-sector/'
 url_sector_gva_value_band = 'dataservices/sector-gva-value-band/'
+url_all_sectors_gva_value_bands = 'dataservices/all-sectors-gva-value-bands/'
 url_dbt_investment_opportunity = 'dataservices/dbt-investment-opportunity/'
 
 
@@ -148,3 +149,6 @@ class DataServicesAPIClient(AbstractAPIClient):
         params = {'full_sector_name': full_sector_name}
 
         return self.get(url=url_sector_gva_value_band, params=params)
+
+    def get_all_sectors_gva_value_bands(self):
+        return self.get(url=url_all_sectors_gva_value_bands)
