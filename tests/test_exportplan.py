@@ -1,7 +1,6 @@
 from io import StringIO
 
 import pytest
-import time
 
 from directory_api_client.exportplan import ExportPlanAPIClient
 
@@ -17,20 +16,18 @@ def client():
 
 
 def test_exportplan_retrieve(client, requests_mock):
-    t = time.time()
-    url = f'https://example.com/exportplan/company-export-plan/123/?cachebuster={t}'
+    url = 'https://example.com/exportplan/company-export-plan/123/'
     requests_mock.get(url)
-    client.detail(id='123', sso_session_id=2, t=t)
+    client.detail(id='123', sso_session_id=2)
 
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 
 
 def test_exportplan_detail_list(client, requests_mock):
-    t = time.time()
-    url = f'https://example.com/exportplan/detail-list/?cachebuster={t}'
+    url = f'https://example.com/exportplan/detail-list/'
     requests_mock.get(url)
-    client.detail_list(sso_session_id=2, t=t)
+    client.detail_list(sso_session_id=2)
     assert requests_mock.last_request.url == url
     assert requests_mock.last_request.headers['Authorization'] == 'SSO_SESSION_ID 2'
 

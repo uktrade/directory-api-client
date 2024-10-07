@@ -1,9 +1,5 @@
 # Changelog
 
-## [26.10.0](https://github.com/uktrade/directory-api-client/pull/) (2024-10-07)
-
-- GREATUK-1232 dont cache get of exportlan and it details
-
 ## [26.4.7](https://github.com/uktrade/directory-api-client/pull/180) (2024-02-21)
 
 - POLS-94 - Add code owners file
