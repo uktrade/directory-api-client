@@ -2,7 +2,9 @@ from directory_client_core.authentication import SessionSSOAuthenticator
 
 from directory_api_client.base import AbstractAPIClient
 
-url_exportplan = '/exportplan/company-export-plan/{pk}/'
+import time
+
+url_exportplan = '/exportplan/company-export-plan/{pk}/?cachebuster={cachebuster}'
 
 url_model_object_create = 'exportplan/export-plan-model-object-list-create/'
 url_model_object_update_delete = 'exportplan/export-plan-model-object-update-delete/{pk}/'
@@ -11,7 +13,7 @@ url_model_object_details = 'exportplan/export-plan-model-object-detail/{pk}/{mod
 url_exportplan_pdf_upload = 'exportplan/pdf-upload/'
 
 # New Multi export-plan api methods will replace old ones above
-url_exportplan_detail_list = '/exportplan/detail-list/'
+url_exportplan_detail_list = '/exportplan/detail-list/?cachebuster={cachebuster}'
 url_exportplan_create = 'exportplan/create/'
 
 
@@ -23,7 +25,7 @@ class ExportPlanAPIClient(AbstractAPIClient):
 
     def detail(self, sso_session_id, id):
         return self.get(
-            url=url_exportplan.format(pk=id),
+            url=url_exportplan.format(pk=id, cachebuster=time.time()),
             authenticator=self.authenticator(sso_session_id),
         )
 
@@ -71,4 +73,5 @@ class ExportPlanAPIClient(AbstractAPIClient):
         )
 
     def detail_list(self, sso_session_id):
-        return self.get(url=url_exportplan_detail_list, authenticator=self.authenticator(sso_session_id))
+        return self.get(url=url_exportplan_detail_list.format(cachebuster=time.time()), authenticator=self.authenticator(sso_session_id))
+
