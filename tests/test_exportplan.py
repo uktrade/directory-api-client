@@ -25,7 +25,7 @@ def test_exportplan_retrieve(client, requests_mock):
 
 
 def test_exportplan_detail_list(client, requests_mock):
-    url = f'https://example.com/exportplan/detail-list/'
+    url = 'https://example.com/exportplan/detail-list/'
     requests_mock.get(url)
     client.detail_list(sso_session_id=2)
     assert requests_mock.last_request.url == url
