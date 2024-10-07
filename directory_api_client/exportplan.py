@@ -3,6 +3,7 @@ from directory_client_core.authentication import SessionSSOAuthenticator
 from directory_api_client.base import AbstractAPIClient
 
 url_exportplan = '/exportplan/company-export-plan/{pk}/'
+url_exportplan_detail = '/exportplan/company-export-plan/{pk}/?cachebuster={cachebuster}'
 
 url_model_object_create = 'exportplan/export-plan-model-object-list-create/'
 url_model_object_update_delete = 'exportplan/export-plan-model-object-update-delete/{pk}/'
@@ -11,7 +12,7 @@ url_model_object_details = 'exportplan/export-plan-model-object-detail/{pk}/{mod
 url_exportplan_pdf_upload = 'exportplan/pdf-upload/'
 
 # New Multi export-plan api methods will replace old ones above
-url_exportplan_detail_list = '/exportplan/detail-list/'
+url_exportplan_detail_list = '/exportplan/detail-list/?cachebuster={cachebuster}'
 url_exportplan_create = 'exportplan/create/'
 
 
@@ -21,11 +22,17 @@ class ExportPlanAPIClient(AbstractAPIClient):
     def update(self, sso_session_id, id, data):
         return self.patch(url=url_exportplan.format(pk=id), data=data, authenticator=self.authenticator(sso_session_id))
 
-    def detail(self, sso_session_id, id):
-        return self.get(
-            url=url_exportplan.format(pk=id),
-            authenticator=self.authenticator(sso_session_id),
-        )
+    def detail(self, sso_session_id, id, t=None):
+        if t:
+            return self.get(
+                url=url_exportplan_detail.format(pk=id, cachebuster=t),
+                authenticator=self.authenticator(sso_session_id),
+            )
+        else:
+            return self.get(
+                url=url_exportplan_detail.format(pk=id),
+                authenticator=self.authenticator(sso_session_id),
+            )
 
     def create(self, sso_session_id, data):
         return self.post(url=url_exportplan_create, data=data, authenticator=self.authenticator(sso_session_id))
@@ -70,5 +77,10 @@ class ExportPlanAPIClient(AbstractAPIClient):
             authenticator=self.authenticator(sso_session_id),
         )
 
-    def detail_list(self, sso_session_id):
-        return self.get(url=url_exportplan_detail_list, authenticator=self.authenticator(sso_session_id))
+    def detail_list(self, sso_session_id, t=None):
+        if t:
+            return self.get(
+                url=url_exportplan_detail_list.format(cachebuster=t), authenticator=self.authenticator(sso_session_id)
+            )
+        else:
+            return self.get(url=url_exportplan_detail_list, authenticator=self.authenticator(sso_session_id))
