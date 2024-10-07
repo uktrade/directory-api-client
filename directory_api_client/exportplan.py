@@ -2,8 +2,6 @@ from directory_client_core.authentication import SessionSSOAuthenticator
 
 from directory_api_client.base import AbstractAPIClient
 
-import time
-
 url_exportplan = '/exportplan/company-export-plan/{pk}/'
 url_exportplan_detail = '/exportplan/company-export-plan/{pk}/?cachebuster={cachebuster}'
 
@@ -81,7 +79,8 @@ class ExportPlanAPIClient(AbstractAPIClient):
 
     def detail_list(self, sso_session_id, t=None):
         if t:
-            return self.get(url=url_exportplan_detail_list.format(cachebuster=t), authenticator=self.authenticator(sso_session_id))
+            return self.get(
+                url=url_exportplan_detail_list.format(cachebuster=t), authenticator=self.authenticator(sso_session_id)
+            )
         else:
             return self.get(url=url_exportplan_detail_list, authenticator=self.authenticator(sso_session_id))
-
