@@ -235,3 +235,17 @@ def test_(requests_mock, client):
     requests_mock.get(url)
     client.get_all_sectors_gva_value_bands()
     assert requests_mock.last_request.url == f'{url}'
+
+
+def test_countries_territories_regions(requests_mock, client):
+    url = 'https://example.com/dataservices/countries-territories-regions/'
+    requests_mock.get(url)
+    client.get_all_countries_territories_regions()
+    assert requests_mock.last_request.url == url
+
+
+def test_countries_territories_regions_single_country(requests_mock, client):
+    url = 'https://example.com/dataservices/country-territory-region/FR'
+    requests_mock.get(url)
+    client.get_country_territory_region(iso2_code='fr')
+    assert requests_mock.last_request.url == url
