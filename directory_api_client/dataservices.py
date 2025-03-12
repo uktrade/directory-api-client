@@ -25,6 +25,7 @@ url_all_sectors_gva_value_bands = 'dataservices/all-sectors-gva-value-bands/'
 url_dbt_investment_opportunity = 'dataservices/dbt-investment-opportunity/'
 url_countries_territories_regions = 'dataservices/countries-territories-regions/'
 url_country_territory_region = 'dataservices/country-territory-region/'
+url_news_content = 'dataservices/news-content/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -160,3 +161,6 @@ class DataServicesAPIClient(AbstractAPIClient):
 
     def get_country_territory_region(self, iso2_code: str) -> str:
         return self.get(url=f'{url_country_territory_region}{iso2_code.upper()}')
+
+    def get_news_content(self):
+        return self.get(url=url_news_content)
