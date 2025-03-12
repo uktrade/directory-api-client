@@ -249,3 +249,10 @@ def test_countries_territories_regions_single_country(requests_mock, client):
     requests_mock.get(url)
     client.get_country_territory_region(iso2_code='fr')
     assert requests_mock.last_request.url == url
+
+
+def test_get_news_content(requests_mock, client):
+    url = 'https://example.com/dataservices/news-content/'
+    requests_mock.get(url)
+    client.get_news_content()
+    assert requests_mock.last_request.url == url
