@@ -256,3 +256,9 @@ def test_get_news_content(requests_mock, client):
     requests_mock.get(url)
     client.get_news_content()
     assert requests_mock.last_request.url == url
+
+def test_support_by_postcode(requests_mock, client):
+    url = 'https://example.com/dataservices/growth-hubs-commerce-chambers/'
+    requests_mock.get(url)
+    client.get_local_support_by_postcode(postcode='SW1A1AA')
+    assert requests_mock.last_request.url == f'{url}?postcode=SW1A1AA'
