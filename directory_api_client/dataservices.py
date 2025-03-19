@@ -168,3 +168,4 @@ class DataServicesAPIClient(AbstractAPIClient):
     def get_local_support_by_postcode(self, postcode):
         params = {'postcode' : postcode}
         return self.get(url=url_local_support_by_postcode, params=params)
+    
