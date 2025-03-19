@@ -28,6 +28,7 @@ url_country_territory_region = 'dataservices/country-territory-region/'
 url_news_content = 'dataservices/news-content/'
 url_local_support_by_postcode = 'dataservices/growth-hubs-commerce-chambers/'
 
+
 class DataServicesAPIClient(AbstractAPIClient):
     def get_markets_data(self):
         return self.get(url=url_markets)
@@ -166,6 +167,5 @@ class DataServicesAPIClient(AbstractAPIClient):
         return self.get(url=url_news_content)
 
     def get_local_support_by_postcode(self, postcode):
-        params = {'postcode' : postcode}
+        params = {'postcode': postcode}
         return self.get(url=url_local_support_by_postcode, params=params)
-    
