@@ -26,6 +26,7 @@ url_dbt_investment_opportunity = 'dataservices/dbt-investment-opportunity/'
 url_countries_territories_regions = 'dataservices/countries-territories-regions/'
 url_country_territory_region = 'dataservices/country-territory-region/'
 url_news_content = 'dataservices/news-content/'
+url_local_support_by_postcode = 'dataservices/growth-hubs-commerce-chambers/'
 
 
 class DataServicesAPIClient(AbstractAPIClient):
@@ -164,3 +165,7 @@ class DataServicesAPIClient(AbstractAPIClient):
 
     def get_news_content(self):
         return self.get(url=url_news_content)
+
+    def get_local_support_by_postcode(self, postcode):
+        params = {'postcode': postcode}
+        return self.get(url=url_local_support_by_postcode, params=params)
